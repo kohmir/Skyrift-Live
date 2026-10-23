@@ -153,6 +153,9 @@ strong.t0{color:var(--dawn-l)}strong.t1{color:var(--dusk-l)}
 .m-axis{display:flex;justify-content:space-between;font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:4px;padding:0 4px}
 .m-vs{align-self:center;font-family:var(--f-display);font-size:30px;color:var(--gold);text-shadow:0 3px 0 var(--ink)}
 .m-help{margin:10px 2px 8px;color:var(--muted);font-size:12.5px}
+.roster-filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.roster-filter{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 12px;font-size:12px}
+.roster-filter .ic{width:16px;height:16px}
 .roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(max(158px,calc((100% - 24px) / 4)),1fr));gap:8px}
 .hero-card{position:relative}
 .hero-pick{width:100%;height:100%;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto auto;align-content:start;gap:5px 8px;text-align:left;padding:8px 10px 9px;border-radius:14px;color:#2b1d16;
@@ -2564,6 +2567,7 @@ const SICON={
  frozen:P('M12 2l8 5v10l-8 5-8-5V7Z')+P('M12 7v10M7.5 9.5l9 5M16.5 9.5l-9 5')
 };
 const CLASS_ICON={tank:'shield',melee:'swords',range:'bow',support:'sun',debuffer:'flask'};
+const CLASS_ORDER=['tank','melee','range','support','debuffer'];
 const SKILL_ICON={lightkeeper:'lantern',stargazer:'sparkle',sentry:'mirror',dancer:'fan',reaper:'scythe',archmage:'zap',templar:'provoked',champion:'fist',bard:'note',crusader:'axe',cannoneer:'cannon',cryomancer:'cold',oracle:'eye',bishop:'book',warlock:'silence',paladin:'shield',valkyrie:'shield',dragoon:'rune',blademaster:'swords',assassin:'dagger',ranger:'bow',pyromancer:'flame',priestess:'sun',alchemist:'flask'};
 const icon=(name,cls='')=>`<svg class="ic ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]||SICON[name]||ICONS.rift}</svg>`;
 const sprite=RiftSprites.markup;
@@ -2579,7 +2583,7 @@ const store={get(k){try{return JSON.parse(localStorage.getItem(k));}catch(_){ret
 const prefs=Object.assign({parties:[['valkyrie','blademaster','ranger','priestess'],['dragoon','assassin','pyromancer','alchemist']],cpu:[false,false]},store.get(PREFS)||{});
 let game=null;
 try{const data=store.get(SAVE);if(data){game=prepareBattle(Battle.restore(data));store.set(SAVE,JSON.parse(game.save()));}}catch(_){game=null;}
-const ui={screen:game?'battle':'setup',sel:{team:0,slot:1},mode:'basic',target:null,busy:false,flash:{},cpuTimer:null,portraitOk:false};
+const ui={screen:game?'battle':'setup',sel:{team:0,slot:1},rosterClass:'all',mode:'basic',target:null,busy:false,flash:{},cpuTimer:null,portraitOk:false};
 function toast(s){const t=$('#toast');t.textContent=s;t.classList.add('show');clearTimeout(ui.toastTimer);ui.toastTimer=setTimeout(()=>t.classList.remove('show'),2600);}
 function persist(){store.set(PREFS,prefs);if(game)store.set(SAVE,JSON.parse(game.save()));}
 const isCpu=team=>!!prefs.cpu[team];
@@ -2651,6 +2655,7 @@ function brand(){return `<div class="brand"><div class="brandmark">${icon('rift'
 /* ---------- setup / muster ---------- */
 function setupView(){
  const ready=prefs.parties.every(p=>p.some(Boolean)),sel=ui.sel;
+ const heroes=CLASS_ORDER.flatMap(cls=>HEROES.filter(h=>h.cls===cls)).filter(h=>ui.rosterClass==='all'||h.cls===ui.rosterClass);
  const card=h=>{
   const party=prefs.parties[sel.team],inParty=party.includes(h.id),allowed=Formation.allowedSlots(h.cls).includes(sel.slot);
   return `<article class="hero-card ${inParty?'in-party':''} ${allowed?'':'blocked'} t${sel.team}">
@@ -2677,7 +2682,8 @@ function setupView(){
   <header class="top">${brand()}${nav('setup')}</header>
   <section class="muster">${side(0)}<div class="m-vs" aria-hidden="true">VS</div>${side(1)}</section>
   <p class="m-help">Editing <strong class="t${sel.team}">${TEAM[sel.team]} slot ${sel.slot}</strong> — pick a hero below. Slot 1 is the front line. Class decides where a hero may stand.</p>
-  <section class="roster" aria-label="Heroes">${HEROES.map(card).join('')}</section>
+  <div class="roster-filters" role="group" aria-label="Filter heroes by class">${['all',...CLASS_ORDER].map(cls=>`<button class="roster-filter ${ui.rosterClass===cls?'primary':''}" data-roster-class="${cls}" data-key="filter-${cls}" aria-pressed="${ui.rosterClass===cls}" aria-controls="hero-roster">${cls==='all'?'':icon(CLASS_ICON[cls])}<span>${cls==='all'?'All':clsName(cls)}</span></button>`).join('')}</div>
+  <section class="roster" id="hero-roster" aria-label="Heroes">${heroes.map(card).join('')}</section>
   <footer class="setup-foot"><button class="quiet" data-action="defaults">Suggested squads</button><button class="quiet" data-action="mirror">Mirror to Dusk</button>
    ${game?'<button class="quiet" data-action="resume">Resume battle</button>':''}<button class="primary start" data-action="start" ${ready?'':'disabled'}>Enter the rift →</button></footer>
  </main>`;
@@ -2873,6 +2879,7 @@ function logModal(){modal(`<div class="modal-head"><h2>Combat log</h2><button cl
 function bind(){
  for(const b of $$('[data-nav]'))b.onclick=()=>{ui.screen=b.dataset.nav;render();};
  for(const b of $$('[data-action]'))b.onclick=()=>action(b.dataset.action);
+ for(const b of $$('[data-roster-class]'))b.onclick=()=>{ui.rosterClass=b.dataset.rosterClass;render();};
  for(const b of $$('[data-pick]'))b.onclick=()=>placeHero(b.dataset.pick);
  for(const b of $$('[data-dossier]'))b.onclick=()=>dossier(b.dataset.dossier);
  for(const b of $$('[data-dossier-unit]'))b.onclick=()=>{const u=game.unit(b.dataset.dossierUnit);dossier(u.hero,u);};
