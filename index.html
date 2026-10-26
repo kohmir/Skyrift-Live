@@ -727,7 +727,7 @@ const STATUS={
  slow:{name:'Slow',kind:'debuff',glyph:'«',stack:'refresh',spd:-1,defaults:{cycles:2},text:s=>`−${s.potency}% SPD`},
  barrier:{name:'Barrier',kind:'buff',glyph:'◇',stack:'refresh',defaults:{cycles:2},text:()=>`takes half of each direct hit; the other half is shared among the other allies`},
  silence:{name:'Silence',kind:'debuff',glyph:'⊘',stack:'refresh',defaults:{cycles:2},text:()=>`cannot use its active skill`},
- mirror:{name:'Mirror Shield',kind:'buff',glyph:'◈',stack:'refresh',defaults:{cycles:2},text:()=>`breaks on the next enemy attack or skill: reflects 30% of it and heals 10% of it`},
+ mirror:{name:'Mirror Shield',kind:'buff',glyph:'◈',stack:'refresh',defaults:{cycles:2},text:()=>`breaks on the next enemy attack or skill: reflects 30% of it and heals 5% of the bearer’s own max HP`},
  provoked:{name:'Provoked',kind:'debuff',glyph:'!',stack:'refresh',defaults:{cycles:2},text:()=>`basic attacks can only target the Templar`},
  focused:{name:'Focused',kind:'buff',glyph:'◎',stack:'refresh',defaults:{cycles:2},text:()=>`immune to Poison, Burn and Bleed`},
  fury:{name:'Fury',kind:'buff',glyph:'✊',stack:'replace',defaults:{},text:s=>`next basic attack deals +${s.potency} damage`},
@@ -802,8 +802,8 @@ const HEROES=[
   passive:{name:'Steadfast',text:'When hit by an attack or skill, gain Fortify 20% (−20% damage taken) until the end of the cycle. Then rests for 1 cycle before it can trigger again.'}},
  {id:'dragoon',name:'Dragoon',cls:'melee',color:'#eab197',hp:92,atk:14,spd:102,
   skill:{name:'Piercing Thrust',cost:3,cd:2,side:'enemy',target:'basic',splash:'behind',
-   effects:[{type:'damage',to:'primary',mult:120},{type:'damage',to:'splash',mult:60},{type:'delay',to:'primary',pct:30}],
-   text:'Uses basic reach. Deal 120% ATK to the target and 60% to the enemy directly behind it (an empty slot stops the lance). Delay the target’s action gauge by 30%.'},
+   effects:[{type:'damage',to:'primary',mult:120},{type:'damage',to:'splash',mult:60},{type:'delay',to:'primary',pct:30,pendingOnly:true}],
+   text:'Uses basic reach. Deal 120% ATK to the target and 60% to the enemy directly behind it (an empty slot stops the lance). Delay the target’s action gauge by 30% only if it has not taken its turn yet this cycle.'},
   passive:{name:'Last Stand',text:'While below 50% HP, the Dragoon’s basic attacks deal +30% damage and its skill deals +20% damage.'}},
  {id:'blademaster',name:'Blademaster',cls:'melee',color:'#e8bf75',hp:76,atk:19,spd:112,
   skill:{name:'Execution',cost:3,cd:2,side:'enemy',target:'basic',
@@ -814,7 +814,7 @@ const HEROES=[
   skill:{name:'Shadow Strike',cost:2,cd:2,side:'enemy',target:'front2',
    effects:[{type:'damage',to:'primary',mult:100},{type:'status',id:'bleed',to:'primary',potency:6,triggers:3,cycles:2}],
    text:'Strike one of the 2 frontmost enemies for 100% ATK and apply Bleed (6 damage each time that hero attacks or uses a skill; 3 uses, at most 2 cycles).'},
-  passive:{name:'Killing Spree',text:'Once per cycle, if Shadow Strike defeats an enemy, the Assassin strikes again at the frontmost enemy with 70% ATK (Bleed included).'}},
+  passive:{name:'Killing Spree',text:'Once per cycle, if Shadow Strike defeats an enemy, the Assassin strikes again at the living enemy with the lowest remaining HP for 70% ATK (Bleed included).'}},
  {id:'ranger',name:'Ranger',cls:'range',color:'#9edbba',hp:62,atk:17,spd:108,
   skill:{name:'Pinning Shot',cost:3,cd:2,side:'enemy',target:'front2',
    effects:[{type:'damage',to:'primary',mult:150},{type:'status',id:'slow',to:'primary',potency:20,cycles:2}],
@@ -824,11 +824,11 @@ const HEROES=[
   skill:{name:'Meteor Burst',cost:4,cd:3,side:'enemy',target:'all',
    effects:[{type:'damage',to:'targets',mult:80},{type:'status',id:'burn',to:'targets',potency:5,cycles:2}],
    text:'Hit every enemy for 80% ATK and Burn them: 5 damage at each of the next 2 cycle ends.'},
-  passive:{name:'Arcane Surge',text:'Whenever an ally casts a skill, the Pyromancer’s action gauge advances by 10%.'}},
+  passive:{name:'Arcane Surge',text:'When an ally casts a skill, advance the Pyromancer’s action gauge by 10% only if he has not taken his turn yet this cycle. Triggers at most twice per cycle.'}},
  {id:'priestess',name:'Priestess',cls:'support',color:'#e9dc97',hp:66,atk:11,spd:112,
   skill:{name:'Restoration',cost:3,cd:2,side:'ally',target:'ally',
-   effects:[{type:'heal',to:'primary',amount:18},{type:'cleanse',to:'primary',count:1},{type:'status',id:'haste',to:'primary',potency:20,turns:2}],
-   text:'Heal one ally (or self) for 18, remove their most recent harmful status and grant Haste +20% SPD for their next 2 turns.'},
+   effects:[{type:'heal',to:'primary',amount:18},{type:'status',id:'haste',to:'primary',potency:20,turns:2}],
+   text:'Heal one ally (or self) for 18 and grant Haste +20% SPD for their next 2 turns.'},
   passive:{name:'Mercy',text:'At each cycle end, heal the most injured living ally (by HP %) for 4.'}},
  {id:'oracle',name:'Oracle',cls:'support',color:'#f2a9c4',hp:70,atk:12,spd:112,
   skill:{name:'Blessed Omen',cost:3,cd:2,cdIn:'cycles',side:'ally',target:'allAllies',
@@ -863,13 +863,13 @@ const HEROES=[
  {id:'sentry',name:'Sentry',cls:'tank',color:'#f0c860',hp:112,atk:9,spd:88,
   skill:{name:'Mirror Bastion',cost:3,cd:3,cdIn:'cycles',side:'ally',target:'self',
    effects:[{type:'healPct',to:'self',pct:15},{type:'status',id:'mirror',to:'allies',cycles:2}],
-   text:'Heal 15% of max HP, then give every ally (and self) a Mirror Shield for up to 2 cycles. It breaks on the next enemy attack or skill that hits: the attacker takes 30% of that damage back and the ally heals 10% of it.'},
+   text:'Heal 15% of max HP, then give every ally (and self) a Mirror Shield for up to 2 cycles. It breaks on the next enemy attack or skill that hits: the attacker takes 30% of that damage back and the ally heals 5% of their own max HP.'},
   passive:{name:'Last Bulwark',text:'Once per battle, a hit that would defeat the Sentry leaves him at 5% of his max HP instead.'}},
  {id:'dancer',name:'Dancer',cls:'support',color:'#f09aae',hp:68,atk:12,spd:120,
   skill:{name:'Tempo Waltz',cost:3,cd:2,cdIn:'cycles',side:'ally',target:'self',
    effects:[{type:'status',id:'haste',to:'allyFront2',potency:30,cycles:2,turns:null},{type:'status',id:'slow',to:'enemyFront2',potency:30,cycles:2}],
    text:'Haste +30% SPD on the 2 frontmost allies and Slow −30% SPD on the 2 frontmost enemies, both for 2 cycles.'},
-  passive:{name:'Encore',text:'After her turn, if every living ally is faster than every living enemy, all allies gain Empower 20% for 1 cycle. Then rests for 2 cycles.'}},
+  passive:{name:'Encore',text:'When targeted by an enemy’s direct skill or basic attack, Slow the attacker by 30% for 1 cycle (does not stack with Tempo Waltz). Advance her own action gauge by 20% only if she has not taken her turn yet this cycle. Then rests for 1 cycle before it can trigger again.'}},
  {id:'reaper',name:'Reaper',cls:'melee',color:'#d07a9a',hp:73,atk:14,spd:112,
   skill:{name:'Soul Harvest',cost:0,cd:3,cdIn:'cycles',side:'enemy',target:'any',splash:'adjacent',
    effects:[{type:'damage',to:'primary',mult:100},{type:'damage',to:'splash',mult:70},{type:'siphon',max:3}],
@@ -904,7 +904,7 @@ const HEROES=[
   skill:{name:'Glacial Bloom',cost:3,cd:2,cdIn:'cycles',side:'enemy',target:'any',splash:'adjacent',
    effects:[{type:'chill',to:'targets'}],
    text:'Ignores formation: chill the target and the enemies in the slots beside it. Cold is −30% SPD for 2 cycles; a hero that is already Cold loses it and is Frozen instead, skipping its turns for 1 cycle.'},
-  passive:{name:'Frostbite',text:'After a basic attack, also chill the target (Cold, or Frozen if it is already Cold). Then rests for 2 cycles before it can trigger again.'}},
+  passive:{name:'Frostbite',text:'After a basic attack, also chill the target (Cold, or Frozen if it is already Cold). Then rests for 1 cycle before it can trigger again.'}},
  {id:'alchemist',name:'Alchemist',cls:'debuffer',color:'#aed694',hp:62,atk:13,spd:116,
   skill:{name:'Toxic Flask',cost:3,cd:2,side:'enemy',target:'any',splash:'adjacent',
    effects:[{type:'status',id:'poison',to:'targets',potency:7,cycles:2},{type:'status',id:'strain',to:'primary',potency:1,triggers:1,cycles:2}],
@@ -925,7 +925,9 @@ const PASSIVES={
  // Killing Spree only marks the kill; the battle performs the follow-up once the skill has resolved.
  assassin:{onKill(b,u,victim,kind){if(kind!=='skill'||u.flags.spreeCycle===b.cycles.cycle)return;u.flags.spreeCycle=b.cycles.cycle;u.flags.spreePending=true;}},
  ranger:{outgoingPct(b,u,t){return t.hp<t.maxHp?20:0;}},
- pyromancer:{onAllySkill(b,u,caster){if(caster.uid!==u.uid&&u.hp>0){b.passiveNote(u,'Arcane Surge');b.shiftGauge(u,10,u);}}},
+ pyromancer:{onAllySkill(b,u,caster){if(caster.uid===u.uid||u.hp<=0||!b.awaitingTurn(u))return;
+  const c=b.cycles.cycle;if(u.flags.surgeCycle!==c){u.flags.surgeCycle=c;u.flags.surgeCount=0;}
+  if(u.flags.surgeCount>=2)return;u.flags.surgeCount++;b.passiveNote(u,'Arcane Surge');b.shiftGauge(u,10,u);}},
  priestess:{onCycleEnd(b,u){const hurt=b.mostInjured(u.team);if(hurt){b.passiveNote(u,'Mercy');b.heal(hurt,4,u);}}},
  /* Benediction: the party max HP bonus is set once at battle start (a hero appears once per party,
     so it never stacks); the basic-attack heal sets healReady, the first cycle it may heal again. */
@@ -956,11 +958,9 @@ const PASSIVES={
    const got=b.mp.gain(u.team,Math.min(2,n));if(got)b.emit({t:'mp',team:u.team,delta:got,reason:'Stellar Harvest'});if(n>=2&&u.cd>2)u.cd=2;}},
  /* Last Bulwark: the first lethal hit of the battle leaves him at 5% max HP. */
  sentry:{beforeLethal(b,u,ctx){if(u.flags.bulwarkUsed)return;u.flags.bulwarkUsed=true;const keep=Math.max(1,Math.round(u.maxHp*.05));ctx.amount=Math.max(0,u.hp-keep);b.passiveNote(u,'Last Bulwark');}},
- /* Encore: checked as her turn ends, on current SPD (Haste and Slow included); every living ally
-    must be strictly faster than every living enemy. encoreReady is the first cycle it may fire again. */
- dancer:{onTurnEnd(b,u){const c=b.cycles.cycle;if(c<(u.flags.encoreReady||0))return;const allies=b.living(u.team),foes=b.living(1-u.team);if(!foes.length)return;
-  if(Math.min(...allies.map(a=>b.spdOf(a)))<=Math.max(...foes.map(f=>b.spdOf(f))))return;
-  u.flags.encoreReady=c+3;b.passiveNote(u,'Encore');for(const a of allies)b.applyStatus(a,'empower',{potency:20,cycles:1,turns:null},u);}},
+ /* Encore reacts to targeting, even when the attack is shielded or lethal. */
+ dancer:{onTarget(b,u,src){const c=b.cycles.cycle;if(c<(u.flags.encoreReady||0))return;
+  u.flags.encoreReady=c+2;b.passiveNote(u,'Encore');b.applyStatus(src,'slow',{potency:30,cycles:1},u);if(b.awaitingTurn(u))b.shiftGauge(u,20,u);}},
  /* Death Mark: markReady is the first cycle the basic-attack heal and Pierced may trigger again. */
  reaper:{afterBasicHit(b,u,t,dealt,before){const c=b.cycles.cycle;if(c<(u.flags.markReady||0))return;
   u.flags.markReady=c+2;b.passiveNote(u,'Death Mark');const n=Math.round((before.hp-t.hp)*.3);if(n>0)b.heal(u,n,u);
@@ -985,7 +985,7 @@ const PASSIVES={
   outgoingPct(b,u,t,kind){return kind==='basic'&&t.hp*100>t.maxHp*80?20:0;},
   afterBasicHit(b,u,t,dealt,before){if(before.hp*100>before.maxHp*80)return;const n=Math.round(dealt*.2);if(n>0&&u.hp<u.maxHp){b.passiveNote(u,'Zealous Edge');b.heal(u,n,u);}}
  },
- cryomancer:{afterBasicHit(b,u,t){const c=b.cycles.cycle;if(t.hp<=0||c<(u.flags.chillReady||0))return;u.flags.chillReady=c+3;b.passiveNote(u,'Frostbite');b.chill(t,u);}},
+ cryomancer:{afterBasicHit(b,u,t){const c=b.cycles.cycle;if(t.hp<=0||c<(u.flags.chillReady||0))return;u.flags.chillReady=c+2;b.passiveNote(u,'Frostbite');b.chill(t,u);}},
  alchemist:{onDotDealt(b,u,victim,status){if(status.id!=='poison'||u.flags.toxCycle===b.cycles.cycle)return;u.flags.toxCycle=b.cycles.cycle;const n=b.mp.gain(u.team,1);b.passiveNote(u,'Toxicology');b.emit({t:'mp',team:u.team,delta:n,reason:'Toxicology'});}}
 };
 const api={HEROES,byId,PASSIVES};
@@ -1088,16 +1088,22 @@ class Battle{
  emit(e){this.events.push(e);}
  passiveNote(u,name){this.emit({t:'passive',uid:u.uid,name});this.note(`${this.name(u)}: ${name}.`);}
 
+ /* A hero is eligible until its first normal activation starts this cycle. */
+ awaitingTurn(u){return this.active!==u.uid&&this.cycles.waitingOn(u.uid);}
+
  /* ---------- scheduler ---------- */
- entries(){return this.living().map(u=>({uid:u.uid,team:u.team,slot:u.slot,gauge:u.gauge,spd:this.spdOf(u)}));}
+ // Gauge debt preserves delays applied during an attacker's own (zero-gauge) turn.
+ gaugeOf(u){return u.gauge-(u.flags.gaugeDebt||0);}
+ setGauge(u,value){u.gauge=Math.max(0,value);if(value<0)u.flags.gaugeDebt=-value;else delete u.flags.gaugeDebt;}
+ entries(){return this.living().map(u=>({uid:u.uid,team:u.team,slot:u.slot,gauge:this.gaugeOf(u),spd:this.spdOf(u)}));}
  nextTurn(){
   if(this.winner!==null)return;
   const es=this.entries(),choice=Gauge.pickNext(es,this.token);
   Gauge.elapse(es,choice.winner);this.token=choice.token;
-  for(const e of es)this.unit(e.uid).gauge=e.gauge;
+  for(const e of es)this.setGauge(this.unit(e.uid),e.gauge);
   // The ready hero spends its full gauge as its turn begins; anything that advances it
   // during this turn (e.g. Battle Momentum) carries into its next activation.
-  const u=this.unit(choice.winner.uid);u.gauge=0;
+  const u=this.unit(choice.winner.uid);this.setGauge(u,0);
   this.beginTurn(u,{tied:choice.tied});
  }
  /* Start a hero's turn. A bonus turn (Beacon) leaves the gauge alone and does not count toward the cycle. */
@@ -1112,7 +1118,10 @@ class Battle{
   if(Status.has(u,'frozen')){this.emit({t:'frozen',uid:u.uid});this.note(`${this.name(u)} is frozen and skips the turn.`);this.endTurn();}
  }
  shiftGauge(u,pct,src){
-  if(u.hp<=0)return 0;const d=Gauge.shift(u,pct);
+  if(u.hp<=0)return 0;
+  const before=this.gaugeOf(u);
+  const after=Math.min(Gauge.G,Math.round(before+Gauge.G*pct/100)),d=after-before;
+  this.setGauge(u,after);
   if(d){this.emit({t:'gauge',uid:u.uid,pct,delta:d/Gauge.G,from:src?.uid||null});this.note(`${this.name(u)} ${pct>0?'advances':'is delayed'} ${Math.abs(pct)}%.`);}
   return d;
  }
@@ -1121,7 +1130,7 @@ class Battle{
    Entry: {uid,team,now?,cycleEnd?}. cycleEnd marks the activation that completes a cycle. */
  forecast(n=CONFIG.forecast){
   if(this.winner!==null)return [];
-  const sim=this.living().map(u=>({uid:u.uid,team:u.team,slot:u.slot,gauge:u.gauge,base:u.spd,
+  const sim=this.living().map(u=>({uid:u.uid,team:u.team,slot:u.slot,gauge:this.gaugeOf(u),base:u.spd,
    mods:u.statuses.filter(s=>Status.STATUS[s.id].spd).map(s=>({pct:Status.STATUS[s.id].spd*s.potency,turns:s.turns,cycles:s.cycles,fresh:s.fresh}))}));
   const spd=e=>Gauge.effectiveSpd(e.base,e.mods.reduce((a,m)=>a+m.pct,0));
   let pending=[...this.cycles.pending],token=this.token;const out=[];
@@ -1163,7 +1172,8 @@ class Battle{
   return {amount,shield,hp,lethal:hp>=recv.hp,receiver:recv.uid};
  }
  /* Both return the damage the hit landed: HP lost plus any Shield absorption. */
- attack(src,tgt,mult,kind){return this.dealDamage(src,tgt,this.outgoing(src,tgt,mult,kind),kind);}
+ targeted(src,tgt){if(src&&src.hp>0&&tgt.hp>0&&src.team!==tgt.team)PASSIVES[tgt.hero]?.onTarget?.(this,tgt,src);}
+ attack(src,tgt,mult,kind){if(DIRECT.has(kind))this.targeted(src,tgt);return this.dealDamage(src,tgt,this.outgoing(src,tgt,mult,kind),kind);}
  dealDamage(src,tgt,amount,kind,status=null){
   if(tgt.hp<=0)return 0;
   const direct=DIRECT.has(kind),recv=tgt;
@@ -1184,9 +1194,9 @@ class Battle{
   if(shared){const n=shared.others.length,per=Math.floor(shared.rest/n);let extra=shared.rest-per*n;
    for(const a of shared.others){const share=per+(extra>0?1:0);if(extra>0)extra--;if(share>0)this.dealDamage(src,a,share,'shared');}}
   if(recv.hp===0)this.defeat(recv,src,kind);
-  // Mirror Shield: breaks on the hit, reflects 30% to the attacker and heals the bearer 10% (of HP lost + absorbed).
+  // Mirror Shield: breaks on the hit, reflects 30% to the attacker and heals the bearer 5% of its own max HP.
   if(mirror&&loss+absorbed>0){const got=loss+absorbed;if(Status.remove(recv,'mirror'))this.emit({t:'status',uid:recv.uid,id:'mirror',op:'remove'});
-   this.emit({t:'mirror',uid:recv.uid,to:src.uid});const r=Math.round(got*.3),h=Math.round(got*.1);
+   this.emit({t:'mirror',uid:recv.uid,to:src.uid});const r=Math.round(got*.3),h=Math.round(recv.maxHp*.05);
    if(r>0&&src.hp>0)this.dealDamage(recv,src,r,'reflect');if(h>0&&recv.hp>0)this.heal(recv,h,recv);}
   // Reactive passives (Steadfast) after the hit has resolved.
   if(recv.hp>0&&direct&&src&&src.team!==recv.team)PASSIVES[recv.hero]?.onHit?.(this,recv,src,kind);
@@ -1195,7 +1205,7 @@ class Battle{
   return loss+absorbed;
  }
  defeat(u,src,kind){
-  u.statuses=[];u.gauge=0;this.cycles.removed(u.uid);
+  u.statuses=[];this.setGauge(u,0);this.cycles.removed(u.uid);
   // A fallen Templar provokes no one.
   for(const a of this.living())if(Status.get(a,'provoked')?.source===u.uid){Status.remove(a,'provoked');this.emit({t:'status',uid:a.uid,id:'provoked',op:'expire'});}
   this.emit({t:'death',uid:u.uid});this.note(`${this.name(u)} is defeated. Slot ${u.slot} stays empty.`);
@@ -1241,7 +1251,8 @@ class Battle{
    // healLowest: heal the most injured ally for a share of the damage this skill dealt so far.
    if(e.type==='healLowest'){const hurt=this.mostInjured(u.team),n=Math.round(dealt*e.pctDealt/100);if(hurt&&n>0)this.heal(hurt,n,u);continue;}
    for(const x of groups[e.to||'targets']||[]){
-   if(x.hp<=0)continue;
+   if(x.hp<=0||(e.pendingOnly&&!this.awaitingTurn(x)))continue;
+   this.targeted(u,x);
    if(e.type==='damage'){const mult=e.byMp?e.byMp[Math.min(8,Math.max(3,spent))]:e.falloff?e.falloff[Math.min(order.indexOf(x),e.falloff.length-1)]:e.execute&&x.hp*100<=x.maxHp*e.execute.below?e.execute.mult:e.mult;dealt+=this.attack(u,x,Math.round(mult*scale/100),'skill');}
    else if(e.type==='status'){const o=statusOpts(e);if(e.pctMaxHp)o.potency=Math.round(u.maxHp*e.pctMaxHp/100);this.applyStatus(x,e.id,o,u);}
    else if(e.type==='heal')this.heal(x,e.amount,u);
@@ -1283,8 +1294,8 @@ class Battle{
    u.cd=s.cd;u.cdCycle=this.cycles.cycle;this.castThisTurn=true;
    this.note(`${this.name(u)} casts ${s.name} (−${cost} MP).`);
    this.resolveSkill(u,s,{primary:[t],splash,targets,self:[u]},100,cost);
-   // Killing Spree: the kill was marked during the skill; strike the new frontmost enemy at 70%.
-   if(u.flags.spreePending){u.flags.spreePending=false;const f=u.hp>0&&Formation.frontmost(this.living(1-u.team));
+   // Killing Spree: the kill was marked during the skill; strike the living enemy with the lowest remaining HP at 70%.
+   if(u.flags.spreePending){u.flags.spreePending=false;const f=u.hp>0&&this.living(1-u.team).sort((a,b)=>a.hp-b.hp||a.slot-b.slot)[0];
     if(f){this.passiveNote(u,'Killing Spree');this.emit({t:'action',uid:u.uid,kind:'skill',target:f.uid,targets:[f.uid],followUp:true});this.resolveSkill(u,s,{primary:[f],splash:[],targets:[f],self:[u]},70);}}
    PASSIVES[u.hero]?.afterSkill?.(this,u);
    for(const a of this.living(u.team))if(a.uid!==u.uid)PASSIVES[a.hero]?.onAllySkill?.(this,a,u);
@@ -1296,7 +1307,7 @@ class Battle{
  }
  endTurn(){
   const u=this.actor();
-  // Turn-end passives (Encore) see the turn's results before durations tick.
+  // Turn-end passives see the turn's results before durations tick.
   if(u.hp>0)PASSIVES[u.hero]?.onTurnEnd?.(this,u);
   if(u.hp>0){
    for(const s of Status.tickTurn(u))this.emit({t:'status',uid:u.uid,id:s.id,op:'expire'});
@@ -1432,7 +1443,7 @@ function value(b,team){
  let total=resourceValue(b,team)-resourceValue(b,1-team);
  for(const u of b.living()){
   const sign=u.team===team?1:-1,pace=Math.min(2,b.spdOf(u)/slowest);
-  const hurt=1-u.hp/u.maxHp,ready=u.gauge/Gauge.G+(b.active===u.uid?1:0);
+  const hurt=1-u.hp/u.maxHp,ready=b.gaugeOf(u)/Gauge.G+(b.active===u.uid?1:0);
   total+=sign*(u.hp+strength(b,u)-12*hurt*hurt+u.atk*ready*.35+
    u.statuses.reduce((n,s)=>n+statusValue(b,u,s,pace),0));
  }
@@ -3474,7 +3485,7 @@ function previewFor(a,kind,primary){
  for(const e of byId[a.hero].skill.effects)if(e.type==='thunder'){const foes=g.living(1-a.team).sort((p,q)=>p.maxHp-q.maxHp||p.slot-q.slot),seen=new Set();
   for(let i=0;i<e.hits&&foes.length;i++){const t=foes[i%foes.length];hit(t,seen.has(t.uid)?e.again:e.fresh,'skill');seen.add(t.uid);}}
  for(const e of byId[a.hero].skill.effects)for(const x of groups[e.to||'targets']||[]){
-  if(x.hp<=0)continue;
+  if(x.hp<=0||(e.pendingOnly&&!g.awaitingTurn(x)))continue;
   if(e.type==='damage')hit(x,e.byMp?e.byMp[Math.min(8,Math.max(3,g.skillCost(a)))]:e.falloff?e.falloff[Math.min(order.indexOf(x),e.falloff.length-1)]:e.execute&&x.hp*100<=x.maxHp*e.execute.below?e.execute.mult:e.mult,'skill');
   else if(e.type==='status'){at(x).statuses.push(e.id);if(e.pctMaxHp)at(x).shield=Math.round(a.maxHp*e.pctMaxHp/100);}
   else if(e.type==='grantTurn')at(x).statuses.push('empower');
@@ -3524,7 +3535,7 @@ function guideView(){
   <table><thead><tr><th>Class</th><th>Slots</th></tr></thead><tbody>${Object.entries(Formation.CLASSES).map(([k,c])=>`<tr><td>${classIcon(k)} ${c.name}</td><td>${c.slots.join(', ')}</td></tr>`).join('')}</tbody></table>
   <p>A basic attack from slot N reaches enemy slots 1…N. The <strong>frontmost living enemy is always reachable</strong>, so when the front collapses the next hero is exposed. Skills may ignore this (“any enemy”, “every enemy”), and splash follows exact slots, so an empty slot stops it.</p></section>
  <section class="card parchment"><h2>Speed &amp; the timeline</h2><p>Every hero fills an action gauge at its SPD. Whoever fills first acts; while you decide, time stands still. Faster heroes simply act more often — there are no thresholds or turn caps.</p>
-  <p><strong>Haste/Slow</strong> change SPD from now on without erasing progress. <strong>Advance/Delay</strong> push the gauge itself. The top timeline predicts the next ${CONFIG.forecast} activations and re-sorts the moment anything changes; the track beneath it shows each gauge live.</p>
+  <p><strong>Haste/Slow</strong> change SPD from now on without erasing progress. <strong>Advance/Delay</strong> affect the next activation, even a repeat turn in the same cycle. Delays at an empty gauge still postpone that turn; cycle boundaries never clear gauge changes. The top timeline predicts the next ${CONFIG.forecast} activations and re-sorts the moment anything changes; the track beneath it shows each gauge live.</p>
   <p>Exact ties go to the higher SPD, then alternate between teams, then the front slot.</p></section>
  <section class="card parchment"><h2>Cycles &amp; MP</h2><p>A <strong>cycle</strong> ends once every living hero has acted at least once since it began. Fast heroes may act several times inside one cycle; fallen heroes never hold it up. Cycles never reset gauges.</p>
   <p>Each party shares one MP pool: start ${CONFIG.mp.start}, max ${CONFIG.mp.max}, <strong>+${CONFIG.mp.regen} per completed cycle</strong>. Basic attacks are free; skills cost MP and have cooldowns counted in the caster’s own turns.</p>
@@ -3543,7 +3554,7 @@ function modal(html,cls=''){modalFocus=document.activeElement;$('#overlay').inne
 function closeModal(){$('#overlay').innerHTML='';modalFocus?.focus?.();}
 function dossier(id,u=null){
  const h=byId[id],s=h.skill,team=u?u.team:ui.sel.team;
- const live=u?`<div class="d-live"><span class="stat-value">${statIcon('hp')}${u.hp}/${u.maxHp}</span><span class="stat-value">${statIcon('spd')}${game.spdOf(u)}</span><span>Gauge ${Math.round(u.gauge/Gauge.G*100)}%</span><span>Slot ${u.slot}</span>${u.cd?`<span>Skill CD ${u.cd}</span>`:''}</div>`:'';
+ const live=u?`<div class="d-live"><span class="stat-value">${statIcon('hp')}${u.hp}/${u.maxHp}</span><span class="stat-value">${statIcon('spd')}${game.spdOf(u)}</span><span>Gauge ${Math.round(game.gaugeOf(u)/Gauge.G*100)}%</span><span>Slot ${u.slot}</span>${u.cd?`<span>Skill CD ${u.cd}</span>`:''}</div>`:'';
  const effects=u?.statuses.length?`<section class="d-effects" aria-label="Active effects"><h3>Active effects</h3><ul class="d-status">${u.statuses.map(st=>{const d=Status.describe(st);return `<li><span class="chip st-${st.id} ${Status.STATUS[st.id].kind}">${icon(st.id)}</span><strong>${d.name}</strong>${d.left?`<em>${d.left}</em>`:''}<p>${esc(d.text)}</p></li>`;}).join('')}</ul></section>`:'';
  modal(`<div class="modal-head"><div class="d-heading"><h2 id="dossier-title" class="d-title">${h.name}</h2><div class="d-class"><span class="cls-tag ${h.cls}" title="${clsName(h.cls)}">${classIcon(h.cls)}<span class="ct-label">${clsName(h.cls)}</span></span><span class="cls-tag d-slots">${slotText(h.cls)}</span></div></div><button class="icon-btn" data-close aria-label="Close">${icon('close')}</button></div>
   <div class="d-top"><div class="d-art t${team}"><span class="ground" aria-hidden="true"></span>${sprite(h.id,team,{uid:'dossier-'+h.id})}</div><div class="d-info">
