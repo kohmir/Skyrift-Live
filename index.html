@@ -249,7 +249,9 @@ html,body{overscroll-behavior:none}
 .fighter{position:absolute;left:50%;translate:-50% 0;bottom:var(--fb);height:var(--fpx);aspect-ratio:144/184;z-index:3;transition:filter .2s,opacity .2s}
 /* Each hero repaints as it breathes; its own compositor layer keeps that from re-rastering the backdrop under it. */
 .fighter{will-change:transform}
-.fighter .sprite{width:100%;height:100%}
+/* Triple the drawing surface and viewBox together: same scale and sole anchor,
+   with room for hair, weapons and action poses inside the SVG viewport. */
+.fighter .sprite{position:absolute;left:-100%;top:-100%;width:300%;height:300%;max-width:none}
 .ground{position:absolute;left:50%;bottom:calc(var(--fb) + var(--fpx) * .059);width:calc(var(--fpx) * .5);aspect-ratio:3.8/1;translate:calc(-50% + var(--fpx) * var(--face,.02)) 50%;
  border-radius:50%;background:radial-gradient(closest-side,#1a0f08d0 0,#1a0f08ad 40%,#1a0f0855 75%,#1a0f0800 100%);z-index:2;pointer-events:none}
 .slot.active .ground{box-shadow:0 0 0 2px #f2c94ccc,0 0 14px #ffd24a99}
@@ -2256,7 +2258,9 @@ function template(id){
  return templates[id];
 }
 function markup(hero,team,{cls='',uid='',still=false,view='full'}={}){
- const box=view==='face'?'-40 -124 84 84':'-72 -172 144 184';
+ // Battle art and poses can extend beyond the original rig box. Give filters and
+ // compositor layers a real drawing surface instead of relying on SVG overflow.
+ const box=view==='face'?'-40 -124 84 84':view==='battle'?'-216 -356 432 552':'-72 -172 144 184';
  return `<svg class="sprite${view==='face'?' face':''} ${cls}" viewBox="${box}" data-sprite="${hero}" data-team="${team?'dusk':'dawn'}" data-seed="${uid||hero}"${still?' data-still':''} aria-hidden="true" focusable="false"></svg>`;
 }
 let defsReady=false,running=false,last=0,spriteInstance=0;
@@ -3454,7 +3458,7 @@ function slotView(u,team,slot,{a,legal,aff,primary,preview}){
  const cls=['slot','t'+team,dead?'dead':'',isActive?'active':'',isTarget?(friendly?'target ally':'target'):'',legal.length&&!isTarget&&!dead&&!isActive?'dim':'',inAff?'affected':'',primary?.uid===u.uid?'chosen':'',!dead&&Status.has(u,'frozen')?'frozen':''].filter(Boolean).join(' ');
  return `<div class="${cls}" data-uid="${u.uid}" data-team="${team}" data-slot="${slot}" data-hp="${u.hp}" data-max="${u.maxHp}">
   <div class="ground"><span class="slot-no">${slot}</span></div>
-  ${dead?`<div class="grave" aria-hidden="true"><svg viewBox="0 0 60 70"><path d="M10 68 V30 a20 20 0 0 1 40 0 V68Z" fill="#8d8a80" stroke="#2b1d16" stroke-width="4"/><path d="M30 26 v22 M21 35 h18" stroke="#2b1d16" stroke-width="4" stroke-linecap="round"/></svg></div>`:`<div class="fighter">${sprite(u.hero,team,{uid:u.uid})}</div>`}
+  ${dead?`<div class="grave" aria-hidden="true"><svg viewBox="0 0 60 70"><path d="M10 68 V30 a20 20 0 0 1 40 0 V68Z" fill="#8d8a80" stroke="#2b1d16" stroke-width="4"/><path d="M30 26 v22 M21 35 h18" stroke="#2b1d16" stroke-width="4" stroke-linecap="round"/></svg></div>`:`<div class="fighter">${sprite(u.hero,team,{uid:u.uid,view:'battle'})}</div>`}
   ${isActive?'<span class="active-arrow" aria-hidden="true"></span>':''}
   <div class="unit-hud">${dead?`<span class="fallen">${h.name} · fallen</span>`:`<span class="u-name">${h.name}</span><span class="hpbar" role="presentation"><i class="hp" style="width:${hpPct}%"></i>${sh?`<i class="sh" style="width:${Math.min(100,sh/u.maxHp*100)}%"></i>`:''}</span><span class="hp-num">${u.hp}<small>/${u.maxHp}</small>${sh?`<em>+${sh}</em>`:''}</span>`}</div>
   ${dead?'':`<div class="chips">${statusChips(u)}${u.statuses.length?`<span class="chip effects-summary">${u.statuses.length} effect${u.statuses.length===1?'':'s'}</span>`:''}</div>`}
