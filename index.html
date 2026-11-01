@@ -189,7 +189,7 @@ strong.t0{color:var(--dawn-l)}strong.t1{color:var(--dusk-l)}
 /* ---------- Battle layout: full-viewport, landscape first ---------- */
 html,body{overscroll-behavior:none}
 .screen.battle{position:relative;height:100vh;height:100dvh;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;
- padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+ padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 .hud-top{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto auto;align-items:center;gap:10px;padding:6px 10px 4px;
  background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border-bottom:3px solid var(--ink);box-shadow:inset 0 -2px 0 #00000026,inset 0 2px 0 var(--panel-edge);position:relative;z-index:20}
 .mp{display:grid;grid-template-columns:auto auto;grid-template-areas:"label value" "orbs orbs";gap:6px;align-items:center}
@@ -293,17 +293,18 @@ html,body{overscroll-behavior:none}
 .pv-gauge.up{background:#7ef0c4}.pv-gauge.down{background:#c3a0ff}
 .pv-st{display:inline-flex;gap:1px}.pv-st .chip{padding:0 1px}
 /* Action bar */
-.actionbar{display:grid;grid-template-columns:minmax(0,auto) auto minmax(0,1fr) auto;align-items:center;gap:10px;min-height:74px;
- padding:7px max(12px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+.actionbar{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;justify-items:center;align-content:center;gap:10px;min-height:74px;
+ /* Safe areas belong to the battle shell, outside the colored action bar. */
+ padding:7px 12px;
  background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border-top:3px solid var(--ink);box-shadow:inset 0 3px 0 color-mix(in srgb,var(--team,#000) 70%,transparent);position:relative;z-index:20}
-.ab-hero{display:flex;align-items:center;gap:8px;padding:4px 10px 4px 4px;min-height:56px;text-align:left;border-radius:14px;background:#00000040;border-color:var(--ink);box-shadow:none;max-width:330px}
+.ab-hero{display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 10px;min-height:56px;text-align:center;border-radius:14px;background:#00000040;border-color:var(--ink);box-shadow:none;width:100%;max-width:330px;min-width:0}
 .ab-hero .face.big{width:50px;height:50px;box-shadow:0 0 0 3px var(--team) inset}
-.ab-id{display:flex;flex-direction:column;line-height:1.1;min-width:0}
+.ab-id{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;min-width:0}
 .ab-team{font-size:9px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--team-l)}
-.ab-name{font-family:var(--f-display);font-size:20px;line-height:1}
-.ab-meta{display:flex;flex-wrap:wrap;gap:2px 8px;font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap}.ab-meta em{font-style:normal;margin-left:3px}.ab-meta .up{color:#7ef0c4}.ab-meta .down{color:#a8b8ff}
-.ab-chips{display:flex;gap:2px;flex-wrap:wrap;max-width:110px}
-.ab-actions{display:flex;gap:6px;min-width:0}
+.ab-name{font-family:var(--f-display);font-size:20px;line-height:1;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ab-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 8px;font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap}.ab-meta em{font-style:normal;margin-left:3px}.ab-meta .up{color:#7ef0c4}.ab-meta .down{color:#a8b8ff}
+.ab-chips{display:flex;justify-content:center;gap:2px;flex-wrap:wrap;max-width:110px}
+.ab-actions{display:flex;justify-content:center;gap:6px;min-width:0}
 .act{position:relative;flex:0 0 auto;width:84px;min-height:58px;padding:5px 7px;min-width:0;display:grid;justify-items:center;align-content:center;gap:1px;border-radius:14px;line-height:1.1}
 /* A thin silhouette edge separates dark art from wood without adding a badge/frame. */
 .act .combat-icon{width:28px;height:28px;filter:drop-shadow(0 0 .55px #fff0cc) drop-shadow(0 1px .25px #21140d)}
@@ -317,16 +318,14 @@ html,body{overscroll-behavior:none}
 .act.on small{color:#5a3e10}
 .act[aria-disabled="true"]{opacity:.78;filter:grayscale(.6)}
 .act .cd{position:absolute;right:-6px;top:-6px;z-index:1;width:20px;height:20px;border-radius:50%;background:#c3a0ff;border:2px solid var(--ink);color:#24123d;font-size:11px;display:grid;place-items:center}
-.ab-prompt{display:flex;flex-direction:column;line-height:1.2;min-width:0}
-.ab-prompt strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ab-prompt span{font-size:11.5px;color:#eadbb8;font-weight:700}
-.ab-confirm{display:flex;gap:6px}
-.confirm{min-height:52px;padding:6px 18px;display:flex;align-items:center;gap:6px;font-size:16px}
-.confirm .ic{width:22px;height:22px;stroke-width:2.6}
+.ab-prompt{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:100%;line-height:1.2;min-width:0;overflow:hidden}
+.ab-prompt strong{max-width:100%;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ab-prompt span{max-width:100%;font-size:11.5px;color:#eadbb8;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.actionbar.cpu{grid-template-columns:repeat(2,minmax(0,1fr))}
 .actionbar.cpu .ab-prompt{flex-direction:row;align-items:center;gap:10px}
 .thinking{display:inline-flex;gap:4px}.thinking i{width:8px;height:8px;border-radius:50%;background:var(--team-l);animation:think 1s infinite}.thinking i:nth-child(2){animation-delay:.15s}.thinking i:nth-child(3){animation-delay:.3s}
 @keyframes think{50%{transform:translateY(-5px);opacity:.5}}
-.battle.busy .actionbar .act,.battle.busy .actionbar .confirm{pointer-events:none;opacity:.55}
+.battle.busy .actionbar .act{pointer-events:none;opacity:.55}
 .battle.busy .preview-tag,.battle.busy .slot::after{display:none}
 .battle.busy .slot.dim .fighter{filter:none}
 /* Victory */
@@ -385,10 +384,9 @@ html,body{overscroll-behavior:none}
  .timeline-wrap{min-height:94px}
  .timeline{height:66px;padding-block:8px}.tl-item .face{width:32px;height:32px}.tl-item.now .face{width:42px;height:42px}
  .cycle-badge{width:54px;height:54px}.cycle-badge strong{font-size:24px}.cycle-badge span{font-size:7px;letter-spacing:.08em;padding-left:.08em}
- .actionbar{min-height:62px;padding-top:5px;padding-bottom:calc(5px + env(safe-area-inset-bottom));gap:8px}
+ .actionbar{min-height:62px;padding-block:5px;gap:8px}
  .ab-hero{min-height:50px}.ab-hero .face.big{width:42px;height:42px}.ab-name{font-size:17px}
  .act{min-height:50px;min-width:74px;padding:3px 7px}.act .combat-icon{width:24px;height:24px}
- .confirm{min-height:48px}
  .slot{--fhq:54cqh;--fb:26%}
  .chips{top:calc(100% - var(--fb) + 16px)}
  .chips .chip{display:grid;place-items:center;min-width:18px;height:18px;padding:0}
@@ -411,6 +409,11 @@ html,body{overscroll-behavior:none}
 @media (max-width:700px) and (orientation:landscape),(max-width:430px){
  .ab-meta{display:none}.act{min-width:62px}.act small{font-size:9px}.ab-name{font-size:15px}
 }
+/* Leave room for balanced side panels on narrow landscape screens. */
+@media (orientation:landscape) and (max-width:760px){
+ .act{width:64px;min-width:62px}.act.skill{width:112px}
+ .ab-hero{gap:5px;padding-inline:5px}.ab-hero .face.big{width:36px;height:36px}
+}
 /* Portrait phones: suggest rotating, but keep the game playable if the player declines. */
 @media (orientation:portrait) and (max-width:760px){
  body:not(.portrait-ok) .battle .rotate-hint{display:grid;position:absolute;inset:0;z-index:45;place-items:center;background:#0d0907e8;text-align:center;padding:24px}
@@ -420,8 +423,8 @@ html,body{overscroll-behavior:none}
  .hud-top{grid-template-columns:44px minmax(0,1fr) minmax(0,1fr) 44px;grid-template-areas:"menu mp0 mp1 cyc" "tl tl tl tl";gap:8px;padding:8px 10px}
  .hud-top>.icon-btn{grid-area:menu}.hud-top .mp.t0{grid-area:mp0}.hud-top .mp.t1{grid-area:mp1;justify-self:end}.timeline-wrap{grid-area:tl}.cycle-badge{grid-area:cyc;width:44px;height:44px}
  .cycle-badge strong{font-size:22px}.cycle-badge span{font-size:7px}.mp{gap:6px 4px}.mp-num{font-size:12px}.mp-num small{font-size:8px}
- .actionbar{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"hero confirm" "prompt prompt" "acts acts";gap:6px 8px}
- .ab-hero{grid-area:hero;max-width:100%;min-width:0}.ab-actions{grid-area:acts;justify-content:space-between}.ab-actions .act{flex:1}.ab-prompt{grid-area:prompt;display:flex}.ab-confirm{grid-area:confirm}
+ .actionbar{grid-template-columns:minmax(0,1fr);grid-template-areas:"hero" "prompt" "acts";gap:6px 8px}
+ .ab-hero{grid-area:hero;max-width:100%;min-width:0}.ab-actions{grid-area:acts;width:100%;justify-content:center}.ab-actions .act{flex:1}.ab-prompt{grid-area:prompt;display:flex}
  .actionbar.cpu{grid-template-columns:minmax(0,1fr);grid-template-areas:"hero" "prompt"}.actionbar.cpu .ab-prompt{display:flex}
  .u-name,.fallen{display:none}.slot{--fhq:46cqh;--fb:34%}
 }
@@ -948,6 +951,12 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 }
 
 .fx-guardian-aura{background:linear-gradient(0deg,#344b86aa,#7186bb88 45%,#344b8600);filter:drop-shadow(0 0 8px #344b8655)}
+
+/* A compact mode-entry choice, with touch-sized actions on phones too. */
+.modal.arena-choice{width:min(420px,100%)}
+.arena-choice h2{font-size:23px;line-height:1.15}
+.arena-choice .modal-head{gap:12px}
+.arena-choice p{margin-bottom:14px}
 </style></head><body><div id="app"><div class="boot" role="status"><strong>Skyrift</strong><span>Loading…</span></div></div><div id="overlay"></div><div id="toast" role="status" aria-live="polite"></div><script>/* Battle configuration. Every number here is a provisional balance value (see
    docs/REVAMP_PLAN.md, "Open decisions"); systems read them from here, never inline. */
 (function(root){
@@ -7002,7 +7011,6 @@ const arenaSession={get game(){return arenaGame;},persist:()=>persist(),menuItem
 function host(s){if(s!==session){painted=null;ui.busy=false;ui.mode='basic';ui.target=null;ui.flash={};}session=s;game=s.game;}
 const hostArena=()=>host(arenaSession);
 const ui={screen:'main',guideFromBattle:false,sel:{team:0,slot:1},rosterClass:'all',mode:'basic',target:null,busy:false,flash:{},cpuTimer:null,portraitOk:false};
-if(arenaGame)hostArena();
 /* Other modes (Expedition) register {id, label, navKey, view(), bind(), onEnter?(), summary?()} here before the
    app starts; the Main Menu opens each mode at its saved progress. */
 const MODES=window.RiftModes||(window.RiftModes={});
@@ -7050,8 +7058,17 @@ function homeButton(){return '<button class="quiet home-button" data-nav="main">
 function go(screen){
  closeModal();
  if(screen==='guide')ui.guideFromBattle=ui.screen==='battle';
- if(screen==='arena'){hostArena();screen=arenaGame?'battle':'setup';}
+ if(screen==='arena'){
+  if(arenaGame?.winner===null)return arenaChoice();
+  hostArena();screen='setup';
+ }
  ui.screen=screen;modeFor(screen)?.onEnter?.();render();
+}
+function arenaChoice(){
+ modal(`<div class="modal-head"><h2 id="arena-choice-title">Arena battle in progress</h2><button class="icon-btn" data-close aria-label="Close">${icon('close')}</button></div>
+  <p>Continue your battle or choose a team for a new one.</p>
+  <div class="menu-list"><button class="primary" data-modal="arena-continue">Continue battle</button><button data-modal="arena-new">Start new</button></div>`,'arena-choice');
+ $('#overlay .modal').setAttribute('aria-labelledby','arena-choice-title');
 }
 function mainMenuView(){
  const arena=arenaGame?(arenaGame.winner===null?'Battle in progress':'Battle finished'):null;
@@ -7100,7 +7117,7 @@ function setupView(){
   <div class="roster-filters" role="group" aria-label="Filter heroes by class">${['all',...CLASS_ORDER].map(cls=>`<button class="roster-filter ${ui.rosterClass===cls?'primary':''}" data-roster-class="${cls}" data-key="filter-${cls}" aria-pressed="${ui.rosterClass===cls}" aria-controls="hero-roster">${cls==='all'?'':classIcon(cls)}<span>${cls==='all'?'All':clsName(cls)}</span></button>`).join('')}</div>
   <section class="roster" id="hero-roster" aria-label="Heroes">${heroes.map(card).join('')}</section>
   <footer class="setup-foot">
-   ${arenaGame?'<button class="quiet" data-action="resume">Resume battle</button>':''}<button class="primary start" data-action="start" ${ready?'':'disabled'}>Enter the rift →</button></footer>
+   ${arenaGame?.winner===null?'<button class="quiet" data-action="resume">Resume battle</button>':''}<button class="primary start" data-action="start" ${ready?'':'disabled'}>Enter the rift →</button></footer>
  </main>`;
 }
 function placeHero(id){
@@ -7240,7 +7257,7 @@ function actionBar(a,human,legal,primary,preview){
  if(!human)return `<footer class="actionbar cpu t${a.team}">${who}<div class="ab-prompt"><span class="thinking"><i></i><i></i><i></i></span><strong>${g.forcedAction(a)?`${h.name} is ${g.forcedAction(a).kind==='skip'?'playing…':'enraged!'}`:`${TEAM[a.team]} is deciding…`}</strong></div></footer>`;
  let prompt;
  if(primary){const pv=preview[primary.uid]||{};const names=Object.keys(preview).filter(k=>preview[k].dmg!==undefined||preview[k].heal||preview[k].statuses?.length).length;
-  prompt=`<strong>${ui.mode==='basic'?'Attack':s.name} → ${esc(byId[primary.hero].name)}${names>1?` +${names-1}`:''}</strong><span>${ui.mode==='skill'?`${cost} MP · `:''}Tap again or confirm</span>`;}
+  prompt=`<strong>${ui.mode==='basic'?'Attack':s.name} → ${esc(byId[primary.hero].name)}${names>1?` +${names-1}`:''}</strong><span>${ui.mode==='skill'?`${cost} MP · `:''}Tap again to confirm</span>`;}
  else prompt=ui.mode==='basic'&&Status.has(a,'provoked')?`<strong>Provoked</strong><span>Basic attacks can only target the Templar</span>`:ui.mode==='basic'?`<strong>Basic attack</strong><span>Free · tap a highlighted enemy (slots 1–${a.slot}${legal.some(t=>t.slot>a.slot)?' + exposed front':''})</span>`:`<strong>${s.name}</strong><span>${esc(targetHint(s))}</span>`;
  return `<footer class="actionbar t${a.team}">${who}
   <div class="ab-actions" role="group" aria-label="Actions">
@@ -7249,12 +7266,11 @@ function actionBar(a,human,legal,primary,preview){
    <button class="act" data-action="wait" data-key="act-wait">${combatIcon(ACTION_ICON.skip)}<span>Skip</span><small>End turn</small></button>
   </div>
   <div class="ab-prompt" role="status">${prompt}</div>
-  ${primary?`<div class="ab-confirm"><button class="cancel icon-btn" data-action="cancel" data-key="cancel" aria-label="Cancel">${icon('close')}</button><button class="primary confirm" data-action="confirm" data-key="confirm">${icon('check')}<span>Confirm</span></button></div>`:''}
  </footer>`;
 }
 /* Button-sized version of skillReason(); the full sentence still shows in the toast. */
 const shortReason=(a,cost)=>{const r=game.skillReason(a);return r==='Playing'||r==='Silenced'?r:a.cd>0?`Ready in ${a.cd}`:!game.mp.canAfford(a.team,cost)?`Need ${cost} MP`:'No target';};
-const targetHint=s=>({basic:'Uses basic reach · tap a highlighted enemy',any:'Ignores formation · tap any enemy',all:'Hits every enemy · confirm to cast',front:'Front enemy only',front2:'Tap one of the 2 frontmost enemies',rear:'Rearmost enemy only',ally:'Tap an ally (or this hero)',allyOther:'Tap another ally',allyReady:'Tap an ally who can act',allAllies:'Shields every ally · confirm to cast',self:'Targets self'}[s.target]||'Choose a target');
+const targetHint=s=>({basic:'Uses basic reach · tap a highlighted enemy',any:'Ignores formation · tap any enemy',all:'Hits every enemy · tap a highlighted enemy to cast',front:'Front enemy only',front2:'Tap one of the 2 frontmost enemies',rear:'Rearmost enemy only',ally:'Tap an ally (or this hero)',allyOther:'Tap another ally',allyReady:'Tap an ally who can act',allAllies:'Shields every ally · tap a highlighted ally to cast',self:'Targets self'}[s.target]||'Choose a target');
 function victory(){const w=game.winner;return `<div class="victory t${w}" role="dialog" aria-label="Battle over"><div class="v-card"><div class="eyebrow">Battle over · cycle ${game.cycles.cycle} · ${game.turn} turns</div><h2>${w==='draw'?'Both lines fall':TEAM[w]+' holds the rift'}</h2><div class="v-row">${game.side(w==='draw'?0:w).map(u=>face(u.hero,u.team,u.hp>0?'':'gone')).join('')}</div><div class="v-buttons"><button class="primary" data-action="rematch">Rematch</button><button class="quiet" data-action="setup">Change squads</button></div></div></div>`;}
 
 /* ---------- guide ---------- */
@@ -7329,6 +7345,8 @@ function action(name){
  if(ui.screen==='battle'&&session?.onAction?.(name))return;
  const g=game;
  if(name==='main')return go('main');
+ if(name==='arena-continue'){hostArena();return go('battle');}
+ if(name==='arena-new'){hostArena();return go('setup');}
  if(name==='quit'){
   if(session!==arenaSession)return;
   cancelCpu();arenaGame=null;game=null;session=null;store.del(SAVE);ui.busy=false;ui.mode='basic';ui.target=null;ui.flash={};go('main');return;
@@ -7420,7 +7438,10 @@ window.RiftApp={
 };
 RiftUI.setModalAction(action);
 /* Always start at the Main Menu; mode buttons resume their independent saves. */
-function boot(){render();}
+let booted=false;
+function boot(){booted=true;go('main');}
+// Browser back/forward restores the old DOM without running startup again.
+window.addEventListener('pageshow',e=>{if(e.persisted&&booted)go('main');});
 RiftPreload.run().then(boot,boot);
 })();
 </script></body></html>
