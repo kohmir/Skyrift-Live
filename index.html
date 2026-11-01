@@ -126,56 +126,8 @@ strong.t0{color:var(--dawn-l)}strong.t1{color:var(--dusk-l)}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- Menu screens ---------- */
-.screen.setup,.screen.guide{max-width:1240px;margin:auto;padding:max(14px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 28px max(20px,env(safe-area-inset-left))}
+.screen.guide{max-width:1240px;margin:auto;padding:max(14px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 28px max(20px,env(safe-area-inset-left))}
 .top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;margin-bottom:14px}
-.muster{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch}
-.m-side{background:linear-gradient(160deg,#47362a,var(--wood) 40%,#30241a);border:3px solid var(--ink);border-radius:16px;padding:8px 10px 6px;box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--team) 50%,transparent),var(--shadow)}
-.m-side header{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;margin-bottom:6px}
-.m-team-title{display:flex;align-items:center;gap:8px}
-.team-name{font-family:var(--f-display);font-size:24px;line-height:1;color:var(--team-l)}
-.control-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border:1px solid color-mix(in srgb,var(--team) 55%,transparent);border-radius:99px;background:#0003;color:var(--team-l);font-size:11px;font-weight:900}
-.control-tag .ic{width:14px;height:14px}
-.new-opponent{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;padding:7px 10px;font-size:12px;color:var(--gold);border-color:var(--gold2);background:#0002}
-.new-opponent .ic{width:17px;height:17px}
-.m-side-note{display:flex;flex-direction:column;gap:1px;margin-top:7px;padding:7px 2px 2px;border-top:1px solid #ffffff14;font-size:11px;line-height:1.4;color:var(--muted)}
-.m-side-note strong{font-size:11px;color:var(--team-l)}
-.m-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
-.m-slot-btn>*{max-width:100%}
-.m-slot{position:relative;container-type:inline-size}
-/* Narrow slots keep the class readable as an icon rather than a clipped word. */
-@container (max-width:100px){.m-slot .cls-tag .ct-label{display:none}.m-slot .cls-tag{padding:2px 5px}.m-name{font-size:11px}}
-.m-slot-btn{width:100%;height:100%;min-height:92px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:12px;
- background:#00000030;border:2px dashed #ffffff30;box-shadow:none;color:var(--muted)}
-.m-slot.filled .m-slot-btn{border-style:solid;border-color:var(--ink);background:linear-gradient(180deg,#5a4433,#3a2b1f)}
-.m-slot.on .m-slot-btn{border:2px solid var(--gold);box-shadow:0 0 0 3px #e9c25a55,0 0 18px #e9c25a55;color:var(--text)}
-.m-no{position:absolute;left:6px;top:4px;font-family:var(--f-display);font-size:15px;color:var(--dim)}
-.m-name{font-weight:900;font-size:12px;color:var(--text);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.m-empty{font-size:10px;line-height:1.25;text-align:center;font-weight:800;padding:0 4px}
-.m-clear{position:absolute;right:-4px;top:-4px;min-height:24px;width:24px;padding:0;display:grid;place-items:center;border-radius:50%}
-.m-clear .ic{width:13px;height:13px;stroke-width:2.6}
-.m-axis{display:flex;justify-content:space-between;font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:4px;padding:0 4px}
-.m-vs{align-self:center;font-family:var(--f-display);font-size:30px;color:var(--gold);text-shadow:0 3px 0 var(--ink)}
-.m-help{margin:10px 2px 8px;color:var(--muted);font-size:12.5px}
-.roster-filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.roster-filter{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 12px;font-size:12px}
-.roster-filter .class-icon{width:26px;height:26px}
-.roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(max(158px,calc((100% - 24px) / 4)),1fr));gap:8px}
-.hero-card{position:relative}
-.hero-pick{width:100%;height:100%;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto auto;align-content:start;gap:5px 8px;text-align:left;padding:8px 10px 9px;border-radius:14px;color:#2b1d16;
- background:radial-gradient(120% 90% at 50% 40%,var(--parch) 55%,var(--parch2));box-shadow:inset 0 -3px 0 #c8b088,0 3px 0 var(--ink)}
-.hero-pick .face{width:44px;height:44px}
-.hc-text{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
-.hc-name{font-family:var(--f-display);font-size:17px;line-height:1.05;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hc-stats{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:2px 12px;font-size:11.5px;font-weight:900;color:#6b5638;white-space:nowrap}
-.hc-slots{grid-column:1/-1;padding-right:30px;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8a7350}
-.hc-info{position:absolute;right:6px;bottom:6px;min-height:30px;width:30px;padding:0;display:grid;place-items:center;border-radius:50%;background:#fff3;border-color:#2b1d1655;box-shadow:none;color:#6b5638}
-.hc-info .ic{width:17px;height:17px}
-.hero-card.in-party .hero-pick{box-shadow:inset 0 0 0 3px var(--team),inset 0 -3px 0 #c8b088,0 3px 0 var(--ink)}
-.hero-card.in-party .hc-slots{color:var(--team)}
-.hero-card.blocked .hero-pick{filter:saturate(.35) brightness(.78)}
-.setup-foot{display:flex;gap:8px;justify-content:flex-end;align-items:center;margin-top:12px;flex-wrap:wrap}
-.setup-foot .start{min-width:190px;font-size:16px}
-@media (max-width:520px){.setup-foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}.setup-foot .start{grid-column:1/-1;order:1}.setup-foot .quiet{padding:8px 6px}}
 .guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .card{border:3px solid var(--ink);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
 .card.wide{grid-column:1/-1}
@@ -415,7 +367,7 @@ html,body{overscroll-behavior:none}
 @media (max-width:360px) and (orientation:portrait){
  .chips .chip:not(.effects-summary){display:none}.chips .chip.effects-summary{display:inline-flex;font-size:8px}
 }
-@media (max-width:900px){.ab-chips{display:none}.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.muster{grid-template-columns:minmax(0,1fr)}.m-vs{display:none}}
+@media (max-width:900px){.ab-chips{display:none}.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){
  .mp-label{font-size:14px}.orb{width:8px;height:8px;border-width:1.5px}.orbs{gap:2px}
  .ab-prompt span{display:none}
@@ -924,7 +876,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .main-choice-copy .continue-badge{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:12px;font-weight:900}
 .continue-badge i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px #e9c25a66}
 .scene-title{font-size:26px;color:var(--text)}.scene-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-.home-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex:0 0 auto}.home-button>span{font-size:26px;line-height:.7}
+.home-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex:0 0 auto}.home-button>.home-arrow{width:7px;height:7px;flex:none;border-left:2px solid currentColor;border-bottom:2px solid currentColor;rotate:45deg}
 .x-navigation{display:flex;align-items:center;gap:6px}.x-navigation .home-button{padding:6px 8px;font-size:12px}.x-navigation .home-button>span{font-size:22px}
 @media (min-width:1100px) and (min-height:620px){
  .x-hud{grid-template-columns:auto minmax(240px,1fr) minmax(0,1.5fr) auto;gap:20px}
@@ -976,6 +928,74 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .arena-choice h2{font-size:23px;line-height:1.15}
 .arena-choice .modal-head{gap:12px}
 .arena-choice p{margin-bottom:14px}
+
+/* Team setup has a fixed shell; only the two lower content areas scroll. */
+.screen.setup{width:100%;max-width:1600px;margin:auto;height:100vh;height:100dvh;padding:max(12px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:14px;overflow:hidden}
+.setup .top{margin:0;flex-wrap:nowrap;min-width:0}.setup .scene-title{font-size:28px;order:0;flex:0 1 auto}.setup .brandmark{width:40px;height:40px}.setup .wordmark{font-size:30px}
+.muster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;min-width:0}
+.m-side{position:relative;min-width:0;padding:10px 12px 6px;background:linear-gradient(150deg,#49382b,#30241a);border:2px solid var(--ink);border-radius:15px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--team) 65%,transparent),0 4px 0 #100c08}
+.m-side header{display:flex;justify-content:space-between;align-items:center;gap:8px;height:36px;margin-bottom:10px}
+.m-team-title{display:flex;align-items:center;gap:10px;min-width:0}.team-name{font-family:var(--f-display);font-size:24px;line-height:1;color:var(--team-l)}
+/* Optical alignment compensates for the display font’s lower ink center. */
+.control-tag{display:inline-flex;align-items:center;line-height:1;font-size:11px;font-weight:900;color:var(--team-l);white-space:nowrap;translate:0 2px}
+.new-opponent{display:flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:3px 9px;font-size:12px;color:var(--gold);border-color:#a67f37;box-shadow:none}.new-opponent>span:first-child{font-size:16px;line-height:1}
+.m-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.m-slot{position:relative;min-width:0}
+.m-slot-btn{width:100%;min-height:100px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:1px dashed #ffffff40;border-radius:10px;background:#0002;box-shadow:none;color:var(--muted)}
+.m-slot.filled .m-slot-btn{border-style:solid;border-color:#130e09;background:linear-gradient(#604b37,#3e2e20)}
+.m-slot.on .m-slot-btn{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold),0 0 0 2px #e9c25a33;background:linear-gradient(#746043,#493621)}
+.m-slot .face{width:42px;height:42px}.m-no{position:absolute;left:7px;top:5px;font-size:12px;font-weight:900;color:var(--gold)}
+.m-name{font-size:13px;font-weight:900;line-height:1.1;color:var(--text);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-role{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted)}.m-role .class-icon{width:14px;height:14px}.m-role>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-empty{font-size:11px;line-height:1.3;text-align:center}.m-clear{position:absolute;right:-5px;top:-5px;min-height:28px;width:28px;padding:0;border-radius:50%;font-size:21px;line-height:1;display:grid;place-items:center;background:#2e2218;box-shadow:none;color:var(--muted);border-width:1px}
+.m-axis{display:flex;justify-content:space-between;padding:3px 2px 0;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:900}
+.m-side-note{position:absolute;right:14px;top:calc(100% - 18px);max-width:65%;margin:0;font-size:9px;line-height:1;color:var(--muted);background:#34271c;padding:0 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.setup-workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:18px;min-height:0;min-width:0}
+.setup-browser,.setup-detail{min-width:0;min-height:0;border:2px solid var(--ink);border-radius:16px;background:linear-gradient(135deg,#f6e9c7,#e8d7af);color:#2b1d16;box-shadow:inset 0 0 0 1px #fff7,0 4px 0 #100c08;overflow:hidden}
+.setup-browser{display:grid;grid-template-rows:auto minmax(0,1fr)}
+.setup-browser-head{padding:14px 16px 8px;border-bottom:1px solid #9e80544d}.setup-browser-head>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:8px}.setup-browser-head h2{font-size:26px}.setup-slot-hint{font-size:11px;font-weight:900;color:#675036;white-space:nowrap}
+.roster-filters{display:flex;gap:6px;overflow-x:auto;padding:10px 1px 5px;scrollbar-width:thin;overscroll-behavior:contain}
+.roster-filter{display:flex;flex:none;align-items:center;justify-content:center;gap:5px;min-height:36px;padding:4px 10px;border-width:1px;font-size:11px;box-shadow:0 2px 0 var(--ink)}.roster-filter .class-icon{width:18px;height:18px}
+.roster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:10px;padding:14px;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#93794b #d9c69c}
+.hero-card{position:relative;min-width:0;border-radius:11px;background:transparent}
+.hero-pick{width:100%;height:100%;min-height:140px;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:6px;padding:12px 8px 24px;border:1px solid #ad956d;border-radius:11px;background:linear-gradient(135deg,#fff6dc,#ebdab5);color:#2b1d16;box-shadow:0 2px 0 #b29a71}
+.hero-pick .face{width:60px;height:60px}.hc-text{display:flex;align-items:center;flex-direction:column;gap:4px;min-width:0;max-width:100%}.hc-name{font-family:var(--f-display);font-size:18px;line-height:1.1;overflow-wrap:anywhere}.hero-pick .cls-tag{font-size:9px;border:0;background:transparent;padding:0}
+.hc-slots{position:absolute;left:8px;bottom:7px;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:#826b49}.in-party .hc-slots{color:#315f94}
+.hc-info{position:absolute;right:3px;bottom:3px;width:28px;min-height:28px;padding:0;display:grid;place-items:center;background:transparent;border:0;box-shadow:none;color:#806c4c}.hc-info .ic{width:15px;height:15px}
+.hero-card.in-party .hero-pick{border-color:#5279a7;box-shadow:inset 0 0 0 1px #5279a7,0 2px 0 #b29a71}.hero-card.previewed .hero-pick{background:linear-gradient(135deg,#fff9dd,#f4d78e);border-color:#9e721d;box-shadow:inset 0 0 0 2px #e7b74c,0 2px 0 #a9833d}.hero-card.blocked:not(.previewed) .hero-pick{background:#dfd1b3}.hero-card.blocked .hc-slots{color:#77674d}
+.setup-detail{display:grid;grid-template-rows:minmax(0,1fr) auto}.setup-detail-scroll{overflow:auto;min-height:0;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#93794b #d9c69c}
+.setup-preview{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;min-height:260px;padding:14px 16px;background:radial-gradient(ellipse at 28% 60%,#fff9e8,transparent 70%);border-bottom:1px solid #9e80544d}
+.setup-hero-art{position:relative;min-width:0;display:grid;place-items:center}.setup-hero-art>.sprite{position:relative;width:100%;max-width:235px;height:245px;z-index:1}.setup-hero-art>.ground{bottom:6%;width:70%;height:14px;translate:-50% 50%}
+.setup-hero-heading{min-width:0}.setup-hero-heading .eyebrow{font-size:9px;color:#927336}.setup-hero-heading h2{font-size:36px;margin:6px 0 10px;overflow-wrap:anywhere}.setup-hero-heading .cls-tag{font-size:11px}.setup-hero-slots{font-size:12px;color:#806849;margin:5px 0 14px}
+.setup-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.setup-stats>div{display:flex;flex-direction:column;gap:2px}.setup-stats span{display:flex;align-items:center;gap:4px;font-size:10px;color:#806849;font-weight:900}.setup-stats strong{font-size:25px;line-height:1.2}
+.setup-skills{padding:0 18px}.setup-skill{padding:16px 0;border-bottom:1px solid #9e80544d}.setup-skill:last-child{border-bottom:0}.setup-skill-heading{display:flex;align-items:center;gap:10px}.setup-skill-heading>.combat-icon{width:38px;height:38px;flex:none}.setup-skill h3{font-size:21px;line-height:1.1}.setup-skill-heading span{font-size:10px;color:#826b49;font-weight:900}.setup-skill p{font-size:13px;line-height:1.6;margin:8px 0 0}
+.setup-place{padding:10px 16px 14px;background:#edddb9;border-top:1px solid #ad956d}.setup-place p{font-size:11px;color:#765b37;line-height:1.4;margin:0 0 7px}.setup-place button{width:100%;font-size:15px;min-height:44px}
+.setup-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px}.setup-foot p{font-size:12px;color:var(--muted);margin:0}.setup-foot>div{display:flex;gap:10px;align-items:center}.setup-foot .start{display:flex;align-items:center;justify-content:center;gap:12px;min-width:210px;min-height:48px;font-size:17px}.setup-foot .combat-icon{width:26px;height:26px}
+@media (max-width:1150px){.roster{grid-template-columns:repeat(3,minmax(0,1fr))}.setup-workspace{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.setup-hero-heading h2{font-size:29px}.setup-preview{min-height:210px;padding:10px}.setup-hero-art>.sprite{height:200px}.setup-browser-head{padding:10px 12px 6px}.roster-filter{padding-inline:8px}.setup-stats{gap:4px}.setup-stats strong{font-size:22px}}
+@media (orientation:landscape) and (max-height:650px){
+ .screen.setup{gap:8px;padding:6px 12px}.setup .top{height:36px}.setup .brandmark{width:30px;height:30px}.setup .wordmark{font-size:24px}.setup .scene-title{font-size:23px}.setup .home-button{min-height:34px;padding:4px 10px;font-size:11px}
+ .m-side{padding:4px 8px 3px;border-radius:11px}.m-side header{height:36px;margin-bottom:6px}.team-name{font-size:19px}.new-opponent{min-height:28px;font-size:10px;padding:0 6px}.new-opponent>span:first-child{font-size:16px}.control-tag{font-size:9px}
+ .m-slot-btn{min-height:55px;padding:3px 5px;gap:2px}.m-slot .face{width:28px;height:28px}.m-name{font-size:9px}.m-role{display:none}.m-no{left:5px;top:4px;font-size:9px}.m-clear{width:22px;min-height:22px;font-size:17px}.m-empty{font-size:9px}.m-axis{font-size:8px}.m-side-note{font-size:8px;top:calc(100% - 14px)}
+ .setup-browser-head{padding:6px 9px 2px}.setup-browser-head h2{font-size:20px}.setup-slot-hint{font-size:9px}.roster-filters{padding-top:4px;gap:5px}.roster-filter{min-height:30px;padding:2px 7px;font-size:10px}.roster-filter .class-icon{width:15px;height:15px}.roster{gap:7px;padding:8px;grid-template-columns:repeat(3,minmax(0,1fr))}.hero-pick{min-height:91px;padding:6px 5px 21px;gap:3px}.hero-pick .face{width:38px;height:38px}.hc-name{font-size:15px}.hc-text{gap:1px}.hero-pick .cls-tag{font-size:8px}.hero-pick .class-icon{width:12px;height:12px}.hc-slots{font-size:8px}
+ .setup-preview{min-height:85px;grid-template-columns:85px minmax(0,1fr);padding:3px 8px}.setup-hero-art>.sprite{height:80px}.setup-hero-heading h2{font-size:23px;margin:0 0 3px}.setup-hero-heading .eyebrow{display:none}.setup-hero-slots{display:none}.setup-stats strong{font-size:17px}.setup-stats{max-width:210px;margin-top:4px}.setup-stats span{font-size:8px}.setup-stats .stat-icon{width:11px;height:11px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill p{font-size:12px}.setup-skill h3{font-size:19px}.setup-place{padding:5px 10px 8px}.setup-place p{font-size:10px;margin-bottom:4px}.setup-place button{min-height:34px;font-size:12px;padding:4px 8px}.setup-foot{min-height:38px}.setup-foot p{font-size:10px}.setup-foot .start{min-height:36px;min-width:170px;font-size:14px;padding:4px 10px}.setup-foot .quiet{min-height:36px;padding:4px 8px;font-size:11px}
+}
+@media (orientation:portrait) and (max-width:760px){
+ .screen.setup{padding:8px 10px max(8px,env(safe-area-inset-bottom));gap:8px}.setup .top{height:36px;gap:8px}.setup .brand{display:none}.setup .scene-title{font-size:25px}.setup .home-button{min-height:36px;padding:4px 9px;font-size:11px}
+ .muster{grid-template-columns:minmax(0,1fr);gap:7px}.m-side{padding:4px 8px;border-radius:11px}.m-side header{height:26px;margin-bottom:8px}.team-name{font-size:19px}.control-tag{font-size:10px}.new-opponent{min-height:24px;padding:0 7px;font-size:10px}.new-opponent>span:first-child{font-size:16px}
+ .m-row{gap:6px}.m-slot-btn{min-height:61px;padding:5px 3px 4px;gap:3px}.m-slot .face{width:31px;height:31px}.m-name{font-size:10px}.m-role{display:none}.m-no{font-size:9px;left:4px;top:3px}.m-clear{width:22px;min-height:22px;font-size:17px;right:-4px;top:-4px}.m-empty{font-size:8px;line-height:1.2}.m-axis{font-size:7px;padding-top:1px}.m-side-note{top:calc(100% - 13px);font-size:7px}
+ .setup-workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(100px,1fr) minmax(125px,1fr);gap:8px}.setup-browser,.setup-detail{border-radius:12px}.setup-browser-head{padding:7px 9px 3px}.setup-browser-head h2{font-size:20px}.setup-slot-hint{font-size:9px}.roster-filters{gap:5px;padding:5px 0 4px}.roster-filter{min-height:28px;padding:2px 7px;font-size:10px}.roster-filter .class-icon{display:none}
+ .roster{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px;gap:7px}.hero-pick{min-height:65px;display:grid;grid-template-columns:auto minmax(0,1fr);padding:6px 8px 19px;gap:4px 6px;text-align:left;justify-content:start}.hero-pick .face{width:38px;height:38px}.hc-text{align-items:flex-start;gap:2px}.hc-name{font-size:16px}.hero-pick .cls-tag{font-size:8px}.hero-pick .class-icon{width:12px;height:12px}.hc-slots{font-size:8px;bottom:5px}.hc-info{width:24px;min-height:24px;bottom:0;right:0}
+ .setup-preview{grid-template-columns:100px minmax(0,1fr);min-height:140px;padding:6px 10px}.setup-hero-art>.sprite{height:130px}.setup-hero-heading h2{font-size:26px;margin:2px 0 4px}.setup-hero-heading .eyebrow{font-size:8px}.setup-hero-heading .cls-tag{font-size:9px}.setup-hero-slots{font-size:10px;margin:2px 0 6px}.setup-stats{max-width:200px}.setup-stats strong{font-size:20px}.setup-stats span{font-size:9px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill-heading>.combat-icon{width:30px;height:30px}.setup-skill h3{font-size:20px}.setup-skill p{font-size:12px}
+ .setup-place{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;padding:7px 9px}.setup-place p{font-size:9px;line-height:1.3;margin:0}.setup-place button{width:auto;min-height:36px;padding:4px 10px;font-size:11px;white-space:nowrap}.setup-foot{min-height:42px;display:block}.setup-foot p{display:none}.setup-foot>div{gap:8px}.setup-foot .start{flex:1;min-width:0;min-height:42px;font-size:15px}.setup-foot .quiet{min-height:42px;font-size:10px;padding:4px 7px}
+}
+@media (orientation:portrait) and (max-height:650px){
+ .screen.setup{gap:5px;padding-top:5px;padding-bottom:5px}.setup .top{height:28px}.setup .scene-title{font-size:22px}.setup .home-button{min-height:28px}.muster{gap:5px}.m-side header{height:22px;margin-bottom:7px}.team-name{font-size:17px}.new-opponent{min-height:22px}.m-slot-btn{min-height:49px;gap:1px}.m-slot .face{width:25px;height:25px}.m-axis{font-size:6px}.setup-workspace{gap:5px;grid-template-rows:minmax(80px,1fr) minmax(105px,1fr)}.setup-browser-head{padding:4px 7px 0}.setup-browser-head h2{font-size:17px}.roster-filters{padding-top:2px;padding-bottom:3px}.roster-filter{min-height:24px;font-size:9px;padding-inline:6px}.setup-foot{min-height:36px}.setup-foot .start,.setup-foot .quiet{min-height:36px}.setup-place{padding:5px 7px}.setup-place button{min-height:30px;font-size:10px}.setup-place p{font-size:8px}
+ .setup-preview{min-height:85px;grid-template-columns:80px minmax(0,1fr);padding:3px 8px}.setup-hero-art>.sprite{height:80px}.setup-hero-heading .eyebrow,.setup-hero-slots{display:none}.setup-hero-heading h2{font-size:21px;margin:0 0 3px}.setup-hero-heading .cls-tag{font-size:8px}.setup-stats{margin-top:4px}.setup-stats strong{font-size:17px}.setup-stats span{font-size:8px}
+}
+
+/* Skill text stays one tap away even when the preview is compressed. */
+.setup-skills-link{position:absolute;right:12px;top:8px;z-index:2;min-height:28px;padding:3px 7px;border:1px solid #b3996f;border-radius:7px;background:#fff4d9;color:#75582c;box-shadow:none;font-size:10px}
+@media (orientation:landscape) and (max-height:650px){.setup-skills-link{top:3px;right:6px;font-size:9px;min-height:24px;padding:2px 5px}.setup-hero-heading h2{padding-right:38px}}
+@media (orientation:portrait) and (max-height:650px){.setup-skills-link{top:3px;right:6px;min-height:22px;font-size:8px;padding:2px 4px}.setup-hero-heading h2{padding-right:38px}}
 </style></head><body><div id="app"><div class="boot" role="status"><strong>Skyrift</strong><span>Loading…</span></div></div><div id="overlay"></div><div id="toast" role="status" aria-live="polite"></div><script>/* Battle configuration. Every number here is a provisional balance value (see
    docs/REVAMP_PLAN.md, "Open decisions"); systems read them from here, never inline. */
 (function(root){
@@ -7072,7 +7092,7 @@ const MENU_LABELS={log:'Combat log',guide:'Rules guide',rematch:'Restart battle'
 const arenaSession={get game(){return arenaGame;},persist:()=>persist(),menuItems:['log','guide','rematch','quit','setup'],resultView:()=>victory()};
 function host(s){if(s!==session){painted=null;ui.busy=false;ui.mode='basic';ui.target=null;ui.flash={};}session=s;game=s.game;}
 const hostArena=()=>host(arenaSession);
-const ui={screen:'main',guideFromBattle:false,sel:{team:0,slot:1},rosterClass:'all',mode:'basic',target:null,busy:false,flash:{},cpuTimer:null,portraitOk:false};
+const ui={screen:'main',guideFromBattle:false,sel:{team:0,slot:1},rosterClass:'all',setupHero:prefs.parties[0][0]||'valkyrie',mode:'basic',target:null,busy:false,flash:{},cpuTimer:null,portraitOk:false};
 /* Other modes (Expedition) register {id, label, navKey, view(), bind(), onEnter?(), summary?()} here before the
    app starts; the Main Menu opens each mode at its saved progress. */
 const MODES=window.RiftModes||(window.RiftModes={});
@@ -7108,7 +7128,7 @@ function syncPoses(){
 function render(){
  const flip=captureFlip(),focus=document.activeElement?.dataset?.key;
  const mode=modeFor(ui.screen),view=ui.screen==='main'?mainMenuView():ui.screen==='battle'&&game?battleView():ui.screen==='guide'?guideView():mode?mode.view():setupView();
- if(painted==='battle'&&ui.screen==='battle'&&game)patchApp(view);else $('#app').innerHTML=view;
+ if((painted==='battle'&&ui.screen==='battle'&&game)||(painted==='setup'&&ui.screen==='setup'))patchApp(view);else $('#app').innerHTML=view;
  painted=ui.screen==='battle'&&game?'battle':ui.screen;
  RiftSprites.hydrate($('#app'));syncPoses();bind();mode?.bind?.();playFlip(flip);
  // Modes learn which screen (and battle session) is showing, e.g. to count play time only while visible.
@@ -7116,7 +7136,7 @@ function render(){
  if(focus)$(`[data-key="${focus}"]`)?.focus({preventScroll:true});
  scheduleCpu();
 }
-function homeButton(){return '<button class="quiet home-button" data-nav="main"><span aria-hidden="true">‹</span> Main Menu</button>';}
+function homeButton(){return '<button class="quiet home-button" data-nav="main"><span class="home-arrow" aria-hidden="true"></span> Main Menu</button>';}
 function go(screen){
  closeModal();
  if(screen==='guide')ui.guideFromBattle=ui.screen==='battle';
@@ -7145,15 +7165,14 @@ function brand(){return `<div class="brand"><img class="brandmark" src="data:ima
 
 /* ---------- setup / muster ---------- */
 function setupView(){
- const ready=prefs.parties.every(p=>p.some(Boolean)),sel=ui.sel;
+ const ready=prefs.parties.every(p=>p.some(Boolean)),sel=ui.sel,h=byId[ui.setupHero];
  const heroes=heroesByClass().filter(h=>ui.rosterClass==='all'||h.cls===ui.rosterClass);
  const card=h=>{
-  const party=prefs.parties[sel.team],inParty=party.includes(h.id),allowed=Formation.allowedSlots(h.cls).includes(sel.slot);
-  return `<article class="hero-card ${inParty?'in-party':''} ${allowed?'':'blocked'} t${sel.team}">
-   <button class="hero-pick" data-pick="${h.id}" data-key="pick-${h.id}" aria-label="${esc(`${h.name}, ${clsName(h.cls)}, ${slotText(h.cls)}${allowed?'':' — not allowed in slot '+sel.slot}`)}">
-    ${face(h.id,sel.team)}<span class="hc-text"><span class="hc-name">${h.name}</span><span class="cls-tag ${h.cls}" title="${clsName(h.cls)}">${classIcon(h.cls)}<span class="ct-label">${clsName(h.cls)}</span></span></span>
-    <span class="hc-stats"><span class="stat-value">${statIcon('hp')}${h.hp}</span><span class="stat-value">${statIcon('atk')}${h.atk}</span><span class="stat-value">${statIcon('spd')}${h.spd}</span></span>
-    <span class="hc-slots">${inParty?'✓ In party':slotText(h.cls)}</span>
+  const party=prefs.parties[sel.team],inParty=party.includes(h.id),allowed=Formation.allowedSlots(h.cls).includes(sel.slot),selected=ui.setupHero===h.id;
+  return `<article class="hero-card ${inParty?'in-party':''} ${allowed?'':'blocked'} ${selected?'previewed':''} t${sel.team}" data-key="hero-${h.id}">
+   <button class="hero-pick" data-pick="${h.id}" data-key="pick-${h.id}" aria-pressed="${selected}" aria-controls="setup-detail" aria-label="${esc(`${h.name}, ${clsName(h.cls)}, ${slotText(h.cls)}${allowed?'':' — not allowed in slot '+sel.slot}`)}">
+    ${face(h.id,sel.team)}<span class="hc-text"><span class="hc-name">${h.name}</span><span class="cls-tag ${h.cls}">${classIcon(h.cls)}<span>${clsName(h.cls)}</span></span></span>
+    <span class="hc-slots">${inParty?`✓ Slot ${party.indexOf(h.id)+1}`:slotText(h.cls)}</span>
    </button>
    <button class="hc-info" data-dossier="${h.id}" aria-label="${h.name} details">${icon('info')}</button>
   </article>`;
@@ -7162,34 +7181,49 @@ function setupView(){
   const id=prefs.parties[team][s-1],h=id&&byId[id],on=sel.team===team&&sel.slot===s;
   const classes=Object.entries(Formation.CLASSES).filter(([,c])=>c.slots.includes(s)).map(([k])=>clsName(k)).join(' · ');
   return `<div class="m-slot ${on?'on':''} ${h?'filled':''} t${team}"><button class="m-slot-btn" data-mslot="${team}-${s}" data-key="ms-${team}-${s}" aria-pressed="${on}" aria-label="${TEAM[team]} slot ${s}: ${h?h.name:'empty, accepts '+classes}">
-   <span class="m-no">${s}</span>${h?`${face(h.id,team)}<span class="m-name">${h.name}</span><span class="cls-tag ${h.cls}" title="${clsName(h.cls)}">${classIcon(h.cls)}<span class="ct-label">${clsName(h.cls)}</span></span>`:`<span class="m-empty">${classes}</span>`}</button>
-   ${h?`<button class="m-clear" data-mclear="${team}-${s}" aria-label="Remove ${h.name} from ${TEAM[team]} slot ${s}">${icon('close')}</button>`:''}</div>`;
+   <span class="m-no">${s}</span>${h?`${face(h.id,team)}<span class="m-name">${h.name}</span><span class="m-role">${classIcon(h.cls)}<span>${clsName(h.cls)}</span></span>`:`<span class="m-empty">${classes}</span>`}</button>
+   ${h?`<button class="m-clear" data-mclear="${team}-${s}" aria-label="Remove ${h.name} from ${TEAM[team]} slot ${s}">×</button>`:''}</div>`;
  };
  const opponent=Opponent.describe(prefs.opponent);
- const side=team=>`<section class="m-side t${team}" aria-label="${TEAM[team]} formation"><header><div class="m-team-title"><span class="team-name">${TEAM[team]}</span>
-  <span class="control-tag">${icon(team?'cpu':'swords')}${team?'CPU':'You'}</span></div>
-  ${team?`<button class="quiet new-opponent" data-action="new-opponent" data-key="new-opponent">${icon('shuffle')}<span>New opponent</span></button>`:''}</header>
+ const side=team=>`<section class="m-side t${team}" aria-label="${TEAM[team]} formation"><header><div class="m-team-title"><span class="team-name">${team?'Opponent':'Your party'}</span>
+  <span class="control-tag">${team?'CPU':`${prefs.parties[team].filter(Boolean).length} / 4`}</span></div>
+  ${team?`<button class="quiet new-opponent" data-action="new-opponent" data-key="new-opponent" aria-label="New opponent"><span aria-hidden="true">⤨</span><span>Reroll</span></button>`:''}</header>
   <div class="m-row">${(team===0?[4,3,2,1]:[1,2,3,4]).map(s=>slot(team,s)).join('')}</div>
   <div class="m-axis"><span>${team===0?'Rear':'Front'}</span><span>${team===0?'Front':'Rear'}</span></div>
-  ${team?`<p class="m-side-note" role="status" aria-live="polite" aria-atomic="true"><strong>${esc(opponent.name)}</strong><span>${esc(opponent.text)}</span></p>`:'<p class="m-side-note"><strong>Your formation</strong><span>Choose your heroes. You command the left side.</span></p>'}</section>`;
+  ${team?`<p class="m-side-note" role="status" aria-live="polite" aria-atomic="true" title="${esc(opponent.text)}"><strong>${esc(opponent.name)}</strong></p>`:''}</section>`;
+ const allowed=Formation.allowedSlots(h.cls).includes(sel.slot),placed=prefs.parties[sel.team][sel.slot-1]===h.id;
+ const skill=(art,title,meta,text)=>`<section class="setup-skill"><div class="setup-skill-heading">${art}<div><h3>${esc(title)}</h3><span>${meta}</span></div></div><p>${esc(text)}</p></section>`;
  return `<main class="screen setup">
   <header class="top">${brand()}<h1 class="scene-title">Team setup</h1>${homeButton()}</header>
-  <section class="muster">${side(0)}<div class="m-vs" aria-hidden="true">VS</div>${side(1)}</section>
-  <p class="m-help">Editing <strong class="t${sel.team}">${TEAM[sel.team]} slot ${sel.slot}</strong> — pick a hero below. Slot 1 is the front line. Class decides where a hero may stand.</p>
-  <div class="roster-filters" role="group" aria-label="Filter heroes by class">${['all',...CLASS_ORDER].map(cls=>`<button class="roster-filter ${ui.rosterClass===cls?'primary':''}" data-roster-class="${cls}" data-key="filter-${cls}" aria-pressed="${ui.rosterClass===cls}" aria-controls="hero-roster">${cls==='all'?'':classIcon(cls)}<span>${cls==='all'?'All':clsName(cls)}</span></button>`).join('')}</div>
-  <section class="roster" id="hero-roster" aria-label="Heroes">${heroes.map(card).join('')}</section>
-  <footer class="setup-foot">
-   ${arenaGame?.winner===null?'<button class="quiet" data-action="resume">Resume battle</button>':''}<button class="primary start" data-action="start" ${ready?'':'disabled'}>Enter the rift →</button></footer>
+  <section class="muster" aria-label="Formations">${side(0)}${side(1)}</section>
+  <section class="setup-workspace" aria-label="Choose and inspect heroes">
+   <section class="setup-browser" aria-labelledby="roster-title">
+    <header class="setup-browser-head"><div><h2 id="roster-title">Choose a hero</h2><span class="setup-slot-hint t${sel.team}">${sel.team?'Opponent':'Your party'} · Slot ${sel.slot}</span></div>
+     <div class="roster-filters" role="group" aria-label="Filter heroes by class">${['all',...CLASS_ORDER].map(cls=>`<button class="roster-filter ${ui.rosterClass===cls?'primary':''}" data-roster-class="${cls}" data-key="filter-${cls}" aria-pressed="${ui.rosterClass===cls}" aria-controls="hero-roster">${cls==='all'?'':classIcon(cls)}<span>${cls==='all'?'All':clsName(cls)}</span></button>`).join('')}</div>
+    </header>
+    <section class="roster" id="hero-roster" tabindex="0" aria-label="Heroes">${heroes.map(card).join('')}</section>
+   </section>
+   <aside class="setup-detail t${sel.team}" id="setup-detail" aria-labelledby="preview-name">
+    <div class="setup-detail-scroll" tabindex="0" aria-label="Hero information">
+     <div class="setup-preview" data-key="preview-${h.id}"><button class="setup-skills-link" data-action="hero-skills" data-key="hero-skills">Skills ↓</button><div class="setup-hero-art"><span class="ground" aria-hidden="true"></span>${sprite(h.id,sel.team,{uid:'setup-'+h.id})}</div>
+      <div class="setup-hero-heading"><span class="eyebrow">Hero preview</span><h2 id="preview-name">${h.name}</h2><span class="cls-tag ${h.cls}">${classIcon(h.cls)}${clsName(h.cls)}</span><p class="setup-hero-slots">${slotText(h.cls)}</p>
+       <div class="setup-stats">${['hp','atk','spd'].map(stat=>`<div><span>${statIcon(stat,true)}${stat.toUpperCase()}</span><strong>${h[stat]}</strong></div>`).join('')}</div>
+      </div>
+     </div>
+     <div class="setup-skills">${skill(combatIcon(SKILL_ICON[Units.kit(h.id)]),h.skill.name,`${h.skill.cost} MP · CD ${h.skill.cd}${h.skill.cdIn==='cycles'?' cycles':''}`,h.skill.text)}
+      ${skill(combatIcon(ACTION_ICON.passive),h.passive.name,'Passive',h.passive.text)}
+      ${skill(combatIcon(ACTION_ICON.attack),'Basic attack','Free',`${h.atk} damage to an enemy in slots 1…N (N = this hero’s slot), or the frontmost living enemy.`)}</div>
+    </div>
+    <footer class="setup-place"><p id="placement-hint" role="status">${!allowed?`${clsName(h.cls)} heroes belong in ${slotText(h.cls).toLowerCase()}. Select a matching slot above.`:placed?`In ${sel.team?'opponent':'your party'} slot ${sel.slot}.`:`${sel.team?'Opponent':'Your party'} · Slot ${sel.slot}${prefs.parties[sel.team][sel.slot-1]?' · Replaces '+byId[prefs.parties[sel.team][sel.slot-1]].name:''}`}</p><button class="primary" data-action="place-hero" data-key="place-hero" aria-describedby="placement-hint" ${!allowed||placed?'disabled':''}>${placed?'✓ In this slot':`Place in slot ${sel.slot}`}</button></footer>
+   </aside>
+  </section>
+  <footer class="setup-foot"><p>Inspect a hero, then place them in the selected slot.</p><div>${arenaGame?'<button class="quiet" data-action="resume">Resume battle</button>':''}<button class="primary start" data-action="start" ${ready?'':'disabled'}>Start battle ${combatIcon(ACTION_ICON.attack)}</button></div></footer>
  </main>`;
 }
+function inspectHero(id){ui.setupHero=id;render();$('.setup-detail-scroll').scrollTop=0;}
 function placeHero(id){
  const h=byId[id],{team}=ui.sel,party=prefs.parties[team];let slot=ui.sel.slot;
- const allowed=Formation.allowedSlots(h.cls);
- if(!allowed.includes(slot)){
-  const free=allowed.find(s=>!party[s-1]);
-  if(!free)return toast(`${h.name} is a ${clsName(h.cls)}: ${slotText(h.cls).toLowerCase()} only, and both are taken.`);
-  slot=free;
- }
+ if(!Formation.allowedSlots(h.cls).includes(slot))return;
  const prev=party.indexOf(id);if(prev>=0)party[prev]=null;
  party[slot-1]=id;
  if(team===1)prefs.opponent=null;
@@ -7377,11 +7411,11 @@ function logModal(){modal(`<div class="modal-head"><h2>Combat log</h2><button cl
 function bind(){
  for(const b of $$('[data-nav]'))b.onclick=()=>go(b.dataset.nav);
  for(const b of $$('[data-action]'))b.onclick=()=>action(b.dataset.action);
- for(const b of $$('[data-roster-class]'))b.onclick=()=>{ui.rosterClass=b.dataset.rosterClass;render();};
- for(const b of $$('[data-pick]'))b.onclick=()=>placeHero(b.dataset.pick);
+ for(const b of $$('[data-roster-class]'))b.onclick=()=>{ui.rosterClass=b.dataset.rosterClass;render();$('#hero-roster').scrollTop=0;};
+ for(const b of $$('[data-pick]'))b.onclick=()=>inspectHero(b.dataset.pick);
  for(const b of $$('[data-dossier]'))b.onclick=()=>dossier(b.dataset.dossier);
  for(const b of $$('[data-dossier-unit]'))b.onclick=()=>{const u=game.unit(b.dataset.dossierUnit);dossier(u.hero,u);};
- for(const b of $$('[data-mslot]'))b.onclick=()=>{const[t,s]=b.dataset.mslot.split('-').map(Number);ui.sel={team:t,slot:s};render();};
+ for(const b of $$('[data-mslot]'))b.onclick=()=>{const[t,s]=b.dataset.mslot.split('-').map(Number);ui.sel={team:t,slot:s};if(prefs.parties[t][s-1])ui.setupHero=prefs.parties[t][s-1];render();$('.setup-detail-scroll').scrollTop=0;};
  for(const b of $$('[data-mclear]'))b.onclick=()=>{const[t,s]=b.dataset.mclear.split('-').map(Number);prefs.parties[t][s-1]=null;if(t===1)prefs.opponent=null;ui.sel={team:t,slot:s};persist();render();};
  for(const b of $$('[data-unit]'))b.onclick=()=>unitTap(b.dataset.unit);
  for(const b of $$('[data-tl]'))b.onclick=()=>{const u=game.unit(b.dataset.tl);dossier(u.hero,u);};
@@ -7407,6 +7441,8 @@ function action(name){
  if(ui.screen==='battle'&&session?.onAction?.(name))return;
  const g=game;
  if(name==='main')return go('main');
+ if(name==='place-hero')return placeHero(ui.setupHero);
+ if(name==='hero-skills'){const panel=$('.setup-detail-scroll'),skills=$('.setup-skills');panel.scrollTo({top:panel.scrollTop+skills.getBoundingClientRect().top-panel.getBoundingClientRect().top,behavior:'smooth'});return;}
  if(name==='arena-continue'){hostArena();return go('battle');}
  if(name==='arena-new'){hostArena();return go('setup');}
  if(name==='quit'){
