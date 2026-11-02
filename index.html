@@ -5228,9 +5228,10 @@ function framePortrait(svg){
  const cx=e?Math.max(ex-size*.15,Math.min(hx,ex+size*.15)):hx,cy=e?Math.max(hy,ey-size*.18):hy;
  // Small composition adjustments move the artwork within the portrait, in frame fractions.
  // Horizontal adjustments mirror with the hero's facing.
- const shiftX=svg.dataset.sprite==='valkyrie'?.04*(svg.dataset.team==='dusk'?-1:1):0;
- const shiftY=['sentry','sage','dancer'].includes(svg.dataset.sprite)?-.04:0;
- const frameSize=['dragoon','pyromancer','ranger','assassin'].includes(svg.dataset.sprite)?size/1.04:size;
+ const shiftX=(svg.dataset.sprite==='valkyrie'?.04:['pyromancer','cryomancer'].includes(svg.dataset.sprite)?-.03:0)*(svg.dataset.team==='dusk'?-1:1);
+ const shiftY=['sentry','sage','dancer'].includes(svg.dataset.sprite)?-.04:svg.dataset.sprite==='pyromancer'?-.03:0;
+ const scale={dragoon:1.04,pyromancer:1.04*1.03*1.04,ranger:1.04,assassin:1.04*1.04*1.02,paladin:1.02}[svg.dataset.sprite]||1;
+ const frameSize=size/scale;
  const box=[cx-frameSize/2-size*shiftX,cy-frameSize/2-size*shiftY,frameSize,frameSize].map(n=>+n.toFixed(3)).join(' ');
  portraitBoxes[svg.dataset.sprite+'-'+(svg.dataset.team==='dusk'?1:0)]=box;
  svg.dataset.portraitHead='';
