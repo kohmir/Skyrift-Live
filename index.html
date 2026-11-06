@@ -146,11 +146,19 @@ html,body{overscroll-behavior:none}
  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 .hud-top{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto auto;align-items:center;gap:10px;padding:6px 10px 4px;
  background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border-bottom:3px solid var(--ink);box-shadow:inset 0 -2px 0 #00000026,inset 0 2px 0 var(--panel-edge);position:relative;z-index:20}
-.mp{display:grid;grid-template-columns:auto auto;grid-template-areas:"label value" "orbs orbs";gap:6px;align-items:center}
-.mp.t1{justify-items:end}
-.mp-label{grid-area:label;font-family:var(--f-display);font-size:17px;line-height:1;color:var(--team-l)}
-.mp-num{grid-area:value;font-weight:900;font-size:15px;line-height:1;white-space:nowrap}.mp-num small{font-size:9px;color:#eadbb8;margin-left:2px}
-.orbs{grid-area:orbs;display:flex;gap:3px;padding:2px}
+.mp{display:grid;grid-template-columns:auto;grid-template-areas:"heading" "orbs";gap:6px;align-items:center;justify-self:start}
+.mp.t1{justify-items:end;justify-self:end}
+.mp-heading{grid-area:heading;justify-self:stretch;display:flex;align-items:center;justify-content:space-between;column-gap:inherit;min-height:var(--mp-title,17px)}
+.mp.t1 .mp-heading{flex-direction:row-reverse}
+.mp-label{font-family:var(--f-display);font-size:17px;line-height:1;color:var(--team-l)}
+.mp-num{font-weight:900;font-size:17px;line-height:1;white-space:nowrap;position:relative;top:.1em}
+/* Center the visible capitals rather than each font's different built-in leading. */
+@supports (text-box-trim:trim-both){
+ .mp-label,.mp-num{text-box-trim:trim-both;text-box-edge:cap alphabetic}
+ .mp-num{top:0}
+}
+/* Enclose the rotated diamonds exactly, so the heading shares their visible edges. */
+.orbs{grid-area:orbs;display:flex;gap:3px;padding:2px calc(var(--mp-orb,11px) * .20710678)}
 .mp.t1 .orbs{justify-content:flex-end}
 .orb{width:11px;height:11px;transform:rotate(45deg);border:2px solid var(--ink);background:#3b2c1f;box-shadow:inset 0 1px 2px #00000080,0 0 0 1px #ffffff26;border-radius:2px}
 .orb.on{background:radial-gradient(circle at 35% 30%,#fff,var(--team-l) 45%,var(--team));box-shadow:0 0 6px var(--team),0 0 0 1px #ffffff26}
@@ -162,7 +170,7 @@ html,body{overscroll-behavior:none}
 /* Timeline: the next activations, a gold NOW card first. */
 /* Keep the original header height, with the turn portraits centered in the freed space. */
 .timeline-wrap{min-width:0;min-height:110px;display:grid;align-items:center}
-.timeline{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);list-style:none;margin:0;padding:10px 2px 10px 10px;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;box-sizing:border-box;height:78px}
+.timeline{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);list-style:none;margin:0;padding:10px;display:flex;align-items:center;justify-content:safe center;gap:6px;min-width:0;overflow:hidden;box-sizing:border-box;height:78px}
 .tl-item{position:relative;flex-shrink:0;cursor:pointer;min-width:44px;min-height:44px;display:grid;place-items:center}
 .tl-item .face{width:38px;height:38px;border-width:2.5px;box-shadow:0 0 0 3px var(--team) inset}
 .tl-item.now .face{width:50px;height:50px;border-color:#2b1d16;box-shadow:0 0 0 3px var(--team) inset,0 0 0 3px var(--gold),0 0 16px #ffd24a}
@@ -231,6 +239,16 @@ html,body{overscroll-behavior:none}
 .grave{position:absolute;left:50%;translate:-50% 0;bottom:calc(var(--fb) + var(--fpx) * .045);width:min(36%,52px);z-index:2}
 .grave svg{width:100%;height:auto}
 .fallen{font-size:10px;font-weight:900;color:#f3e6c8;text-shadow:var(--ol15);opacity:.85;margin-top:12px;white-space:nowrap}
+/* Roomy battlefields can carry readable labels without shrinking the formation. */
+@media (min-width:1100px) and (min-height:620px){
+ .unit-hud{gap:2px}
+ .u-name{font-size:clamp(14px,1vw,18px)}
+ .hp-num{font-size:clamp(13px,.95vw,16px)}
+ .hp-num small{font-size:clamp(12px,.85vw,14px)}
+ .vacant{font-size:clamp(12px,.9vw,16px)}
+ .fallen{font-size:clamp(12px,1vw,18px);line-height:1.2;white-space:normal;overflow-wrap:anywhere;max-width:100%;text-align:center}
+ .battle .active-arrow,.battle .slot.target::after,.battle .slot.affected::after{bottom:calc(var(--fb) + var(--fpx) * .9 + 56px)}
+}
 /* Turn and targeting states */
 .active-arrow,.slot.target::after,.slot.affected::after{content:"";position:absolute;left:50%;bottom:calc(var(--fb) + var(--fpx) * .9 + 38px);width:clamp(18px,calc(var(--fpx) * .15),26px);aspect-ratio:26/23;translate:-50% 0;z-index:7;pointer-events:none;
  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 23'%3E%3Cpath d='M3.5 3.5L22.5 3.5Q24.6 3.5 23.5 5.4L14.7 19.6Q13 22.2 11.3 19.6L2.5 5.4Q1.4 3.5 3.5 3.5Z' fill='%23f2c94c' stroke='%231b1210' stroke-width='2.6' stroke-linejoin='round'/%3E%3Cpath d='M6 6.6L19.4 6.6' stroke='%23ffffff99' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;filter:drop-shadow(0 2px 0 #1b121088);animation:hop .9s ease-in-out infinite}
@@ -386,7 +404,7 @@ html,body{overscroll-behavior:none}
 @media (orientation:portrait) and (max-width:760px){
  .hud-top{grid-template-columns:44px minmax(0,1fr) minmax(0,1fr) 44px;grid-template-areas:"menu mp0 mp1 cyc" "tl tl tl tl";gap:8px;padding:8px 10px}
  .hud-top>.icon-btn{grid-area:menu}.hud-top .mp.t0{grid-area:mp0}.hud-top .mp.t1{grid-area:mp1;justify-self:end}.timeline-wrap{grid-area:tl}.cycle-badge{grid-area:cyc;width:44px;height:44px}
- .cycle-badge strong{font-size:22px}.cycle-badge span{font-size:7px}.mp{gap:6px 4px}.mp-num{font-size:12px}.mp-num small{font-size:8px}
+ .cycle-badge strong{font-size:22px}.cycle-badge span{font-size:7px}.mp{gap:6px 4px}.mp-num{font-size:12px}
  .actionbar{min-height:200px;grid-template-columns:minmax(0,1fr);grid-template-areas:"hero" "prompt" "acts";gap:6px 8px}
  .ab-hero{grid-area:hero;max-width:100%;min-width:0}.ab-actions{grid-area:acts;width:100%;justify-content:center}.ab-actions .act{flex:1}.ab-prompt{grid-area:prompt;display:flex}
  .actionbar.cpu{grid-template-columns:minmax(0,1fr);grid-template-areas:"hero" "prompt"}.actionbar.cpu .ab-prompt{display:flex}
@@ -552,9 +570,11 @@ svg.sprite[data-pose="enrage"]{animation:rage-glow 1.1s ease-in-out infinite}
 .x-relics .x-none{color:var(--dim)}
 /* Map */
 .x-map-wrap{display:grid;grid-template-columns:minmax(0,1fr) 232px;gap:10px;padding:8px 10px;min-height:0}
-.x-map{position:relative;min-height:0;border:3px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);
+.x-map{position:relative;min-height:0;border:3px solid var(--ink);border-radius:16px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;box-shadow:var(--shadow);
  background:radial-gradient(90% 120% at 50% 50%,#f4e6c4 40%,#e2cc9c 100%)}
-.x-map-track{position:relative;width:100%;height:100%}
+/* Keep readable spacing per layer in every orientation; narrow frames scroll sideways. */
+.x-map::-webkit-scrollbar{display:none}
+.x-map-track{position:relative;width:100%;min-width:calc(var(--layers) * 64px + 24px);height:100%}
 .x-map-track::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 46px,#b08a5014 46px 47px),repeating-linear-gradient(0deg,transparent 0 46px,#b08a5014 46px 47px);pointer-events:none}
 .x-edges{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .x-edges line{stroke:#9b8158;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linecap:round}
@@ -694,6 +714,16 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .x-sum-relics{display:flex;flex-wrap:wrap;gap:6px}
 .x-dialog-buttons{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
 .x-dialog p{font-size:14px}
+.x-starters{width:min(380px,100%)}
+.x-starters .modal-head{gap:12px}.x-starters .modal-head h2{font-size:24px}.x-starters .modal-head .icon-btn{flex-shrink:0}
+.x-starting-party{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-top:8px}
+.x-starter{display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 8px;border:2px solid #c8b088;border-radius:12px;background:#e7d4ad}
+.x-starter .face{width:72px;height:72px}
+.x-starter strong{font-family:var(--f-display);font-size:20px;line-height:1.1;text-align:center;overflow-wrap:anywhere}
+.x-trade-result{width:min(420px,100%)}
+.x-trade-result .modal-head{gap:12px}.x-trade-result .modal-head h2{font-size:26px}.x-trade-result .modal-head .icon-btn{flex-shrink:0}
+.x-trade-result .x-trade-reveal{margin:16px 0;gap:18px}
+.x-trade-result .x-trade-received{font-size:15px;line-height:1.5}
 .danger-fill{color:#fff;background:linear-gradient(180deg,#e0624f,#a8352a);box-shadow:inset 0 2px 0 #fff5,inset 0 -4px 0 #7a2318,0 3px 0 var(--ink)}
 .menu-list .danger{color:#ffb1a3}
 .x-relic-list{display:grid;gap:10px}
@@ -717,10 +747,6 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
  .x-hud{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"menu prog relics" "roster roster roster"}
  .x-hud>.icon-btn{grid-area:menu}.x-progress{grid-area:prog}.x-relics{grid-area:relics}.x-roster{grid-area:roster;justify-content:flex-start;overflow-x:auto}
  .x-map-wrap{grid-template-columns:minmax(0,1fr);grid-template-rows:62vh auto}
- /* About 64px per layer: the map scrolls sideways (no visible scrollbar) instead of overlapping nodes. */
- .x-map{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
- .x-map::-webkit-scrollbar{display:none}
- .x-map-track{min-width:calc(var(--layers) * 64px + 24px)}
  .x-setup,.x-cards{grid-template-columns:minmax(0,1fr)}
  /* One column of cards that grow with their text: the landscape height cap would split 340px
     between the rows (Safari does), pushing each card's text out below it. */
@@ -874,15 +900,13 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .continue-badge i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px #e9c25a66}
 .scene-title{font-size:26px;color:var(--text)}.scene-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 .home-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex:0 0 auto}.home-button>.home-arrow{width:7px;height:7px;flex:none;border-left:2px solid currentColor;border-bottom:2px solid currentColor;rotate:45deg}
-.x-navigation{display:flex;align-items:center;gap:6px}.x-navigation .home-button{padding:6px 8px;font-size:12px}.x-navigation .home-button>span{font-size:22px}
 @media (min-width:1100px) and (min-height:620px){
  .x-hud{grid-template-columns:auto minmax(240px,1fr) minmax(0,1.5fr) auto;gap:20px}
- .x-navigation{gap:10px}.x-navigation .icon-btn{width:48px;height:48px}.x-navigation .home-button{font-size:13px;padding:10px}
+ .x-hud>.icon-btn{width:48px;height:48px}
 }
 @media (max-width:650px){
  .top{gap:12px;flex-wrap:wrap}.top>.scene-title{order:3;flex:1 0 100%;font-size:24px}.top>.scene-actions{display:contents}
  .top .scene-actions>[data-action=return-battle]{order:4}
- .x-navigation{grid-area:menu}.x-navigation .home-button{max-width:74px;line-height:1.15;gap:3px}
  .main-menu{padding-top:32px;gap:28px}.main-logo .brandmark{width:96px;height:96px}.main-logo .brand{gap:18px}
  .main-choice{padding:14px 18px;gap:14px;min-height:98px}.main-choice-icon{flex-basis:56px;width:56px;height:56px}
 }
@@ -895,32 +919,38 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 }
 
 /* Battle header: use the former gauge space for larger, readable controls. */
-.hud-top{--turn-face:52px;--turn-active:68px;--turn-slot:56px;--turn-height:110px;--turn-gap:8px;--turn-label:10px;--mp-orb:14px;--mp-orb-gap:4px;--mp-title:22px;--mp-value:19px;--mp-unit:11px;--menu-size:60px;--cycle-size:84px;--cycle-value:36px;--cycle-title:10px}
+.hud-top{--turn-face:52px;--turn-active:68px;--turn-slot:56px;--turn-height:110px;--turn-gap:8px;--turn-label:10px;--mp-orb:14px;--mp-orb-gap:4px;--mp-title:22px;--menu-size:60px;--cycle-size:84px;--cycle-value:36px;--cycle-title:10px}
 .hud-top>.icon-btn{width:var(--menu-size);height:var(--menu-size)}.hud-top>.icon-btn .ic{width:26px;height:26px}
 .hud-top .timeline{height:var(--turn-height);padding-block:14px;gap:var(--turn-gap)}
 .hud-top .tl-item{min-width:var(--turn-slot);min-height:var(--turn-slot)}
 .hud-top .tl-item .face{width:var(--turn-face);height:var(--turn-face)}.hud-top .tl-item.now .face{width:var(--turn-active);height:var(--turn-active)}
 .hud-top .tl-now,.hud-top .tl-n{font-size:var(--turn-label)}.hud-top .tl-cycle span{font-size:var(--turn-label);padding:6px 2px}
 .hud-top .tl-spd{width:20px;height:20px}.hud-top .tl-spd .status-icon{width:15px;height:15px}
-.hud-top .mp-label{font-size:var(--mp-title)}.hud-top .mp-num{font-size:var(--mp-value)}.hud-top .mp-num small{font-size:var(--mp-unit)}
+.hud-top .mp-label{font-size:var(--mp-title)}
+/* Nunito's capitals read larger than the team names' display font at equal CSS sizes. */
+.hud-top .mp-num{font-size:calc(var(--mp-title) * .8)}
 .hud-top .orb{width:var(--mp-orb);height:var(--mp-orb)}.hud-top .orbs{gap:var(--mp-orb-gap)}
 .hud-top .cycle-badge{width:var(--cycle-size);height:var(--cycle-size)}.hud-top .cycle-badge strong{font-size:var(--cycle-value)}.hud-top .cycle-badge span{font-size:var(--cycle-title)}
+@media (min-width:1100px) and (min-height:620px){
+ .hud-top{--mp-title:clamp(24px,1.6vw,30px);--mp-orb:clamp(18px,1.25vw,24px);--mp-orb-gap:clamp(8px,.6vw,12px)}
+ .hud-top .mp{column-gap:16px;row-gap:10px}.hud-top .orbs{padding-block:6px}
+}
 @media (max-height:440px){
- .hud-top{--turn-face:42px;--turn-active:56px;--turn-slot:46px;--turn-height:94px;--turn-gap:6px;--turn-label:9px;--mp-orb:12px;--mp-orb-gap:3px;--mp-title:19px;--mp-value:16px;--mp-unit:10px;--menu-size:52px;--cycle-size:68px;--cycle-value:30px;--cycle-title:8px}
+ .hud-top{--turn-face:42px;--turn-active:56px;--turn-slot:46px;--turn-height:94px;--turn-gap:6px;--turn-label:9px;--mp-orb:12px;--mp-orb-gap:3px;--mp-title:19px;--menu-size:52px;--cycle-size:68px;--cycle-value:30px;--cycle-title:8px}
 }
 /* Reclaim header padding on very short screens for the persistent action-bar space. */
 @media (max-height:350px) and (min-width:540px){
  .hud-top{--turn-height:80px}.hud-top .timeline-wrap{min-height:80px}.hud-top .timeline{padding-block:10px}
 }
 @media (orientation:portrait) and (max-width:760px){
- .hud-top{--turn-face:48px;--turn-active:64px;--turn-slot:52px;--turn-height:102px;--turn-gap:6px;--mp-orb:clamp(8px,2.55vw,10px);--mp-orb-gap:2px;--mp-title:18px;--mp-value:14px;--mp-unit:8px;--menu-size:52px;--cycle-size:52px;--cycle-value:25px;--cycle-title:7px;
+ .hud-top{--turn-face:48px;--turn-active:64px;--turn-slot:52px;--turn-height:102px;--turn-gap:6px;--mp-orb:clamp(8px,2.55vw,10px);--mp-orb-gap:2px;--mp-title:clamp(14px,4.6vw,18px);--menu-size:52px;--cycle-size:52px;--cycle-value:25px;--cycle-title:7px;
   grid-template-columns:52px minmax(0,1fr) minmax(0,1fr) 52px;grid-template-rows:52px auto}
  .hud-top .timeline-wrap{min-height:102px}
 }
 
 /* Landscape phones: give the battlefield 15% of each bar's former height. */
 @media (orientation:landscape) and (max-height:500px){
- .hud-top{--turn-face:44.2px;--turn-active:57.8px;--turn-slot:47.6px;--turn-height:93.5px;--turn-gap:6.8px;--turn-label:8.5px;--mp-orb:11.9px;--mp-orb-gap:3.4px;--mp-title:18.7px;--mp-value:16.15px;--mp-unit:9.35px;--menu-size:51px;--cycle-size:71.4px;--cycle-value:30.6px;--cycle-title:8.5px;
+ .hud-top{--turn-face:44.2px;--turn-active:57.8px;--turn-slot:47.6px;--turn-height:93.5px;--turn-gap:6.8px;--turn-label:8.5px;--mp-orb:11.9px;--mp-orb-gap:3.4px;--mp-title:18.7px;--menu-size:51px;--cycle-size:71.4px;--cycle-value:30.6px;--cycle-title:8.5px;
   height:calc(123px * .85);gap:8.5px;padding:5.1px 8.5px 3.4px;border-bottom-width:2.55px}
  .hud-top .timeline-wrap{min-height:var(--turn-height)}.hud-top .timeline{padding-block:11.9px}
  .hud-top>.icon-btn .ic{width:22.1px;height:22.1px}
@@ -940,7 +970,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
  .thinking{gap:3.4px}.thinking i{width:6.8px;height:6.8px}
 }
 @media (orientation:landscape) and (max-height:440px){
- .hud-top{--turn-face:35.7px;--turn-active:47.6px;--turn-slot:39.1px;--turn-height:79.9px;--turn-gap:5.1px;--turn-label:7.65px;--mp-orb:10.2px;--mp-orb-gap:2.55px;--mp-title:16.15px;--mp-value:13.6px;--mp-unit:8.5px;--menu-size:44.2px;--cycle-size:57.8px;--cycle-value:25.5px;--cycle-title:6.8px;
+ .hud-top{--turn-face:35.7px;--turn-active:47.6px;--turn-slot:39.1px;--turn-height:79.9px;--turn-gap:5.1px;--turn-label:7.65px;--mp-orb:10.2px;--mp-orb-gap:2.55px;--mp-title:16.15px;--menu-size:44.2px;--cycle-size:57.8px;--cycle-value:25.5px;--cycle-title:6.8px;
   height:calc(103px * .85);padding:3.4px 6.8px 1.7px;gap:6.8px}
  .actionbar{height:74.8px;min-height:74.8px;padding-block:4.25px;gap:6.8px}
  .ab-hero{min-height:42.5px}.ab-hero .face.big{width:35.7px;height:35.7px}.ab-name{font-size:14.45px}
@@ -6262,10 +6292,14 @@ const DMG_KIND={bomb:'burn',true:'true',link:'bleed',poison:'poison',burn:'burn'
 const NAMES={fear:'Fear',timelocked:'Time Lock',aiming:'Aiming',assaultStance:'Assault Stance',guardStance:'Guard Stance',onslaught:'Onslaught',camouflage:'Camouflage',displaced:'Displaced',companion:'Hawk',guarded:'Guarded',strung:'Strung',nullify:'Nullify',overclocked:'Overclocked',desolation:'Desolation',bomb:'Bomb',enraged:'Enraged',meditating:'Meditating',flow:'Flow',bloodlink:'Blood-Link',barrier:'Barrier',mirror:'Mirror Shield',provoked:'Provoked',focused:'Focused',fury:'Fury',performing:'Performing',charged:'Charged',cold:'Cold',frozen:'Frozen',silence:'Silenced',pierced:'Pierced',poison:'Poison',burn:'Burn',bleed:'Bleed',shield:'Shield',fortify:'Fortify',empower:'Empower',weaken:'Weaken',strain:'Strain',haste:'Haste',slow:'Slow'};
 const easeOut='cubic-bezier(.2,.8,.3,1)';
 const SKILL_SHADE=.56;
+let stageId=0;
 
 class Stage{
  constructor(rootEl){
   this.root=rootEl;this.layer=document.createElement('div');this.layer.className='fx-layer';this.layer.setAttribute('aria-hidden','true');rootEl.appendChild(this.layer);
+  // A delayed cleanup still owns this node after the board is patched. Keep it out of
+  // positional DOM matching so it can never become a result card (then be removed).
+  this.layer.dataset.key='fx-layer-'+(++stageId);
   this.stack={};
   this.rects=new Map();this.heldPositions=new Map();
  }
@@ -7329,7 +7363,7 @@ function enter(screen,kind='fade',dir=1){
  blocks.forEach((el,i)=>el.animate([{opacity:0,transform:from},{opacity:1,transform:'none'}],{duration:kind==='boot'?700:520,delay:base+i*(kind==='boot'?90:65),easing:OUT,fill:'backwards'}));
 }
 
-window.RiftScene={begin,play,enter,end,warm:()=>flagReady};
+window.RiftScene={begin,play,enter,end,active:()=>!!live,warm:()=>flagReady};
 })();
 </script><script>/* Shared UI helpers for every screen and mode (window.RiftUI): DOM shortcuts, escaping, icon and
    sprite markup, class labels, local storage, the toast, modal dialogs and the DOM morph used for
@@ -7429,11 +7463,11 @@ function morphChildren(a,b){
 /* Modal buttons with data-modal="<action>" close the dialog, then run that action in the app. */
 let modalAction=()=>{};
 const setModalAction=fn=>{modalAction=fn;};
-let modalFocus=null;
-function modal(html,cls=''){modalFocus=document.activeElement;$('#overlay').innerHTML=`<div class="modal-backdrop"><section class="modal ${cls}" role="dialog" aria-modal="true"${cls==='dossier'?' aria-labelledby="dossier-title"':''}>${html}</section></div>`;RiftSprites.hydrate($('#overlay'));
+let modalFocus=null,modalOnClose=null;
+function modal(html,cls='',{onClose=null}={}){modalFocus=document.activeElement;modalOnClose=onClose;$('#overlay').innerHTML=`<div class="modal-backdrop"><section class="modal ${cls}" role="dialog" aria-modal="true"${cls==='dossier'?' aria-labelledby="dossier-title"':''}>${html}</section></div>`;RiftSprites.hydrate($('#overlay'));
  $('#overlay .modal-backdrop').onclick=e=>{if(e.target===e.currentTarget)closeModal();};for(const b of $$('#overlay [data-close]'))b.onclick=closeModal;
  for(const b of $$('#overlay [data-modal]'))b.onclick=()=>{const k=b.dataset.modal;closeModal();modalAction(k);};$('#overlay button')?.focus();}
-function closeModal(){$('#overlay').innerHTML='';modalFocus?.focus?.();}
+function closeModal(){const onClose=modalOnClose;modalOnClose=null;$('#overlay').innerHTML='';modalFocus?.focus?.();onClose?.();}
 window.RiftUI={$,$$,esc,P,ICONS,STATUS_ICON,CLASS_ICON,classIcon,CLASS_ORDER,heroesByClass,SKILL_ICON,ACTION_ICON,combatIcon,STAT_ICON,statIcon,icon,relicIcon,nodeIcon,sprite,face,store,toast,clsName,slotText,keyOf,sameKind,syncAttrs,morph,morphChildren,modal,closeModal,setModalAction};
 })();
 </script><script>/* Expedition screens (docs/expedition/M12). The mode changes the run only through Run.apply, Bridge
@@ -7491,6 +7525,8 @@ function newRun(){
  // Tests pin the run through window.__expeditionSeed; players always get a fresh random seed.
  const seed=Number.isInteger(window.__expeditionSeed)?window.__expeditionSeed>>>0:RNG.newSeed();
  S.run=Run.create({seed,now:Date.now()});S.battle=null;S.session=null;S.hub=false;resetChoices();save();open();
+ // Show only when a run is created, never when its map is rendered or resumed.
+ startingPartyDialog();
 }
 /* Show the run where it stands (not the start screen): its battle on the battle screen, anything
    else in this mode. The Main Menu also continues an active run directly. */
@@ -7549,9 +7585,23 @@ X.__autoBattle=({win=false,lose=false}={})=>{
 };
 
 /* ---------- dialogs ---------- */
-function dialog(html,handlers,cls=''){
- modal(html,'x-dialog '+cls);
+function dialog(html,handlers,cls='',options){
+ modal(html,'x-dialog '+cls,options);
  for(const b of $$('#overlay [data-x]'))b.onclick=()=>handlers[b.dataset.x]?.(b.dataset.arg);
+}
+function startingPartyDialog(){
+ dialog(`<div class="modal-head"><h2 id="x-starters-title">Your starting heroes</h2><button class="icon-btn" data-close aria-label="Close">${icon('close')}</button></div>
+  <div class="x-starting-party">${S.run.roster.map(m=>`<div class="x-starter">${face(m.hero,0)}<strong>${esc(unitName(m.hero))}</strong></div>`).join('')}</div>`,{},'x-starters');
+ $('#overlay .modal').setAttribute('aria-labelledby','x-starters-title');
+}
+function tradeResultDialog(){
+ const n=S.run.notice,runId=S.run.runId,relic=Relics.get(n.got);
+ dialog(`<div class="modal-head"><h2 id="x-trade-title">Trade complete</h2><button class="icon-btn" data-close aria-label="Close">${icon('close')}</button></div>
+  <div class="x-trade-reveal"><span class="x-gave" title="${esc(Relics.get(n.gave)?.name||n.gave)}">${relicIcon(n.gave,{size:40})}</span>${icon('shuffle')}${relicIcon(n.got,{size:64})}</div>
+  <p class="x-trade-received">You received <strong>${esc(relic?.name||n.got)}</strong>: ${esc(relic?.text||'')}</p>`,{},'x-trade-result',{
+   onClose(){if(S.run?.runId===runId&&S.run.notice?.kind==='trade')apply({type:'DISMISS_NOTICE'});}
+  });
+ $('#overlay .modal').setAttribute('aria-labelledby','x-trade-title');
 }
 function abandonDialog(){
  dialog(`<div class="modal-head"><h2>Abandon expedition?</h2><button class="icon-btn" data-close aria-label="Close">${icon('close')}</button></div>
@@ -7598,7 +7648,7 @@ function hud(title){
  const mates=r.roster.map(m=>{const max=base(m.hero),down=m.hp<=0;
   return `<button class="x-mate ${down?'down':''} ${deployed.has(m.hero)?'on':''}" data-x="dossier" data-arg="${m.hero}" aria-label="${esc(`${unitName(m.hero)}, ${down?'fallen':`${m.hp} of ${max} HP`}, details`)}" title="${esc(`${unitName(m.hero)} · ${down?'fallen':`${m.hp}/${max} HP`}${deployed.has(m.hero)?' · in party':''}`)}">${face(m.hero,0,down?'gone':'')}${hpBar(m.hp,max)}<span class="x-mate-name">${esc(unitName(m.hero))}</span></button>`;}).join('');
  const relics=r.relics.length?r.relics.slice(0,7).map(id=>relicIcon(id,{size:24})).join('')+(r.relics.length>7?`<b>+${r.relics.length-7}</b>`:''):'';
- return `<header class="x-hud"><div class="x-navigation">${App().homeButton()}<button class="icon-btn" data-x="menu" data-key="x-menu" aria-label="Expedition menu">${icon('menu')}</button></div>
+ return `<header class="x-hud"><button class="icon-btn" data-x="menu" data-key="x-menu" aria-label="Expedition menu">${icon('menu')}</button>
   <div class="x-progress"><span class="eyebrow">Node ${n} of ${L}</span><strong>${esc(title)}</strong><span class="x-steps" aria-hidden="true">${steps}</span></div>
   <div class="x-roster" aria-label="Roster: ${esc(r.roster.map(m=>`${unitName(m.hero)} ${m.hp>0?`${m.hp} of ${base(m.hero)} HP`:'fallen'}`).join(', '))}">${mates}</div>
   <button class="x-relics" data-x="relics" data-key="x-relics" aria-label="${r.relics.length} relic${r.relics.length===1?'':'s'}: open details"><span class="x-relics-label">Relics · ${r.relics.length}</span><span class="x-relics-art">${relics}</span></button></header>
@@ -7668,7 +7718,7 @@ function mapView(){
  return screen('x-map-screen',`${hud('Choose your path')}<div class="x-map-wrap"><section class="x-map" aria-label="Expedition map, ${route.length} of ${L} nodes travelled"><div class="x-map-track" style="--layers:${L}">
   <svg class="x-edges" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${edges.join('')}</svg>${nodes}</div></section>${mapPanel(choices)}</div>`);
 }
-/* A map wider than its frame (portrait phones) scrolls sideways. Each render rebuilds it, so the
+/* A map wider than its frame scrolls sideways in any orientation. Each render rebuilds it, so the
    scroll position is kept; after a move, the next choices are brought into view. */
 function bindMap(){
  const el=$('#app .x-map');if(!el)return;
@@ -7681,7 +7731,7 @@ function bindMap(){
  el.onscroll=()=>{S.mapScroll=el.scrollLeft;};
 }
 function mapPanel(choices){
- const r=S.run,notice=r.notice?noticeCard(r.notice):'',id=choices.includes(S.nodeSel)?S.nodeSel:null;
+ const r=S.run,notice=r.notice&&r.notice.kind!=='trade'?noticeCard(r.notice):'',id=choices.includes(S.nodeSel)?S.nodeSel:null;
  if(!id)return `<aside class="x-panel parchment">${notice}<span class="eyebrow">Next stop</span><h3>Choose a node</h3><p class="x-small">Rest and the guardian wait on every path.</p>
   <div class="x-choice-list">${choices.map(c=>{const n=r.map.nodes[c];return `<button class="x-choice" data-x="node" data-arg="${c}">${nodeIcon(n.type,{size:24})}<span>${NODE[n.type].name}</span><small>${pathName(r.map,c)}</small></button>`;}).join('')}</div></aside>`;
  const n=r.map.nodes[id],rules=n.type==='elite'?eliteRules(r,id):n.type==='boss'?['boss_sovereign']:[];
@@ -7693,8 +7743,7 @@ function mapPanel(choices){
 function pathName(m,id){const n=m.nodes[id],w=m.layers[n.layer-1].length;return w===1?'':w===2?['upper','lower'][n.lane]:n.lane===0?'top':n.lane===w-1?'bottom':w===3?'middle':['top','upper middle','lower middle','bottom'][n.lane];}
 function noticeCard(n){
  let body='';
- if(n.kind==='trade')body=`<span class="eyebrow">Trade complete</span><div class="x-trade-reveal"><span class="x-gave" title="${esc(Relics.get(n.gave)?.name||n.gave)}">${relicIcon(n.gave,{size:28})}</span>${icon('shuffle')}<span>${relicIcon(n.got,{size:40})}</span></div><p class="x-small">You received <strong>${esc(Relics.get(n.got)?.name||n.got)}</strong>: ${esc(Relics.get(n.got)?.text||'')}</p>`;
- else if(n.kind==='rest')body=`<span class="eyebrow">Rested</span><p class="x-small">${Object.keys(n.healed).length?Object.entries(n.healed).map(([h,v])=>`${esc(unitName(h))} +${v}`).join(' · '):'Everyone was already at full health.'}${n.revived?` · <strong>${esc(unitName(n.revived))} revived</strong>`:''}</p>`;
+ if(n.kind==='rest')body=`<span class="eyebrow">Rested</span><p class="x-small">${Object.keys(n.healed).length?Object.entries(n.healed).map(([h,v])=>`${esc(unitName(h))} +${v}`).join(' · '):'Everyone was already at full health.'}${n.revived?` · <strong>${esc(unitName(n.revived))} revived</strong>`:''}</p>`;
  else if(n.kind==='reward')body=`<span class="eyebrow">No relics left</span><p class="x-small">You already own every relic this rift can offer.</p>`;
  else if(n.kind==='recruit')body=`<span class="eyebrow">Nobody to recruit</span><p class="x-small">Every hero has already joined your expedition.</p>`;
  return `<div class="x-notice" role="status">${body}<button class="quiet x-ok" data-x="dismiss" data-key="x-dismiss">OK</button></div>`;
@@ -7844,6 +7893,7 @@ document.addEventListener('visibilitychange',()=>{if(S.visible){if(document.visi
  bind(){
   for(const b of $$('#app [data-x]'))b.onclick=()=>{if(b.getAttribute('aria-disabled')==='true'&&b.dataset.x!=='bench')return;handlers[b.dataset.x]?.(b.dataset.arg);};
   if(S.error&&!S.errorShown){S.errorShown=true;errorDialog();}
+  if(!S.hub&&S.run?.phase==='map'&&S.run.notice?.kind==='trade'&&!$('#overlay .modal'))tradeResultDialog();
   bindMap();
  }
 };
@@ -8058,7 +8108,7 @@ function battleView(){
 }
 function mpOrbs(team){
  const g=game,v=g.mp.get(team),a=g.actor(),cost=a&&a.team===team&&ui.mode==='skill'&&!ui.busy?g.skillCost(a):0;
- return `<div class="mp t${team}" data-mp="${team}" aria-label="${TEAM[team]} ${v} of ${g.mp.max} MP"><span class="mp-label">${TEAM[team]}</span><span class="orbs">${Array.from({length:g.mp.max},(_,i)=>{const k=team?g.mp.max-1-i:i;return `<i class="orb ${k<v?'on':''} ${k<v&&k>=v-cost?'spend':''}"></i>`;}).join('')}</span><span class="mp-num">${v}<small>/${g.mp.max} MP</small></span></div>`;
+ return `<div class="mp t${team}" data-mp="${team}" aria-label="${TEAM[team]} ${v} of ${g.mp.max} MP"><div class="mp-heading"><span class="mp-label">${TEAM[team]}</span><span class="mp-num">${v} MP</span></div><span class="orbs">${Array.from({length:g.mp.max},(_,i)=>{const k=team?g.mp.max-1-i:i;return `<i class="orb ${k<v?'on':''} ${k<v&&k>=v-cost?'spend':''}"></i>`;}).join('')}</span></div>`;
 }
 function topBar(){
  const g=game;
@@ -8160,8 +8210,7 @@ function forecast(a,kind,primary){
 }
 function actionBar(a,human,legal,primary,preview){
  const g=game;
- if(g.winner!==null)return `<footer class="actionbar"><div class="ab-prompt"><strong>${g.winner==='draw'?'Draw':TEAM[g.winner]+' wins'}</strong></div></footer>`;
- if(!a)return '<footer class="actionbar"></footer>';
+ if(g.winner!==null||!a)return '<footer class="actionbar"></footer>';
  const h=byId[a.hero],s=h.skill,reason=g.skillReason(a),basicReason=g.basicReason(a),cost=g.skillCost(a),spd=g.spdOf(a);
  const who=`<button class="ab-hero t${a.team}" data-dossier-unit="${a.uid}" aria-label="${esc(g.name(a))} details">${face(a.hero,a.team,'big')}<span class="ab-id"><span class="ab-team">${TEAM[a.team]}${isCpu(a.team)?' · CPU':''}</span><span class="ab-name">${h.name}</span><span class="ab-meta"><span class="stat-value">${statIcon('hp')}${a.hp}/${a.maxHp}</span><span class="stat-value">${statIcon('spd')}${spd}${spd!==a.spd?`<em class="${spd>a.spd?'up':'down'}">(${spd>a.spd?'+':''}${spd-a.spd})</em>`:''}</span></span></span><span class="ab-chips">${statusChips(a,4)}</span></button>`;
  if(!human)return `<footer class="actionbar cpu t${a.team}">${who}<div class="ab-prompt"><span class="thinking"><i></i><i></i><i></i></span><strong>${g.forcedAction(a)?`${h.name} is ${g.forcedAction(a).kind==='skip'?'playing…':'enraged!'}`:`${TEAM[a.team]} is deciding…`}</strong></div></footer>`;
@@ -8323,7 +8372,9 @@ function scheduleCpu(){
  }
  const job=cpuJob;
  if(!job.result)return;
- if($('#overlay').innerHTML||performance.now()<job.readyAt){
+ // The flag can still cover a ready CPU's opening skill. Let its shade and cast
+ // play on the revealed board, including when resuming an Expedition battle.
+ if(RiftScene.active()||$('#overlay').innerHTML||performance.now()<job.readyAt){
   ui.cpuTimer=setTimeout(scheduleCpu,Math.max(50,job.readyAt-performance.now()));return;
  }
  const c=job.result.action;
