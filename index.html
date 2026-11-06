@@ -329,8 +329,8 @@ html,body{overscroll-behavior:none}
 .d-art .sprite{position:relative;z-index:3;width:var(--d-sprite-width);height:auto;aspect-ratio:144/184}
 .d-class{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12px;font-weight:800;color:#6b5638;margin:4px 0 8px}
 .d-class .cls-tag{flex-shrink:0;min-height:23px}.cls-tag.d-slots{background:var(--wood3);color:#fff;padding-inline:6px;white-space:nowrap}
-.d-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.d-stats>div{min-width:0;min-height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;border:2px solid #c8b088;border-radius:10px;padding:8px 4px}.d-stats strong{display:block;font-family:var(--f-display);font-size:22px;line-height:1}.d-stats span{font-size:10px;font-weight:900;letter-spacing:.1em;color:#8a7350}
-.d-stats .stat-label{display:flex;align-items:center;justify-content:center;gap:3px}.d-stats .stat-icon{width:16px;height:16px}
+
+
 .d-live{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;font-size:12px;font-weight:900}
 .d-live>span{padding:3px 6px;border:1px solid #c8b088;border-radius:6px;background:#fff8e680}
 .d-effects{grid-column:1/-1;min-width:0;margin-top:12px}.d-effects h3{font-family:var(--f-ui);font-size:12px;color:#6b5638;margin-bottom:6px}
@@ -668,11 +668,12 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .x-check{position:absolute;top:8px;right:8px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:var(--gold);border:2px solid var(--ink);color:#2b1d16}
 .x-check .ic{width:15px;height:15px;stroke-width:3}
 .x-hero{padding:0;overflow:hidden}
-.x-hero-pick{width:100%;height:100%;display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:10px 12px 12px;text-align:left;border:0;border-radius:13px;box-shadow:none;background:transparent;color:#2b1d16}
+.x-hero-pick{width:100%;height:100%;display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:10px 12px 38px;text-align:left;border:0;border-radius:13px;box-shadow:none;background:transparent;color:#2b1d16}
 .x-hero-top{display:flex;align-items:center;gap:9px}.x-hero-top>span{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
 .x-hero-top .face{width:48px;height:48px}
-.x-hero-skill{font-size:11.5px;line-height:1.35}.x-hero-skill span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:#6b5638}
-.x-hero-passive{font-size:11.5px;color:#6b5638}
+
+.x-hero-skill{width:100%;display:flex;flex-direction:column;gap:3px;font-size:11.5px;line-height:1.35}.x-hero-skill-head{display:flex;align-items:center;gap:6px}.x-hero-skill-head .combat-icon{width:26px;height:26px;flex:0 0 auto}.x-hero-skill-head em{margin-left:auto;font-style:normal;font-size:11px;font-weight:900;color:#9a640e}.x-hero-skill-text{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;color:#6b5638}
+.x-hero .slots-tag{background:#000;color:#fff;white-space:nowrap}
 .x-hero .hc-info{bottom:8px;right:8px}
 .x-rest{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
 .x-rest-row{display:flex;align-items:center;gap:9px;min-height:54px;padding:6px 10px;border:2px solid var(--ink);border-radius:12px;text-align:left;color:#2b1d16;
@@ -739,6 +740,8 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
  .x-stage{padding:6px 10px;gap:6px}.x-stage-head h2{font-size:21px}
  .x-card{padding:8px 10px 10px;gap:3px}.x-card strong{font-size:17px}.x-card-art{width:64px;height:64px}.x-card-art .relic-icon{width:56px!important;height:56px!important}
  .x-hero-top .face{width:40px;height:40px}
+ .x-hero-pick{padding:8px 10px 30px;gap:4px}.x-hero-top>span{flex-direction:row;flex-wrap:wrap;align-items:center;gap:2px 5px}.x-hero-top>span>strong{flex-basis:100%;line-height:1.1}
+ .x-hero-skill-head .combat-icon{width:20px;height:20px}.x-hero-skill-head{gap:5px}.x-hero-skill{font-size:11px;line-height:1.3;gap:1px}.x-hero-skill-text{-webkit-line-clamp:5}.x-hero-top{padding-right:30px}
 }
 @media (max-width:900px){.x-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 /* Portrait phones: Expedition screens scroll instead of squeezing. */
@@ -859,7 +862,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
  .x-cards:not(.wrap) .x-card-art{width:120px;height:120px;flex-shrink:0}.x-cards:not(.wrap) .x-card-art .relic-icon{width:96px!important;height:96px!important}
  .x-cards:not(.wrap) .x-card strong{font-size:26px;line-height:1.12}.x-cards:not(.wrap) .x-card p{font-size:16px;line-height:1.55;max-width:34ch}
  .x-cards:not(.wrap) .x-hero-pick{padding:26px;gap:16px}.x-hero-top{gap:15px}.x-hero-top .face{width:76px;height:76px}
- .x-hero-skill{font-size:15px;line-height:1.5}.x-hero-skill span{display:block;overflow:visible}.x-hero-passive{font-size:14px}.x-hero-stats{font-size:14px}
+ .x-hero-skill{font-size:15px;line-height:1.5}.x-hero-skill-head .combat-icon{width:34px!important;height:34px!important}.x-hero-skill-head b{font-size:17px}.x-hero-skill-text{-webkit-line-clamp:unset!important;display:block!important;overflow:visible!important}
  .x-cards.wrap{gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}.x-cards.wrap .x-card{padding:22px;gap:10px}
  .x-map-wrap{padding:20px 28px;gap:20px;grid-template-columns:minmax(0,1fr) 290px}.x-panel{padding:20px;gap:12px}.x-panel h3{font-size:28px}.x-panel .x-relic-line p{font-size:14px}
 }
@@ -1042,17 +1045,17 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .setup-preview{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;min-height:240px;padding:8px 16px;background:radial-gradient(ellipse at 28% 60%,#fff9e8,transparent 70%);border-bottom:1px solid #9e80544d}
 .setup-hero-art{--setup-art-height:220px;position:relative;left:4px;min-width:0;width:100%;max-width:calc(var(--setup-art-height)*144/184);justify-self:start;display:grid;place-items:center}.setup-hero-art>.sprite{position:relative;width:100%;height:var(--setup-art-height);z-index:1}.setup-hero-art>.ground{bottom:6%;width:70%;height:14px;translate:-50% 50%}
 .setup-hero-heading{min-width:0}.setup-hero-heading h2{font-size:36px;margin:0 0 8px;overflow-wrap:anywhere}.setup-hero-heading .cls-tag{font-size:11px}.setup-hero-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px}.setup-hero-slots{font-size:12px;line-height:1.2;background:var(--wood3);color:#fff;border:1px solid var(--ink);border-radius:99px;padding:2px 6px;white-space:nowrap}
-.setup-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.setup-stats>div{display:flex;flex-direction:column;gap:2px}.setup-stats span{display:flex;align-items:center;gap:4px;font-size:10px;color:#806849;font-weight:900}.setup-stats strong{font-size:25px;line-height:1.2}
+
 .setup-skills{padding:0 18px}.setup-skill{padding:16px 0;border-bottom:1px solid #9e80544d}.setup-skill:last-child{border-bottom:0}.setup-skill-heading{display:flex;align-items:center;gap:10px}.setup-skill-heading>.combat-icon{width:38px;height:38px;flex:none}.setup-skill h3{font-size:21px;line-height:1.1}.setup-skill-heading span{font-size:10px;color:#826b49;font-weight:900}.setup-skill p{font-size:13px;line-height:1.6;margin:8px 0 0}
 
 .setup-foot{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-height:50px}.setup-foot p{font-size:12px;color:var(--muted);margin:0}.setup-foot>div{display:flex;gap:10px;align-items:center}.setup-foot .start{display:flex;align-items:center;justify-content:center;gap:12px;min-width:210px;min-height:48px;font-size:17px}.setup-foot .combat-icon{width:26px;height:26px}
-@media (max-width:1150px){.roster{grid-template-columns:repeat(3,minmax(0,1fr))}.setup-workspace{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.setup-hero-heading h2{font-size:29px}.setup-preview{min-height:190px;padding:8px 10px}.setup-hero-art{--setup-art-height:180px}.setup-browser-head{padding:10px 12px 6px}.roster-filter{padding-inline:8px}.setup-stats{gap:4px}.setup-stats strong{font-size:22px}}
+@media (max-width:1150px){.roster{grid-template-columns:repeat(3,minmax(0,1fr))}.setup-workspace{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.setup-hero-heading h2{font-size:29px}.setup-preview{min-height:190px;padding:8px 10px}.setup-hero-art{--setup-art-height:180px}.setup-browser-head{padding:10px 12px 6px}.roster-filter{padding-inline:8px}}
 @media (orientation:landscape) and (max-height:650px){
  .screen.setup{gap:8px;padding:6px 12px}.setup .top{height:36px}.setup .brandmark{width:30px;height:30px}.setup .wordmark{font-size:24px}.setup .scene-title{font-size:23px}.setup .home-button{min-height:34px;padding:4px 10px;font-size:11px}
  .m-side{padding:4px 8px 3px;border-radius:11px}.m-side header{height:36px;margin-bottom:6px}.team-name{font-size:19px}.party-reroll{min-height:28px;font-size:10px;padding:0 6px}.party-reroll>span:first-child{font-size:16px}.control-tag{font-size:9px}
  .m-slot-btn{min-height:55px;padding:3px 5px;gap:2px}.m-slot .face{width:28px;height:28px}.m-name{font-size:9px}.m-role{display:none}.m-no{left:5px;top:4px;font-size:9px}.m-clear{width:22px;min-height:22px;font-size:17px}.m-empty{font-size:9px}.m-axis{font-size:8px}.m-side-note{font-size:8px}
  .setup-browser-head{padding:6px 9px 2px}.setup-browser-head h2{font-size:20px}.setup-slot-hint{font-size:9px}.roster-filters{padding-top:4px;gap:5px}.roster-filter{min-height:30px;padding:2px 7px;font-size:10px}.roster-filter .class-icon{width:15px;height:15px}.roster{gap:7px;padding:8px;grid-template-columns:repeat(3,minmax(0,1fr))}.hero-pick{min-height:72px;padding:7px 7px 21px;gap:3px 6px}.hero-pick .face{width:38px;height:38px}.hc-name{font-size:15px}.hc-text{gap:1px}.hero-pick .cls-tag{font-size:8px}.hero-pick .class-icon{width:12px;height:12px}.hc-slots{font-size:8px}
- .setup-preview{min-height:74px;grid-template-columns:85px minmax(0,1fr);padding:3px 8px}.setup-hero-art{--setup-art-height:68px}.setup-hero-heading h2{font-size:23px;margin:0 0 3px}.setup-hero-meta{gap:6px;margin-bottom:4px}.setup-hero-slots{font-size:10px;padding:1px 4px}.setup-stats strong{font-size:17px}.setup-stats{max-width:210px;margin-top:4px}.setup-stats span{font-size:8px}.setup-stats .stat-icon{width:11px;height:11px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill p{font-size:12px}.setup-skill h3{font-size:19px}.setup-foot{min-height:38px}.setup-foot p{font-size:10px}.setup-foot .start{min-height:36px;min-width:170px;font-size:14px;padding:4px 10px}.setup-foot .quiet{min-height:36px;padding:4px 8px;font-size:11px}
+ .setup-preview{min-height:74px;grid-template-columns:85px minmax(0,1fr);padding:3px 8px}.setup-hero-art{--setup-art-height:68px}.setup-hero-heading h2{font-size:23px;margin:0 0 3px}.setup-hero-meta{gap:6px;margin-bottom:4px}.setup-hero-slots{font-size:10px;padding:1px 4px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill p{font-size:12px}.setup-skill h3{font-size:19px}.setup-foot{min-height:38px}.setup-foot p{font-size:10px}.setup-foot .start{min-height:36px;min-width:170px;font-size:14px;padding:4px 10px}.setup-foot .quiet{min-height:36px;padding:4px 8px;font-size:11px}
 }
 @media (orientation:portrait) and (max-width:760px){
  .screen.setup{padding:8px 10px max(8px,env(safe-area-inset-bottom));gap:8px}.setup .top{height:36px;gap:8px}.setup .brand{display:none}.setup .scene-title{font-size:25px}.setup .home-button{min-height:36px;padding:4px 9px;font-size:11px}
@@ -1060,12 +1063,12 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
  .m-row{gap:6px}.m-slot-btn{min-height:61px;padding:5px 3px 4px;gap:3px}.m-slot .face{width:31px;height:31px}.m-name{font-size:10px}.m-role{display:none}.m-no{font-size:9px;left:4px;top:3px}.m-clear{width:22px;min-height:22px;font-size:17px;right:-4px;top:-4px}.m-empty{font-size:8px;line-height:1.2}.m-axis{font-size:7px;padding-top:1px}.m-side-note{font-size:7px}
  .setup-workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(100px,1fr) minmax(125px,1fr);gap:8px}.setup-browser,.setup-detail{border-radius:12px}.setup-browser-head{padding:7px 9px 3px}.setup-browser-head h2{font-size:20px}.setup-slot-hint{font-size:9px}.roster-filters{gap:5px;padding:5px 0 4px}.roster-filter{min-height:28px;padding:2px 7px;font-size:10px}.roster-filter .class-icon{display:none}
  .roster{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px;gap:7px}.hero-pick{min-height:65px;display:grid;grid-template-columns:auto minmax(0,1fr);padding:6px 8px 19px;gap:4px 6px;text-align:left;justify-content:start}.hero-pick .face{width:38px;height:38px}.hc-text{align-items:flex-start;gap:2px}.hc-name{font-size:16px}.hero-pick .cls-tag{font-size:8px}.hero-pick .class-icon{width:12px;height:12px}.hc-slots{font-size:8px;bottom:5px}.hc-info{width:24px;min-height:24px;bottom:0;right:0}
- .setup-preview{grid-template-columns:100px minmax(0,1fr);min-height:120px;padding:4px 10px}.setup-hero-art{--setup-art-height:112px}.setup-hero-heading h2{font-size:26px;margin:0 0 5px}.setup-hero-heading .cls-tag{font-size:9px}.setup-hero-meta{gap:6px;margin-bottom:6px}.setup-hero-slots{font-size:10px;padding:1px 4px}.setup-stats{max-width:200px}.setup-stats strong{font-size:20px}.setup-stats span{font-size:9px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill-heading>.combat-icon{width:30px;height:30px}.setup-skill h3{font-size:20px}.setup-skill p{font-size:12px}
+ .setup-preview{grid-template-columns:100px minmax(0,1fr);min-height:120px;padding:4px 10px}.setup-hero-art{--setup-art-height:112px}.setup-hero-heading h2{font-size:26px;margin:0 0 5px}.setup-hero-heading .cls-tag{font-size:9px}.setup-hero-meta{gap:6px;margin-bottom:6px}.setup-hero-slots{font-size:10px;padding:1px 4px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill-heading>.combat-icon{width:30px;height:30px}.setup-skill h3{font-size:20px}.setup-skill p{font-size:12px}
  .setup-foot{min-height:42px;display:block}.setup-foot p{display:none}.setup-foot>div{gap:8px}.setup-foot .start{flex:1;min-width:0;min-height:42px;font-size:15px}.setup-foot .quiet{min-height:42px;font-size:10px;padding:4px 7px}
 }
 @media (orientation:portrait) and (max-height:650px){
  .screen.setup{gap:5px;padding-top:5px;padding-bottom:5px}.setup .top{height:28px}.setup .scene-title{font-size:22px}.setup .home-button{min-height:28px}.muster{gap:5px}.m-side header{height:22px;margin-bottom:7px}.team-name{font-size:17px}.party-reroll{min-height:22px}.m-slot-btn{min-height:49px;gap:1px}.m-slot .face{width:25px;height:25px}.m-axis{font-size:6px}.setup-workspace{gap:5px;grid-template-rows:minmax(80px,1fr) minmax(105px,1fr)}.setup-browser-head{padding:4px 7px 0}.setup-browser-head h2{font-size:17px}.roster-filters{padding-top:2px;padding-bottom:3px}.roster-filter{min-height:24px;font-size:9px;padding-inline:6px}.setup-foot{min-height:36px}.setup-foot .start,.setup-foot .quiet{min-height:36px}
- .setup-preview{min-height:78px;grid-template-columns:80px minmax(0,1fr);padding:3px 8px}.setup-hero-art{--setup-art-height:70px}.setup-hero-meta{margin-bottom:4px}.setup-hero-heading h2{font-size:21px;margin:0 0 3px}.setup-hero-heading .cls-tag{font-size:8px}.setup-stats{margin-top:4px}.setup-stats strong{font-size:17px}.setup-stats span{font-size:8px}
+ .setup-preview{min-height:78px;grid-template-columns:80px minmax(0,1fr);padding:3px 8px}.setup-hero-art{--setup-art-height:70px}.setup-hero-meta{margin-bottom:4px}.setup-hero-heading h2{font-size:21px;margin:0 0 3px}.setup-hero-heading .cls-tag{font-size:8px}
 }
 
 /* Portrait browsing and inspection share the space freed by hiding the formations. */
@@ -1100,13 +1103,13 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 
 /* Phone layouts keep the hero identity prominent and supporting details compact. */
 @media (orientation:landscape) and (max-width:1000px) and (max-height:650px), (orientation:portrait) and (max-width:760px){
- .setup-stats strong{font-size:13px}.setup-stats{gap:3px;margin-top:3px}
+ 
  .setup-hero-heading .cls-tag{padding:0;background:transparent;border:0;border-radius:0;line-height:1}
  .setup-hero-heading .cls-tag .ct-label{display:none}.setup-hero-heading .cls-tag .class-icon{width:14px;height:14px}
  .setup-skill h3{font-size:15px;line-height:1.15}.setup-skill-heading>.combat-icon{width:26px;height:26px}
 }
 
-@media (orientation:landscape) and (max-width:1000px) and (max-height:650px){.setup-stats strong{font-size:9px}}
+@media (orientation:landscape) and (max-width:1000px) and (max-height:650px){}
 
 @media (orientation:landscape) and (max-height:650px), (orientation:portrait) and (max-width:760px){.setup-hero-heading h2{padding-right:56px}}
 
@@ -1120,6 +1123,15 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .scene-ring{position:fixed;z-index:36;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%);width:0;height:0;
  border:4px solid #0a0612;box-shadow:0 0 0 2px rgba(150,100,240,.55),0 0 22px 6px rgba(120,70,220,.6),0 0 70px 18px rgba(70,30,140,.5),inset 0 0 30px 4px rgba(10,6,18,.85)}
 .scene-flag{position:fixed;inset:0;width:100vw;height:100vh;z-index:36}
+
+/* Stat strip: HP / ATK / SPD in a framed three-cell row, shared by recruit cards, team setup and the hero popup. */
+.hc-stats,.setup-stats,.d-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;padding:5px 0;border-radius:10px;background:rgba(43,29,22,.08);box-shadow:inset 0 0 0 1.5px rgba(43,29,22,.16);font-size:14px;font-weight:900;line-height:1.2}
+.hc-stats>*,.setup-stats>*,.d-stats>*{min-width:0;display:flex;align-items:center;justify-content:center;gap:5px;text-align:center}
+.hc-stats>*+*,.setup-stats>*+*,.d-stats>*+*{border-left:1.5px solid rgba(43,29,22,.16)}
+.d-stats{font-size:18px;padding:9px 0}.d-stats .stat-icon{width:20px;height:20px}
+.setup-stats{font-size:16px;padding:6px 0;margin-top:6px}.setup-stats .stat-icon{width:18px;height:18px}
+@media (max-height:440px){.setup-stats{font-size:12px;padding:2px 0;margin-top:3px}.setup-stats .stat-icon{width:13px;height:13px}.hc-stats{padding:2px 0;font-size:12px}.hc-stats>*{gap:3px}.d-stats{font-size:14px;padding:4px 0}.d-stats .stat-icon{width:16px;height:16px}}
+@media (min-width:1100px) and (min-height:700px){.hc-stats{font-size:17px;padding:8px 0}}
 </style></head><body><div id="app"><div class="boot" role="status"><strong>Skyrift</strong><span>Loading…</span></div></div><div id="overlay"></div><div id="toast" role="status" aria-live="polite"></div><script>/* Battle configuration. Every number here is a provisional balance value (see
    docs/REVAMP_PLAN.md, "Open decisions"); systems read them from here, never inline. */
 (function(root){
@@ -5673,8 +5685,8 @@ function framePortrait(svg){
  const cx=e?Math.max(ex-size*.15,Math.min(hx,ex+size*.15)):hx,cy=e?Math.max(hy,ey-size*.18):hy;
  // Small composition adjustments move the artwork within the portrait, in frame fractions.
  // Horizontal adjustments mirror with the hero's facing.
- const shiftX=(svg.dataset.sprite==='valkyrie'?.04:['pyromancer','cryomancer'].includes(svg.dataset.sprite)?-.03:0)*(svg.dataset.team==='dusk'?-1:1);
- const shiftY=['sentry','sage','dancer'].includes(svg.dataset.sprite)?-.04:svg.dataset.sprite==='pyromancer'?-.03:svg.dataset.sprite==='timekeeper'?.04:0;
+ const shiftX=(['pyromancer','cryomancer'].includes(svg.dataset.sprite)?-.03:0)*(svg.dataset.team==='dusk'?-1:1);
+ const shiftY=['sentry','sage','dancer'].includes(svg.dataset.sprite)?-.04:['pyromancer','ronin'].includes(svg.dataset.sprite)?-.03:svg.dataset.sprite==='timekeeper'?.04:0;
  const scale={dragoon:1.04,pyromancer:1.04*1.03*1.04,ranger:1.04,assassin:1.04*1.04*1.02,paladin:1.02,timekeeper:1.04*1.05,ronin:1.04*1.05*1.04}[svg.dataset.sprite]||1;
  const frameSize=size/scale;
  const down=svg.dataset.sprite==='timekeeper'?5:svg.dataset.sprite==='alchemist'?2:0,right=svg.dataset.sprite==='ronin'?(svg.dataset.team==='dusk'?-1:1):0;
@@ -7215,6 +7227,10 @@ const EASE='cubic-bezier(.65,0,.25,1)',OUT='cubic-bezier(.2,.8,.2,1)';
 
 function end(){if(!live)return;live.anims.forEach(a=>a.cancel());live.nodes.forEach(n=>n.remove());live=null;}
 
+const pageCss=()=>[...document.querySelectorAll('style')].map(st=>st.textContent).join('\n');
+let sheet=null;
+function sceneSheet(){if(!sheet){sheet=new CSSStyleSheet();sheet.replaceSync(pageCss());}return sheet;}
+
 /* Snapshot the screen that is about to be replaced. Returns a token for play(), or null. */
 function begin(kind,dir=1){
  end();
@@ -7226,7 +7242,11 @@ function begin(kind,dir=1){
  // The copy is decoration: strip every hook the app's document-wide queries look for.
  for(const el of copy.querySelectorAll('[data-flip],[data-key],[data-uid],[data-action],[data-nav],[data-x]'))for(const a of ['data-flip','data-key','data-uid','data-action','data-nav','data-x'])el.removeAttribute(a);
  for(const el of copy.querySelectorAll('[id]'))if(!/^(?:grad|clip|mask|pat|f)/i.test(el.id)&&!el.closest('svg'))el.removeAttribute('id');
- ghost.append(copy);document.body.append(ghost);
+ // A closed shadow root keeps the copy out of every document query (the app's, and a test's), and the
+ // copied scene keeps resolving its own SVG gradients.
+ const root=ghost.attachShadow({mode:'closed'});
+ if('adoptedStyleSheets' in root)root.adoptedStyleSheets=[sceneSheet()];else{const st=document.createElement('style');st.textContent=pageCss();root.append(st);}
+ root.append(copy);document.body.append(ghost);
  live={ghost,nodes:[ghost],anims:[]};
  return {kind,dir,ghost,copy,o:origin()};
 }
@@ -7478,7 +7498,7 @@ window.RiftUI={$,$$,esc,P,ICONS,STATUS_ICON,CLASS_ICON,classIcon,CLASS_ORDER,her
 const {Units,Formation,AI}=Rift;
 const X=Rift.Expedition;
 const {Run,RunError,Bridge,Persistence,Rewards,MapGen,Relics,Encounters,CONFIG,RNG}=X;
-const {$,$$,esc,face,sprite,classIcon,clsName,slotText,statIcon,combatIcon,ACTION_ICON,relicIcon,nodeIcon,modal,closeModal,toast}=RiftUI;
+const {$,$$,esc,face,sprite,classIcon,clsName,slotText,statIcon,combatIcon,SKILL_ICON,ACTION_ICON,relicIcon,nodeIcon,modal,closeModal,toast}=RiftUI;
 // Painted action art shares the game's existing assets. Universal controls stay simple
 // text symbols; SVG is reserved for hero rigs, map connections and missing-art fallbacks.
 function icon(name){
@@ -7797,9 +7817,9 @@ function recruitView(){
  const r=S.run,offer=r.pending.offer;
  const cards=offer.map(id=>{const h=Units.get(id),on=S.recruit===id;
   return `<div class="x-card x-hero ${on?'on':''}"><button class="x-hero-pick" data-x="recruit-pick" data-arg="${id}" data-key="xh-${id}" aria-pressed="${on}" aria-label="${esc(`${h.name}, ${clsName(h.cls)}`)}">
-   <span class="x-hero-top">${face(id,0)}<span><strong>${esc(h.name)}</strong><span class="cls-tag ${h.cls}">${classIcon(h.cls)}<span class="ct-label">${clsName(h.cls)}</span></span></span></span>
-   <span class="hc-stats"><span class="stat-value">${statIcon('hp')}${h.hp}</span><span class="stat-value">${statIcon('atk')}${h.atk}</span><span class="stat-value">${statIcon('spd')}${h.spd}</span><span>${slotText(h.cls)}</span></span>
-   <span class="x-hero-skill"><b>${esc(h.skill.name)}</b> · ${h.skill.cost} MP<span>${esc(h.skill.text)}</span></span><span class="x-hero-passive"><b>${esc(h.passive.name)}</b></span>${on?`<span class="x-check">${icon('check')}</span>`:''}</button>
+   <span class="x-hero-top">${face(id,0)}<span><strong>${esc(h.name)}</strong><span class="cls-tag ${h.cls}">${classIcon(h.cls)}<span class="ct-label">${clsName(h.cls)}</span></span><span class="cls-tag slots-tag">${slotText(h.cls)}</span></span></span>
+   <span class="hc-stats"><span class="stat-value">${statIcon('hp')}${h.hp}</span><span class="stat-value">${statIcon('atk')}${h.atk}</span><span class="stat-value">${statIcon('spd')}${h.spd}</span></span>
+   <span class="x-hero-skill"><span class="x-hero-skill-head">${combatIcon(SKILL_ICON[Units.kit(id)])}<b>${esc(h.skill.name)}</b><em>${h.skill.cost} MP</em></span><span class="x-hero-skill-text">${esc(h.skill.text)}</span></span>${on?`<span class="x-check">${icon('check')}</span>`:''}</button>
    <button class="hc-info" data-x="dossier" data-arg="${id}" aria-label="${esc(h.name)} details">${icon('info')}</button></div>`;}).join('');
  return screen('x-node-screen',`${hud('Recruitment')}<section class="x-stage"><header class="x-stage-head"><h2>Choose a hero to join</h2><span class="x-small">Recruits join the reserve at full HP; place them before your next battle.</span></header>
   <div class="x-cards">${cards}</div></section><footer class="x-foot"><span class="x-small">${S.recruit?`Selected: <strong>${esc(unitName(S.recruit))}</strong>`:''}</span><button class="primary" data-x="recruit" data-key="x-recruit" ${S.recruit?'':'disabled'}>Recruit</button></footer>`);
@@ -8066,7 +8086,7 @@ function setupView(){
       </div>
       <div class="setup-hero-art"><span class="ground" aria-hidden="true"></span>${sprite(h.id,sel.team,{uid:'setup-'+h.id})}</div>
       <div class="setup-hero-heading"><h2 id="preview-name">${h.name}</h2><div class="setup-hero-meta"><span class="cls-tag ${h.cls}" role="img" aria-label="${clsName(h.cls)}" title="${clsName(h.cls)}">${classIcon(h.cls)}<span class="ct-label">${clsName(h.cls)}</span></span><span class="setup-hero-slots">${slotText(h.cls)}</span></div>
-       <div class="setup-stats">${['hp','atk','spd'].map(stat=>`<div><span>${statIcon(stat,true)}${stat.toUpperCase()}</span><strong>${h[stat]}</strong></div>`).join('')}</div>
+       <div class="setup-stats">${['hp','atk','spd'].map(stat=>`<div title="${stat.toUpperCase()}">${statIcon(stat)}<strong>${h[stat]}</strong></div>`).join('')}</div>
       </div>
      </div>
      <div class="setup-skills">${skill(combatIcon(SKILL_ICON[Units.kit(h.id)]),h.skill.name,`${h.skill.cost} MP · CD ${h.skill.cd}${h.skill.cdIn==='cycles'?' cycles':''}`,h.skill.text)}
@@ -8259,7 +8279,7 @@ function dossier(id,u=null,side=null){
  const effects=u?.statuses.length?`<section class="d-effects" aria-label="Active effects"><h3>Active effects</h3><ul class="d-status">${u.statuses.map(st=>{const d=Status.describe(st);return `<li><span class="chip st-${st.id} ${Status.STATUS[st.id].kind}${st.variant?' v-'+st.variant:''}">${icon(st.id)}</span><strong>${d.name}</strong>${d.left?`<em>${d.left}</em>`:''}<p>${esc(d.text)}</p></li>`;}).join('')}</ul></section>`:'';
  modal(`<div class="modal-head"><div class="d-heading"><h2 id="dossier-title" class="d-title">${h.name}</h2><div class="d-class"><span class="cls-tag ${h.cls}" title="${clsName(h.cls)}">${classIcon(h.cls)}<span class="ct-label">${clsName(h.cls)}</span></span><span class="cls-tag d-slots">${slotText(h.cls)}</span></div></div><button class="icon-btn" data-close aria-label="Close">${icon('close')}</button></div>
   <div class="d-top"><div class="d-art t${team}"><span class="ground" aria-hidden="true"></span>${sprite(h.id,team,{uid:'dossier-'+h.id})}</div><div class="d-info">
-  <div class="d-stats"><div><strong>${h.hp}</strong><span class="stat-label">${statIcon('hp',true)}HP</span></div><div><strong>${h.atk}</strong><span class="stat-label">${statIcon('atk',true)}ATK</span></div><div><strong>${h.spd}</strong><span class="stat-label">${statIcon('spd',true)}SPD</span></div></div>${live}</div></div>${effects}
+  <div class="d-stats">${['hp','atk','spd'].map(stat=>`<div title="${stat.toUpperCase()}">${statIcon(stat)}<strong>${h[stat]}</strong></div>`).join('')}</div>${live}</div></div>${effects}
   <div class="d-skills"><div class="d-skill"><div class="d-skill-head">${combatIcon(SKILL_ICON[Units.kit(h.id)])}<strong>${s.name}</strong><span>${s.cost} MP · CD ${s.cd}${s.cdIn==='cycles'?' cycles':''}</span></div><p>${esc(s.text)}</p></div>
   <div class="d-skill passive"><div class="d-skill-head">${combatIcon(ACTION_ICON.passive)}<strong>${esc(h.passive.name)}</strong><span>Passive</span></div><p>${esc(h.passive.text)}</p></div>
   <div class="d-skill basic"><div class="d-skill-head">${combatIcon(ACTION_ICON.attack)}<strong>Basic attack</strong><span>Free</span></div><p>${h.atk} damage to an enemy in slots 1…N (N = this hero’s slot), or the frontmost living enemy.</p></div></div>`,'dossier');
