@@ -295,7 +295,6 @@ html,body{overscroll-behavior:none}
 .v-row{display:flex;gap:8px;justify-content:center;margin-bottom:14px}.v-row .face{width:48px;height:48px}
 .v-buttons{display:flex;gap:8px;justify-content:center}
 .v-card .quiet,.modal .quiet{color:#6b5638;border-color:#a88c5e}
-.rotate-hint{display:none}
 /* Modals */
 .modal-backdrop{position:fixed;inset:0;z-index:50;background:#0d0907bb;display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
 .modal{width:min(560px,100%);max-height:calc(100dvh - max(12px,env(safe-area-inset-top)) - max(12px,env(safe-area-inset-bottom)));overflow:auto;border:3px solid var(--ink);border-radius:18px;padding:14px 18px 18px;box-shadow:var(--shadow);
@@ -383,12 +382,8 @@ html,body{overscroll-behavior:none}
  .act{width:64px;min-width:62px}.act.skill{width:112px}
  .ab-hero{gap:5px;padding-inline:5px}.ab-hero .face.big{width:36px;height:36px}
 }
-/* Portrait phones: suggest rotating, but keep the game playable if the player declines. */
+/* Portrait phones keep the battle controls in stacked rows. */
 @media (orientation:portrait) and (max-width:760px){
- body:not(.portrait-ok) .battle .rotate-hint{display:grid;position:absolute;inset:0;z-index:45;place-items:center;background:#0d0907e8;text-align:center;padding:24px}
- .rotate-hint .ic{width:48px;height:48px;margin:0 auto 10px;color:var(--gold)}
- .rotate-hint strong{font-family:var(--f-display);font-size:26px;display:block}
- .rotate-hint p{color:var(--muted);margin:6px 0 16px}
  .hud-top{grid-template-columns:44px minmax(0,1fr) minmax(0,1fr) 44px;grid-template-areas:"menu mp0 mp1 cyc" "tl tl tl tl";gap:8px;padding:8px 10px}
  .hud-top>.icon-btn{grid-area:menu}.hud-top .mp.t0{grid-area:mp0}.hud-top .mp.t1{grid-area:mp1;justify-self:end}.timeline-wrap{grid-area:tl}.cycle-badge{grid-area:cyc;width:44px;height:44px}
  .cycle-badge strong{font-size:22px}.cycle-badge span{font-size:7px}.mp{gap:6px 4px}.mp-num{font-size:12px}.mp-num small{font-size:8px}
@@ -7171,8 +7166,8 @@ root.RiftPreload={run};
    scene swap the old screen is cloned into a fixed "ghost" layer, the new screen renders beneath it
    as usual, and the ghost is then animated away. The new scene's panels rise in behind it.
    Kinds (picked by the app from the scenes involved):
-     iris    — a gold-rimmed hole opens from the tap point (anything → battle)
-     flag    — a crimson flag waves across and covers the screen, hiding the swap (Main Menu ↔ a mode); `dir` -1 sweeps back
+     iris    — a gold-rimmed hole opens from the tap point
+     flag    — a crimson flag covers the swap (Main Menu ↔ a mode; entering battle); `dir` -1 sweeps back
      travel  — a sideways step along the path (Expedition screens); `dir` -1 steps back
      drop    — the battle sinks away (battle → anything)
      fade    — a soft dissolve (everything else)
@@ -7326,7 +7321,7 @@ function enter(screen,kind='fade',dir=1){
  if(!screen||kind==='iris')return;
  const blocks=[];
  for(const el of screen.children){
-  if(!(el instanceof HTMLElement)||getComputedStyle(el).position==='fixed'||el.classList.contains('rotate-hint'))continue;
+  if(!(el instanceof HTMLElement)||getComputedStyle(el).position==='fixed')continue;
   if(el.classList.contains('main-choices'))blocks.push(...el.children);else blocks.push(el);
  }
  const base={flag:740,travel:120,drop:140,fade:100,boot:0}[kind]??100;
@@ -7884,7 +7879,7 @@ const MENU_LABELS={log:'Combat log',guide:'Rules guide',rematch:'Restart battle'
 const arenaSession={get game(){return arenaGame;},persist:()=>persist(),menuItems:['log','guide','rematch','quit','setup'],resultView:()=>victory()};
 function host(s){if(s!==session){painted=null;ui.busy=false;ui.mode='basic';ui.target=null;ui.flash={};}session=s;game=s.game;}
 const hostArena=()=>host(arenaSession);
-const ui={screen:'main',guideFromBattle:false,sel:{team:0,slot:1},rosterClass:'all',rosterExpanded:false,setupHero:prefs.parties[0][0]||'valkyrie',mode:'basic',target:null,busy:false,flash:{},cpuTimer:null,portraitOk:false};
+const ui={screen:'main',guideFromBattle:false,sel:{team:0,slot:1},rosterClass:'all',rosterExpanded:false,setupHero:prefs.parties[0][0]||'valkyrie',mode:'basic',target:null,busy:false,flash:{},cpuTimer:null};
 /* Other modes (Expedition) register {id, label, navKey, view(), bind(), onEnter?(), summary?()} here before the
    app starts; the Main Menu opens each mode at its saved progress. */
 const MODES=window.RiftModes||(window.RiftModes={});
@@ -7923,7 +7918,7 @@ let lastScene=null;
 const sceneOf=()=>ui.screen==='battle'&&game?'battle':ui.screen+(modeFor(ui.screen)?.sceneKey?':'+modeFor(ui.screen).sceneKey():'');
 function transitionFor(from,to){
  const [fs,fk]=from.split(':'),[ts,tk]=to.split(':');
- if(ts==='battle')return {kind:'iris',dir:1};
+ if(ts==='battle')return {kind:'flag',dir:1};
  if(fs==='battle')return {kind:'drop',dir:1};
  if(fs===ts)return {kind:'travel',dir:tk==='map'||tk==='start'&&fk!=='map'?-1:1};
  if(fs==='main'||ts==='main')return {kind:'flag',dir:fs==='main'?1:-1};
@@ -8059,7 +8054,6 @@ function battleView(){
   </section>
   ${actionBar(a,human,legal,primary,preview)}
   ${g.winner!==null?session.resultView(g):''}
-  <div class="rotate-hint" role="note"><div>${icon('rift')}<strong>Turn your device sideways</strong><button class="quiet" data-action="portrait">Play in portrait</button></div></div>
  </main>`;
 }
 function mpOrbs(team){
@@ -8284,7 +8278,6 @@ function action(name){
  if(name==='log')return logModal();
  // Only Arena may restart a battle; other modes leave it out of their menu, and it is refused here too.
  if(name==='rematch'){if(session!==arenaSession)return;arenaGame=prepareBattle(new Battle(g.parties.map(p=>[...p])));hostArena();ui.busy=false;ui.mode='basic';ui.target=null;ui.flash={};ui.screen='battle';persist();render();return introFx();}
- if(name==='portrait'){ui.portraitOk=true;document.body.classList.add('portrait-ok');return;}
  if(!g||ui.busy)return;
  const a=g.actor();if(!a||auto(a))return;
  if(name==='mode-basic'){const reason=g.basicReason(a);if(reason)return toast(`Basic attack: ${reason}.`);ui.mode='basic';ui.target=null;render();return;}
