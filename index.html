@@ -1132,6 +1132,8 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .setup-stats{font-size:16px;padding:6px 0;margin-top:6px}.setup-stats .stat-icon{width:18px;height:18px}
 @media (max-height:440px){.setup-stats{font-size:12px;padding:2px 0;margin-top:3px}.setup-stats .stat-icon{width:13px;height:13px}.hc-stats{padding:2px 0;font-size:12px}.hc-stats>*{gap:3px}.d-stats{font-size:14px;padding:4px 0}.d-stats .stat-icon{width:16px;height:16px}}
 @media (min-width:1100px) and (min-height:700px){.hc-stats{font-size:17px;padding:8px 0}}
+/* Phone portrait: the team setup stat strip matches the detail text instead of out-sizing it. */
+@media (orientation:portrait) and (max-width:760px){.setup-stats{font-size:13px;padding:3px 0;margin-top:4px}.setup-stats .stat-icon{width:15px;height:15px}.setup-stats>*{gap:4px}}
 </style></head><body><div id="app"><div class="boot" role="status"><strong>Skyrift</strong><span>Loading…</span></div></div><div id="overlay"></div><div id="toast" role="status" aria-live="polite"></div><script>/* Battle configuration. Every number here is a provisional balance value (see
    docs/REVAMP_PLAN.md, "Open decisions"); systems read them from here, never inline. */
 (function(root){
@@ -5542,10 +5544,14 @@ const heroes = {
     "groundOffset": -1.0815,
     "base": {
       "frontArm": {
-        "r": -30
+        "r": -30,
+        "x": -2.45,
+        "y": 1.41
       },
       "sword": {
-        "r": -15
+        "r": -15,
+        "x": 7.63,
+        "y": -0.15
       },
       "backArm": {
         "r": 6
