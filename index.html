@@ -31,6 +31,7 @@
  --dawn:#4579d6;--dawn-l:#9cc0ff;--dusk:#cf4a3b;--dusk-l:#ff9f8e;
  --panel-hi:#80644a;--panel-lo:#654e38;--panel-edge:#a07f5c;
  --parch:#f2e4c2;--parch2:#e6d3a8;
+ --scrollbar-thumb:#93794b;--scrollbar-track:#d9c69c;
  --move:#bdf3ff;--attack:#ff7a62;--cast:#b993ff;--aoe:#ffd24a;
  --radius:16px;--shadow:0 5px 0 var(--ink);
  --f-display:"Grenze Gotisch",Georgia,"Times New Roman",serif;
@@ -43,7 +44,8 @@
  --dawn-l:#2f5fb8;--dusk-l:#b23a2c;
 }
 
-*{box-sizing:border-box}
+/* One scrollbar theme for pages, panels, dialogs and both scroll axes. */
+*{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) var(--scrollbar-track)}
 body{margin:0;min-height:100vh;font-size:14px;line-height:1.5;color:var(--text);
  background:radial-gradient(70% 45% at 50% 0,#3b2f22 0,transparent 70%),radial-gradient(120% 80% at 50% 120%,#0d0907 0,transparent 60%),var(--bg)}
 h1,h2,h3,p{margin:0}
@@ -314,6 +316,8 @@ html,body{overscroll-behavior:none}
 .v-buttons{display:flex;gap:8px;justify-content:center}
 .v-card .quiet,.modal .quiet{color:#6b5638;border-color:#a88c5e}
 /* Modals */
+.modal-open{overflow:hidden}
+.modal-open body{position:fixed;top:var(--modal-page-top);left:0;right:0;padding-right:var(--modal-scrollbar-gap)}
 .modal-backdrop{position:fixed;inset:0;z-index:50;background:#0d0907bb;display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
 .modal{width:min(560px,100%);max-height:calc(100dvh - max(12px,env(safe-area-inset-top)) - max(12px,env(safe-area-inset-bottom)));overflow:auto;border:3px solid var(--ink);border-radius:18px;padding:14px 18px 18px;box-shadow:var(--shadow);
  background:radial-gradient(120% 90% at 50% 40%,var(--parch) 55%,var(--parch2));color:#2b1d16}
@@ -637,7 +641,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .x-slot-name{max-width:100%;font-size:11px;font-weight:900;line-height:1.1;text-align:center;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .x-slot-btn .cls-tag{font-size:8.5px}
 @container (max-width:92px){.x-slot-btn .ct-label{display:none}}
-.x-bench-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:5px;flex:0 1 auto;min-height:48px;overflow:auto;padding:2px;scrollbar-width:thin}
+.x-bench-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));grid-auto-rows:max-content;align-content:start;gap:5px;flex:0 1 auto;min-height:48px;overflow:auto;padding:2px}
 .x-bench{position:relative;display:flex;align-items:center;gap:6px;min-width:0;min-height:46px;padding:3px 7px 3px 4px;text-align:left;color:#2b1d16;border-radius:11px;
  background:radial-gradient(120% 90% at 50% 40%,var(--parch) 55%,var(--parch2));box-shadow:inset 0 -3px 0 #c8b088,0 3px 0 var(--ink)}
 .x-bench .face{width:32px;height:32px}
@@ -732,6 +736,9 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .danger-fill{color:#fff;background:linear-gradient(180deg,#e0624f,#a8352a);box-shadow:inset 0 2px 0 #fff5,inset 0 -4px 0 #7a2318,0 3px 0 var(--ink)}
 .menu-list .danger{color:#ffb1a3}
 .x-relic-list{display:grid;gap:10px}
+.modal.x-relics-modal{display:flex;flex-direction:column;overflow:hidden}
+.x-relics-modal>.modal-head{flex:0 0 auto}
+.x-relics-modal>.x-relic-list{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-right:8px}
 /* Short landscape screens: tighten the frame so map, setup and node screens fit 844×390. */
 @media (max-height:440px){
  .x-hud{padding:3px 8px;gap:8px}.x-progress strong{font-size:16px}.x-mate .face{width:26px;height:26px}.x-mate{width:30px}.x-mate .x-hp{width:26px}
@@ -786,7 +793,8 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .x-rest-row .face{width:38px;height:38px;flex:0 0 auto}
 .x-rest-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
 .x-rest-name{width:auto;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.x-rest-num{display:flex;align-items:baseline;gap:3px;white-space:nowrap}.x-rest-num small{font-size:10.5px;color:#8a7454}
+.x-rest-num{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px;white-space:nowrap}.x-rest-num small{font-size:10.5px;color:#8a7454}
+.x-rest-values{display:inline-flex;align-items:baseline;gap:3px}
 .x-rest-num em{margin-left:auto;padding:0 5px;border-radius:6px;font-style:normal;font-size:11px;color:#fff;background:#3e8f37}
 .x-rest-full{color:#8a7454}.x-rest-tap{color:#8a5a2e}
 .x-rest-row.full{opacity:.78}
@@ -879,7 +887,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 }
 
 @media (min-width:1100px) and (min-height:620px){
- .x-roster{overflow-x:auto;scrollbar-width:thin;overscroll-behavior-x:contain}
+ .x-roster{overflow-x:auto;overscroll-behavior-x:contain}
  .x-bench-heading{flex:0 0 auto}
  .x-encounter-note{display:flex;align-items:center;gap:12px;margin-top:auto;padding:14px 2px 0;border-top:1px solid #ffffff18;color:var(--muted);font-size:13px;line-height:1.5}
  .x-encounter-note strong{color:var(--text);font-size:14px}.x-encounter-note p{margin-top:3px}
@@ -1033,9 +1041,9 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .setup-browser{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
 .setup-browser-head{min-width:0;padding:14px 16px 8px;border-bottom:1px solid #9e80544d}.setup-browser-head>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:8px}.setup-browser-head h2{font-size:26px}.setup-slot-hint{font-size:11px;font-weight:900;color:#675036;white-space:nowrap}
 .roster-expand{display:none}
-.roster-filters{display:flex;gap:6px;overflow-x:auto;padding:10px 1px 5px;scrollbar-width:thin;overscroll-behavior:contain}
+.roster-filters{display:flex;gap:6px;overflow-x:auto;padding:10px 1px 5px;overscroll-behavior:contain}
 .roster-filter{display:flex;flex:none;align-items:center;justify-content:center;gap:5px;min-height:36px;padding:4px 10px;border-width:1px;font-size:11px;box-shadow:0 2px 0 var(--ink)}.roster-filter .class-icon{width:18px;height:18px}
-.roster,.setup-detail-scroll,.x-reliquary-stage{scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#93794b #d9c69c}
+.roster,.setup-detail-scroll,.x-reliquary-stage{scrollbar-gutter:stable}
 .roster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:10px;padding:14px;min-height:0;overflow:auto;overscroll-behavior:contain}
 .hero-card{position:relative;min-width:0;border-radius:11px;background:transparent}
 .hero-pick{width:100%;height:100%;min-height:90px;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;align-content:center;gap:4px 8px;padding:10px 10px 24px;border:1px solid #ad956d;border-radius:11px;background:linear-gradient(135deg,#fff6dc,#ebdab5);color:#2b1d16;box-shadow:0 2px 0 #b29a71}
@@ -1174,6 +1182,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .x-swap-slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:clamp(130px,26vw,190px);min-height:120px;padding:10px;text-align:center;border:2px dashed #8a7350;border-radius:14px;background:#f2e4c240;color:#f1e2c4}
 .x-swap-slot.filled{border-style:solid;border-color:var(--ink);background:linear-gradient(135deg,#f6e9c7,#e8d7af);color:#2b1d16;box-shadow:0 3px 0 var(--ink)}
 .x-swap-slot strong{font-family:var(--f-display);font-size:16px;line-height:1.1}.x-swap-slot .x-small{opacity:.8}
+.x-swap-slot.filled .x-small{color:#6b5638;opacity:1}
 .x-swap-empty{font-size:12px;font-weight:800;opacity:.85}
 .x-swap-slot.mystery{border:2px solid #7c5cc4;background:radial-gradient(circle at 50% 35%,#4a3478,#251a40 75%);color:#efe4ff;box-shadow:0 0 18px #7c5cc455,0 3px 0 var(--ink)}
 .x-swap-q{font-family:var(--f-display);font-size:46px;line-height:1;color:#d9c6ff;text-shadow:0 0 14px #b993ffaa}
@@ -1214,7 +1223,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .x-screen.x-trade-screen{height:100vh;height:100dvh;min-height:0;overflow:hidden}
 .x-stage.x-trade-stage{overflow:hidden}
 .x-trade-stage .x-stage-head,.x-trade-stage .x-swap{flex:0 0 auto}
-.x-trade-stage .x-cards.wrap{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:6px 6px 12px;scrollbar-width:thin;align-content:flex-start}
+.x-trade-stage .x-cards.wrap{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:6px 6px 12px;align-content:flex-start}
 /* Phone portrait trade: relic cards span the screen (with a small margin) and use smaller text, so more fit. */
 @media (orientation:portrait) and (max-width:760px){
  .x-stage.x-trade-stage{padding-inline:14px}
@@ -1271,25 +1280,33 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .x-rested-none{justify-content:center;font-weight:800;color:#6b5638}
 .x-rested-result .x-dialog-actions{display:flex;justify-content:flex-end;margin-top:12px}
 
-/* Expedition Home and Reliquary share the Arena-style menu header. */
-.x-screen.x-menu-screen{width:100%;max-width:1600px;margin-inline:auto;padding:max(12px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
+/* Guide and expedition menu screens share the Arena-style header. */
+.screen.x-menu-screen{width:100%;max-width:1600px;margin-inline:auto;padding:max(12px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
 .x-menu-screen>.top{flex:0 0 auto;flex-wrap:nowrap;min-width:0;width:100%}
+.x-menu-screen .home-button,.x-menu-screen .scene-actions{margin-left:auto}
+.guide.x-menu-screen>.top{height:auto;flex-wrap:wrap}
 /* Match Arena Team Setup's header gutters and compact controls. */
 @media (orientation:landscape) and (max-height:650px){
- .x-screen.x-menu-screen{padding:max(6px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+ .screen.x-menu-screen{padding:max(6px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
  .x-menu-screen>.top{height:36px}.x-menu-screen .brandmark{width:30px;height:30px}.x-menu-screen .wordmark{font-size:24px}.x-menu-screen .home-button{min-height:34px;padding:4px 10px;font-size:11px}
 }
 @media (orientation:portrait) and (max-width:760px){
- .x-screen.x-menu-screen{padding:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+ .screen.x-menu-screen{padding:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
  .x-menu-screen>.top{height:36px;gap:8px}.x-menu-screen .brand{gap:8px}.x-menu-screen .brandmark{width:32px;height:32px}.x-menu-screen .wordmark{font-size:24px}.x-menu-screen .home-button{min-height:36px;padding:4px 9px;font-size:11px}
 }
 @media (orientation:portrait) and (max-height:650px) and (max-width:760px){
- .x-screen.x-menu-screen{padding-top:max(5px,env(safe-area-inset-top));padding-bottom:max(5px,env(safe-area-inset-bottom))}.x-menu-screen>.top{height:28px}.x-menu-screen .brandmark{width:24px;height:24px}.x-menu-screen .home-button{min-height:28px}
+ .screen.x-menu-screen{padding-top:max(5px,env(safe-area-inset-top));padding-bottom:max(5px,env(safe-area-inset-bottom))}.x-menu-screen>.top{height:28px}.x-menu-screen .brandmark{width:24px;height:24px}.x-menu-screen .home-button{min-height:28px}
 }
 .x-reliquary-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:6px;min-height:38px;padding:4px 14px}
 .x-reliquary-btn small{flex-shrink:0;white-space:nowrap;padding:1px 7px;border-radius:999px;background:#2b1d16;color:#f3e6c8;font-size:10.5px;font-weight:900;letter-spacing:.04em}
 @media (orientation:portrait) and (max-width:760px){.x-reliquary-btn{align-self:center}}
-.x-reliquary-stage{overflow:auto;gap:14px;padding:8px 0 24px}
+/* The scroll viewport reaches the screen edge; header and cards retain their insets. */
+.x-reliquary{--reliquary-inset:20px;--reliquary-left:max(var(--reliquary-inset),env(safe-area-inset-left));--reliquary-right:max(var(--reliquary-inset),env(safe-area-inset-right))}
+.x-screen.x-menu-screen.x-reliquary{max-width:none;height:100dvh;overflow:hidden;padding-inline:0;padding-bottom:0}
+.x-reliquary>.top{width:calc(100% - var(--reliquary-left) - var(--reliquary-right));max-width:calc(1600px - var(--reliquary-left) - var(--reliquary-right));margin-inline:auto}
+@media (orientation:landscape) and (max-height:650px){.x-reliquary{--reliquary-inset:12px}}
+@media (orientation:portrait) and (max-width:760px){.x-reliquary{--reliquary-inset:10px}}
+.x-reliquary-content{display:flex;flex-direction:column;gap:14px;max-width:1380px;min-width:0;margin-inline:auto}
 .x-reliquary-stage .x-stage-head{flex:0 0 auto}
 .x-rel-group{display:flex;flex-direction:column;gap:8px}
 .x-rel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin:0;padding:0;list-style:none}
@@ -1310,7 +1327,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
  .x-rel-card-title>strong,.x-rel-card-title>.x-new-tag{text-box-trim:trim-both;text-box-edge:cap alphabetic}
 }
 .x-cards:not(.wrap){padding-bottom:18px}
-.x-stage.x-reliquary-stage{justify-content:flex-start;max-width:1380px;width:100%;margin:0 auto}
+.x-stage.x-reliquary-stage{display:block;max-width:none;width:100%;margin:0;padding:8px var(--reliquary-right) 24px var(--reliquary-left)}
 </style></head><body><div id="app"><div class="boot" role="status"><strong>Skyrift</strong><span>Loading…</span></div></div><div id="overlay"></div><div id="toast" role="status" aria-live="polite"></div><script>/* Battle configuration. Every number here is a provisional balance value (see
    docs/REVAMP_PLAN.md, "Open decisions"); systems read them from here, never inline. */
 (function(root){
@@ -7922,11 +7939,23 @@ function morphChildren(a,b){
 /* Modal buttons with data-modal="<action>" close the dialog, then run that action in the app. */
 let modalAction=()=>{};
 const setModalAction=fn=>{modalAction=fn;};
-let modalFocus=null,modalOnClose=null;
-function modal(html,cls='',{onClose=null}={}){modalFocus=document.activeElement;modalOnClose=onClose;$('#overlay').innerHTML=`<div class="modal-backdrop"><section class="modal ${cls}" role="dialog" aria-modal="true"${cls==='dossier'?' aria-labelledby="dossier-title"':''}>${html}</section></div>`;RiftSprites.hydrate($('#overlay'));
+let modalFocus=null,modalOnClose=null,modalScroll=null;
+function modal(html,cls='',{onClose=null}={}){
+ if(!modalScroll){
+  modalFocus=document.activeElement;modalScroll={x:window.scrollX,y:window.scrollY};
+  const doc=document.documentElement;
+  doc.style.setProperty('--modal-scrollbar-gap',`${window.innerWidth-doc.clientWidth}px`);
+  doc.style.setProperty('--modal-page-top',`${-modalScroll.y}px`);doc.classList.add('modal-open');
+ }
+ modalOnClose=onClose;$('#overlay').innerHTML=`<div class="modal-backdrop"><section class="modal ${cls}" role="dialog" aria-modal="true"${cls==='dossier'?' aria-labelledby="dossier-title"':''}>${html}</section></div>`;RiftSprites.hydrate($('#overlay'));
  $('#overlay .modal-backdrop').onclick=e=>{if(e.target===e.currentTarget)closeModal();};for(const b of $$('#overlay [data-close]'))b.onclick=closeModal;
  for(const b of $$('#overlay [data-modal]'))b.onclick=()=>{const k=b.dataset.modal;closeModal();modalAction(k);};$('#overlay button')?.focus();}
-function closeModal(){const onClose=modalOnClose;modalOnClose=null;$('#overlay').innerHTML='';modalFocus?.focus?.();onClose?.();}
+function closeModal(){
+ const onClose=modalOnClose,scroll=modalScroll;modalOnClose=null;modalScroll=null;$('#overlay').innerHTML='';
+ const doc=document.documentElement;doc.classList.remove('modal-open');doc.style.removeProperty('--modal-page-top');doc.style.removeProperty('--modal-scrollbar-gap');
+ if(scroll)window.scrollTo(scroll.x,scroll.y);
+ modalFocus?.focus?.({preventScroll:true});modalFocus=null;onClose?.();
+}
 window.RiftUI={$,$$,esc,buttonLabel,sentenceCase,P,ICONS,STATUS_ICON,CLASS_ICON,classIcon,CLASS_ORDER,heroesByClass,SKILL_ICON,ACTION_ICON,combatIcon,STAT_ICON,statIcon,icon,relicIcon,nodeIcon,sprite,face,store,toast,clsName,slotText,keyOf,sameKind,syncAttrs,morph,morphChildren,modal,closeModal,setModalAction};
 })();
 </script><script>/* Expedition screens (docs/expedition/M12). The mode changes the run only through Run.apply, Bridge
@@ -8197,14 +8226,14 @@ function reliquaryView(){
  const groups=Object.keys(CATEGORY).map(k=>({k,items:list.filter(r=>r.category===k)})).filter(g=>g.items.length)
   .map(g=>`<section class="x-rel-group"><h3 class="x-camp-h">${CATEGORY[g.k]} <small>${g.items.filter(r=>discovered(r.id)).length} / ${g.items.length}</small></h3><ul class="x-rel-grid">${g.items.map(record).join('')}</ul></section>`).join('');
  return `<main class="screen expedition x-screen x-reliquary x-menu-screen"><header class="top">${App().brand()}<button class="quiet home-button" data-x="reliquary-close" data-key="x-reliquary-close"><span class="home-arrow" aria-hidden="true"></span> Expedition</button></header>
-  <section class="x-stage x-reliquary-stage"><header class="x-stage-head"><h2>Reliquary</h2><span class="x-small">${found} of ${list.length} relics discovered. Relics you take, win or trade for are recorded here for good.</span></header>${groups}</section></main>`;
+  <section class="x-stage x-reliquary-stage"><div class="x-reliquary-content"><header class="x-stage-head"><h2>Reliquary</h2><span class="x-small">${found} of ${list.length} relics discovered. Relics you take, win or trade for are recorded here for good.</span></header>${groups}</div></section></main>`;
 }
 function summaryView(){
  const r=S.run,st=r.stats,won=r.status==='won';
  const title={won:'Victory',lost:'Defeat',abandoned:'Expedition abandoned'}[r.status];
  const party=r.roster.map(m=>`<span class="x-sum-mate">${face(m.hero,0,m.hp>0?'':'gone')}<span>${esc(unitName(m.hero))}</span>${hpBar(m.hp,base(m.hero))}</span>`).join('');
  const end=st.endNode&&r.map.nodes[st.endNode];
- return `<main class="screen expedition x-screen x-summary"><header class="top">${App().brand()}${App().homeButton()}</header>
+ return `<main class="screen expedition x-screen x-summary x-menu-screen"><header class="top">${App().brand()}${App().homeButton()}</header>
   <section class="card parchment x-sum-card ${won?'won':'lost'}"><span class="eyebrow">Expedition over</span><h2>${title}</h2>
    <p class="x-sum-line">${won?'The guardian has fallen and the rift is sealed.':r.status==='abandoned'?'You left the rift before the end.':`Your party fell at ${esc(NODE[end?.type]?.name||'a battle')} (node ${end?.layer||'?'} of ${r.map.length}).`}</p>
    <dl class="x-stats"><div><dt>Nodes</dt><dd>${st.nodesCompleted}<small>/${r.map.length}</small></dd></div><div><dt>Battles won</dt><dd>${st.battlesWon}</dd></div><div><dt>Elites won</dt><dd>${st.elitesWon}</dd></div><div><dt>Trades</dt><dd>${st.trades}</dd></div><div><dt>Time</dt><dd>${duration(st.playMs)}</dd></div></dl>
@@ -8347,7 +8376,7 @@ function restView(){
  const healed=r.roster.reduce((n,m,i)=>n+(m.hp>0?out[i].hp-m.hp:0),0);
  const row=(m,i)=>{const max=base(m.hero),after=out[i].hp,isDown=m.hp<=0,on=pick===m.hero,full=!isDown&&m.hp>=max,name=esc(unitName(m.hero));
   const num=isDown?(on?`<b>Returns At ${after}</b><small>/${max}</small>`:`<span class="x-rest-tap">Fallen · Tap To Revive</span>`)
-   :full?`<span class="x-rest-full">Full health</span>`:`${m.hp} → <b>${after}</b><small>/${max}</small><em>+${after-m.hp}</em>`;
+   :full?`<span class="x-rest-full">Full health</span>`:`<span class="x-rest-values">${m.hp} → <b>${after}</b><small>/${max}</small></span><em>+${after-m.hp}</em>`;
   const inner=`${face(m.hero,0,isDown&&!on?'gone':'')}<span class="x-rest-body"><span class="x-rest-name">${name}</span>${gainBar(isDown?0:m.hp,after,max)}<span class="x-rest-num">${num}</span></span>`;
   if(!isDown)return `<div class="x-rest-row ${full?'full':''}">${inner}</div>`;
   return `<button class="x-rest-row down ${on?'on':''}" data-x="revive" data-arg="${m.hero}" data-key="xv-${m.hero}" aria-pressed="${on}" aria-label="${esc(`Revive ${unitName(m.hero)} at ${after} HP`)}">${inner}${on?`<span class="x-check">${icon('check')}</span>`:''}</button>`;};
@@ -8784,13 +8813,13 @@ function victory(){const w=game.winner;return `<div class="victory t${w}" role="
 /* ---------- guide ---------- */
 function guideView(){
  const st=Object.entries(Status.STATUS).map(([id,d])=>`<tr><td><span class="chip st-${id} ${d.kind}">${icon(id)}</span> ${d.name}</td><td>${d.kind==='buff'?'Buff':'Debuff'}</td><td>${esc(sentenceCase(d.text({potency:'N'})))}</td><td>${Object.entries(d.defaults).map(([k,v])=>`${v} ${buttonLabel(k)}`).join(', ')}</td></tr>`).join('');
- return `<main class="screen guide"><header class="top">${brand()}<h1 class="scene-title">Rules guide</h1><div class="scene-actions">${ui.guideFromBattle&&game?'<button class="quiet" data-action="return-battle">Return To Battle</button>':''}${homeButton()}</div></header><div class="guide-grid">
- <section class="card parchment"><h2>Formation</h2><p>Each party has four fixed slots. <strong>Slot 1 is the front</strong>, closest to the enemy. Heroes never move; a fallen hero leaves its slot empty.</p>
+ return `<main class="screen guide x-menu-screen"><header class="top">${brand()}<h1 class="scene-title">Rules guide</h1><div class="scene-actions">${ui.guideFromBattle&&game?'<button class="quiet" data-action="return-battle">Return To Battle</button>':''}${homeButton()}</div></header><div class="guide-grid">
+ <section class="card parchment"><h2>Formation</h2><p>Each party has four fixed slots. <strong>Slot 1 is the front</strong>, closest to the enemy. Heroes stay in their assigned slots unless a skill Displaces them. Displaced heroes temporarily swap slots and return when Displaced ends or either swapped hero falls. A fallen hero leaves its slot empty.</p>
   <p>You command <strong>Dawn on the left</strong>; the CPU commands Dusk on the right. Edit either roster before starting, or <strong>Reroll</strong> it for a preset, mixed or random squad you can still change.</p>
   <table><thead><tr><th>Class</th><th>Slots</th></tr></thead><tbody>${Object.entries(Formation.CLASSES).map(([k,c])=>`<tr><td>${classIcon(k)} ${c.name}</td><td>${c.slots.join(', ')}</td></tr>`).join('')}</tbody></table>
   <p>A basic attack from slot N reaches enemy slots 1…N. The <strong>frontmost living enemy is always reachable</strong>, so a fallen front exposes the next hero. Some skills ignore reach (“any enemy”, “every enemy”). Splash follows exact slots, so an empty slot stops it.</p></section>
  <section class="card parchment"><h2>Speed &amp; the timeline</h2><p>Every hero fills an action gauge at its SPD, and whoever fills first acts. Time stands still while you decide. Faster heroes simply act more often, with no thresholds or turn caps.</p>
-  <p><strong>Haste/Slow</strong> change SPD from now on without erasing progress. <strong>Advance/Delay</strong> shift the next activation, even a repeat turn in the same cycle; a Delay on an empty gauge still postpones that turn. Cycles never clear gauge changes. The top timeline forecasts the next ${CONFIG.forecast} activations and re-sorts instantly; the track beneath shows each gauge live.</p>
+  <p><strong>Haste/Slow</strong> change SPD from now on without erasing progress. <strong>Advance/Delay</strong> shift the next activation, even a repeat turn in the same cycle; a Delay on an empty gauge still postpones that turn. Cycles never clear gauge changes. The top timeline forecasts the next ${CONFIG.forecast} activations and re-sorts instantly. Tap a hero in the timeline to open their details and see their current gauge.</p>
   <p>Ties go to the higher SPD, then alternate between teams, then the front slot.</p></section>
  <section class="card parchment"><h2>Cycles &amp; MP</h2><p>A <strong>cycle</strong> ends once every living hero has acted at least once. Fast heroes may act several times per cycle; fallen heroes never hold it up.</p>
   <p>Each party shares one MP pool: start ${CONFIG.mp.start}, max ${CONFIG.mp.max}, <strong>+${CONFIG.mp.regen} per completed cycle</strong>. Basic attacks are free and deal a share of ATK set by class: ${basicRule()}. Skills use the shared MP pool. Some have no cooldown; others count cooldowns in the caster’s turns or in cycles as the skill states.</p>
