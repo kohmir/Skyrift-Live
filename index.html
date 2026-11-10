@@ -1353,6 +1353,57 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .x-relics-art:empty::before{content:'0 Relics';font-size:11px;font-weight:800;white-space:nowrap;color:var(--muted)}
 @media (min-width:1025px) and (min-height:600px){.x-relics-art:empty::before{display:none}}
 .x-notice .x-gold-gain{color:#85500c;justify-content:flex-start}
+
+.fx-blademaster-aura{background:linear-gradient(0deg,#b41436aa,#ed526e88 45%,#b4143600);filter:drop-shadow(0 0 8px #c9234655)}
+
+.fx-dragoon-aura{background:linear-gradient(0deg,#bec4caaa,#edf0f288 45%,#bec4ca00);filter:drop-shadow(0 0 8px #d4dae055)}
+
+.fx-vanguard-aura{background:linear-gradient(0deg,#b68d65aa,#e1c3a188 45%,#b68d6500);filter:drop-shadow(0 0 8px #c7a17b55)}
+
+.fx-svg.fx-cannon-muzzle{width:80px;height:48px}
+.fx-svg.fx-cannon-smoke{width:60px;height:52px}
+.fx-svg.fx-cannon-blast{width:90px;height:90px}
+
+.fx-svg.fx-astral-impact{width:64px;height:64px}
+
+.fx-oracle-aura{background:linear-gradient(0deg,#d64b73aa,#ff9db588 45%,#d64b7300);filter:drop-shadow(0 0 8px #ed729555)}
+
+.fx-svg.fx-beacon-halo{width:100px;height:100px;filter:drop-shadow(0 0 4px #63c6ff88)}
+.fx-ring.fx-beacon-floor{border-color:#82d9ff;box-shadow:0 0 12px #5abaff88,inset 0 0 8px #5abaff66}
+
+.fx-svg.fx-dance-ribbon{width:100px;height:70px;filter:drop-shadow(0 0 3px #f6a7d477)}
+
+.fx-rune-sigil .fx-raster{filter:brightness(1.3) saturate(1.15) drop-shadow(0 0 1px #bcefffcc) drop-shadow(0 0 5px #58beff99)}
+
+.fx-svg.fx-valkyrie-dome{width:60px;height:56px;transform-origin:50% 100%;filter:drop-shadow(0 0 2px #b5ddff44)}
+
+.fx-svg.fx-mirror-ray{width:32px;height:8px;filter:drop-shadow(0 0 3px #a5eaff)}
+
+.fx-svg.fx-hex-curse{width:48px;height:48px;opacity:.7;filter:drop-shadow(0 0 3px #b27aff99) drop-shadow(0 0 6px #6130a566)}
+
+.fx-svg.fx-blood-seal{width:88px;height:88px;filter:drop-shadow(0 0 3px #d63f6866)}
+
+.fx-shaman-charge .fx-blood-seal{filter:brightness(1.2) drop-shadow(0 0 4px #ff8daacc) drop-shadow(0 0 8px #d63f6877)}
+
+.fx-chain.fx-blood-tether{width:100%;height:4px;box-shadow:0 0 6px #ff4060;border-radius:3px}
+.fx-ring.fx-blood-link-ring{border:1px solid #ff7c9c;box-shadow:0 0 6px #e3386688}
+.fx-blood-link-pulse .fx-svg{filter:drop-shadow(0 0 4px #ff668c)}
+
+.fx-svg.fx-druid-leaf{width:24px;height:30px}
+
+.fx-svg.fx-swap-arrows{width:72px;height:52px;filter:drop-shadow(0 0 3px #bd9bff)}
+
+.fx-svg.fx-turn-clock{width:80px;height:80px;filter:drop-shadow(0 0 4px #dbd5b777)}
+
+.fx-svg.fx-time-ground{width:92px;height:34px;filter:drop-shadow(0 0 3px #c7e6e966)}
+.fx-hourglass-glint .fx-svg{filter:drop-shadow(0 0 3px #fff0bb) drop-shadow(0 0 6px #e8b04b88)}
+
+.fx-svg.fx-acid-ground{width:100px;height:40px;filter:drop-shadow(0 0 3px #9bcf4c66)}
+.fx-svg.fx-acid-bubble{width:12px;height:12px}
+
+.fx-svg.fx-ice-bloom{width:100px;height:80px;filter:drop-shadow(0 0 3px #9cddff88)}
+.fx-svg.fx-ice-ground{width:100px;height:32px}
+.fx-svg.fx-ice-shard{width:12px;height:20px}
 </style></head><body><div id="app"><div class="boot" role="status"><strong>Skyrift</strong><span>Loading…</span></div></div><div id="overlay"></div><div id="toast" role="status" aria-live="polite"></div><script>/* Battle configuration. Every number here is a provisional balance value (see
    docs/REVAMP_PLAN.md, "Open decisions"); systems read them from here, never inline. */
 (function(root){
@@ -6305,7 +6356,7 @@ const P=(d,p,e='inOut')=>({d,p,e});
 const swing=[P(220,{body:{r:-8},frontArm:{r:-150},sword:{r:70},head:{r:-6},backArm:{r:30}},'out'),P(80,{body:{r:12},frontArm:{r:20},sword:{r:80},head:{r:6},backArm:{r:-30}},'snap'),P(200,{},'lin')];
 const raise=d=>[P(d,{body:{r:-8},frontArm:{r:-110},sword:{r:120},head:{r:-6}},'out'),P(160,{body:{r:4},frontArm:{r:-70},sword:{r:90}},'snap')];
 const CLIPS={
- blademaster:{basic:{keys:swing,impact:300},skill:{keys:[P(380,{body:{r:-14,y:5},frontArm:{r:-170},sword:{r:110},head:{r:-10},backArm:{r:40},root:{sx:1.06,sy:.92}},'out'),P(185,{},'lin'),P(80,{body:{r:20,y:4},frontArm:{r:30},sword:{r:90},head:{r:10},backArm:{r:-40},root:{sx:1,sy:1}},'snap'),P(300,{},'lin')],impact:645,approach:500}},
+ blademaster:{basic:{keys:swing,impact:300},skill:{keys:[P(380,{body:{r:-14,y:5},frontArm:{r:-170},sword:{r:110},head:{r:-10},backArm:{r:40},root:{sx:1.06,sy:.92}},'out'),P(168.75,{},'lin'),P(80,{body:{r:20,y:4},frontArm:{r:30},sword:{r:90},head:{r:10},backArm:{r:-40},root:{sx:1,sy:1}},'snap'),P(300,{},'lin')],impact:628.75,approach:500}},
  valkyrie:{basic:{keys:[P(220,{body:{r:-8},backArm:{r:100}},'out'),P(90,{body:{r:12},backArm:{r:-72},frontArm:{r:-30}},'snap'),P(220,{},'lin')],impact:310},skill:{keys:[
    // Brace, lift through the shoulder, then settle with the shield face upright.
    P(100,{root:{x:0,y:0,sx:1,sy:1},body:{r:-3,y:0},frontArm:{r:-24,x:0,y:0},sword:{r:17,x:0,y:0},head:{r:2},backArm:{r:41}},'inOut'),
@@ -6315,9 +6366,9 @@ const CLIPS={
    P(280,{root:{x:0,y:0,sx:1,sy:1},body:{r:0,y:0},frontArm:{r:-14,x:0,y:0},sword:{r:0,x:0,y:0},head:{r:0},backArm:{r:38}},'inOut')
   ],impact:300}},
  pyromancer:{basic:{keys:raise(240),impact:400},skill:{keys:[P(380,{body:{r:-8},frontArm:{r:-130},sword:{r:120},head:{r:-8},backArm:{r:60}},'out'),P(240,{},'lin'),P(160,{frontArm:{r:-60},sword:{r:70},body:{r:8},backArm:{r:30}},'snap'),P(500,{},'lin')],impact:780}},
- ranger:{basic:{keys:[P(260,{frontArm:{r:-75},sword:{r:75},backArm:{r:-80},body:{r:-4}},'out'),P(180,{backArm:{r:-60}},'lin'),P(60,{backArm:{r:-10},body:{r:2}},'snap'),P(240,{},'lin')],impact:500},skill:{keys:[P(300,{frontArm:{r:-75},sword:{r:75},backArm:{r:-80},body:{r:-6}},'out'),P(420,{backArm:{r:-60},root:{sx:1.04,sy:.96}},'lin'),P(60,{backArm:{r:-10},body:{r:4},root:{sx:1,sy:1}},'snap'),P(300,{},'lin')],impact:780}},
+ ranger:{basic:{keys:[P(260,{frontArm:{r:-75},sword:{r:75},backArm:{r:-80},body:{r:-4}},'out'),P(180,{backArm:{r:-60}},'lin'),P(60,{backArm:{r:-10},body:{r:2}},'snap'),P(240,{},'lin')],impact:500},skill:{keys:[P(300,{frontArm:{r:-75},sword:{r:75},backArm:{r:-80},body:{r:-6}},'out'),P(550,{},'lin'),P(420,{backArm:{r:-60},root:{sx:1.04,sy:.96}},'lin'),P(60,{backArm:{r:-10},body:{r:4},root:{sx:1,sy:1}},'snap'),P(300,{},'lin')],impact:1330}},
  assassin:{basic:{keys:[P(140,{body:{r:-6},frontArm:{r:-60},backArm:{r:-40}},'out'),P(70,{body:{r:14},frontArm:{r:20}},'snap'),P(90,{frontArm:{r:-40}},'out'),P(70,{backArm:{r:-100}},'snap'),P(200,{},'lin')],impact:210},skill:{keys:[P(160,{body:{r:-10},frontArm:{r:-130},backArm:{r:-130}},'out'),P(70,{body:{r:16},frontArm:{r:40},backArm:{r:30}},'snap'),P(320,{},'lin')],impact:230}},
- priestess:{basic:{keys:raise(240),impact:400},skill:{keys:[P(380,{body:{r:-6},frontArm:{r:-140},sword:{r:150},head:{r:-6}},'out'),P(700,{},'lin')],impact:380}},
+ priestess:{basic:{keys:raise(240),impact:400},skill:{keys:[P(240,{body:{r:-6},frontArm:{r:-140},sword:{r:150},head:{r:-6}},'out'),P(904,{},'lin')],impact:240,recovery:256}},
  alchemist:{basic:{keys:[P(240,{body:{r:-10},frontArm:{r:-170}},'out'),P(90,{body:{r:10},frontArm:{r:-50}},'snap'),P(300,{},'lin')],impact:330},skill:{keys:[P(280,{body:{r:-12},frontArm:{r:-175}},'out'),P(90,{body:{r:12},frontArm:{r:-40}},'snap'),P(500,{},'lin')],impact:370}},
  /* Paladin: hammer in the back hand (its own bone), shield in the front. Swings read like a
     real hammer blow: the arm lifts up and forward until the hammer is cocked overhead, then
@@ -6352,7 +6403,7 @@ const CLIPS={
  /* Warlock: staff in the front hand, a violet orb of dark magic cupped in the back hand. */
  warlock:{
   basic:{keys:[P(240,{body:{r:-10},frontArm:{r:-8},sword:{r:16},head:{r:-6},orb:{sx:1.3,sy:1.3},root:{sx:.97,sy:1.04}},'out'),P(90,{body:{r:12},frontArm:{r:-78},sword:{r:166},head:{r:6},root:{sx:1.06,sy:.94}},'snap'),P(260,{root:{sx:1,sy:1}},'lin')],impact:330},
-  skill:{keys:[P(320,{body:{r:-8,y:2},frontArm:{r:-150},sword:{r:150},head:{r:-10},backArm:{r:60},orb:{sx:2,sy:2},root:{sx:.96,sy:1.05}},'out'),P(240,{orb:{sx:2.4,sy:2.4}},'lin'),P(100,{body:{r:14},frontArm:{r:-82},sword:{r:172},head:{r:8},backArm:{r:-40},orb:{sx:1.4,sy:1.4},root:{sx:1.08,sy:.92}},'snap'),P(420,{root:{sx:1,sy:1}},'lin')],impact:660},
+  skill:{keys:[P(320,{body:{r:-8,y:2},frontArm:{r:-150},sword:{r:150},head:{r:-10},backArm:{r:60},orb:{sx:2,sy:2},root:{sx:.96,sy:1.05}},'out'),{...P(620,{orb:{sx:2.4,sy:2.4}},'lin'),cue:'release'},P(100,{body:{r:14},frontArm:{r:-82},sword:{r:172},head:{r:8},backArm:{r:-40},orb:{sx:1.4,sy:1.4},root:{sx:1.08,sy:.92}},'snap'),P(420,{root:{sx:1,sy:1}},'lin')],impact:1040},
   curse:{keys:[P(100,{frontArm:{r:-64},sword:{r:140},body:{r:8},head:{r:4},orb:{sx:1.8,sy:1.8}},'snap'),P(380,{},'lin')],impact:100},
   cheer:{keys:[P(140,{root:{sy:.86,sx:1.1}},'out'),P(220,{root:{y:-24,sy:1.08,sx:.94},frontArm:{r:-140},sword:{r:140},backArm:{r:120},orb:{sx:2,sy:2}},'out'),P(200,{root:{y:0,sy:1,sx:1}},'in'),P(300,{},'lin')],impact:0}
  },
@@ -6360,7 +6411,7 @@ const CLIPS={
     in the open back palm. `bless` plays when his heal lands on an ally. */
  bishop:{
   basic:{keys:[P(240,{body:{r:-8},backArm:{r:96},light:{sx:1.7,sy:1.7},frontArm:{r:-8},sword:{r:8},head:{r:-6},root:{sx:.97,sy:1.04}},'out'),P(90,{body:{r:10},frontArm:{r:-58},sword:{r:40},backArm:{r:24},light:{sx:1.2,sy:1.2},head:{r:6},root:{sx:1.06,sy:.94}},'snap'),P(260,{root:{sx:1,sy:1}},'lin')],impact:330},
-  skill:{keys:[P(340,{body:{r:-6,y:2},frontArm:{r:-118},sword:{r:118},backArm:{r:98},light:{sx:2.4,sy:2.4},head:{r:-10},root:{sx:.96,sy:1.05}},'out'),P(260,{light:{sx:2.9,sy:2.9}},'lin'),P(100,{body:{r:10},frontArm:{r:-56},sword:{r:38},backArm:{r:24},light:{sx:1.4,sy:1.4},head:{r:6},root:{sx:1.07,sy:.93}},'snap'),P(420,{root:{sx:1,sy:1}},'lin')],impact:700},
+  skill:{keys:[P(340,{body:{r:-6,y:2},frontArm:{r:-118},sword:{r:118},backArm:{r:98},light:{sx:2.4,sy:2.4},head:{r:-10},root:{sx:.96,sy:1.05}},'out'),{...P(260,{light:{sx:2.9,sy:2.9}},'lin'),cue:'release'},P(100,{body:{r:10},frontArm:{r:-56},sword:{r:38},backArm:{r:24},light:{sx:1.4,sy:1.4},head:{r:6},root:{sx:1.07,sy:.93}},'snap')],impact:700,recovery:220},
   bless:{keys:[P(160,{backArm:{r:98},light:{sx:2.3,sy:2.3},body:{r:-4},head:{r:-8},frontArm:{r:-14},sword:{r:14}},'out'),P(160,{light:{sx:1.8,sy:1.8}},'lin'),P(360,{},'lin')],impact:160},
   cheer:{keys:[P(140,{root:{sy:.86,sx:1.1}},'out'),P(220,{root:{y:-26,sy:1.08,sx:.94},frontArm:{r:-120},sword:{r:120},backArm:{r:100},light:{sx:2,sy:2}},'out'),P(200,{root:{y:0,sy:1,sx:1}},'in'),P(300,{},'lin')],impact:0}
  },
@@ -6376,7 +6427,7 @@ const CLIPS={
     the enemy line; `chill` is the quick frost flick when her passive adds Cold after a basic. */
  cryomancer:{
   basic:{keys:[P(240,{body:{r:-8},frontArm:{r:-110},sword:{r:120},head:{r:-6},backArm:{r:30},root:{sx:.97,sy:1.04}},'out'),P(160,{body:{r:6},frontArm:{r:-64},sword:{r:96},backArm:{r:-10},root:{sx:1.05,sy:.95}},'snap'),P(240,{root:{sx:1,sy:1}},'lin')],impact:400},
-  skill:{keys:[P(200,{root:{sy:.9,sx:1.08},body:{y:3}},'out'),P(300,{root:{y:-8,sy:1.06,sx:.95},body:{r:-8,y:0},frontArm:{r:-145},sword:{r:150},head:{r:-10},backArm:{r:62}},'out'),P(220,{root:{y:-10}},'lin'),P(110,{root:{y:0,sy:.92,sx:1.08},body:{r:12},frontArm:{r:-70},sword:{r:104},head:{r:6},backArm:{r:-14}},'snap'),P(380,{root:{sy:1,sx:1}},'lin')],impact:830},
+  skill:{keys:[P(200,{root:{sy:.9,sx:1.08},body:{y:3}},'out'),P(300,{root:{y:-8,sy:1.06,sx:.95},body:{r:-8,y:0},frontArm:{r:-145},sword:{r:150},head:{r:-10},backArm:{r:62}},'out'),{...P(220,{root:{y:-10}},'lin'),cue:'release'},P(400,{root:{y:0,sy:.92,sx:1.08},body:{r:12},frontArm:{r:-70},sword:{r:104},head:{r:6},backArm:{r:-14}},'inOut'),P(380,{root:{sy:1,sx:1}},'lin')],impact:1120},
   chill:{keys:[P(110,{frontArm:{r:-84},sword:{r:104},body:{r:6},head:{r:4},root:{sx:1.04,sy:.96}},'snap'),P(380,{root:{sx:1,sy:1}},'lin')],impact:110},
   cheer:{keys:[P(140,{root:{sy:.86,sx:1.1}},'out'),P(220,{root:{y:-26,sy:1.08,sx:.94},frontArm:{r:-140},sword:{r:150},backArm:{r:70}},'out'),P(200,{root:{y:0,sy:1,sx:1}},'in'),P(300,{},'lin')],impact:0}
  },
@@ -6432,7 +6483,7 @@ const CLIPS={
     sweeping slash; `curse` is the quick flick when her passive marks a target Pierced. */
  reaper:{
   basic:{keys:[P(260,{body:{r:-10},frontArm:{r:-150},sword:{r:90},head:{r:-8},backArm:{r:30},root:{sx:.97,sy:1.04}},'out'),P(90,{body:{r:14,y:3},frontArm:{r:20},sword:{r:72},head:{r:6},backArm:{r:-30},root:{sx:1.08,sy:.92}},'snap'),P(160,{},'lin'),P(260,{root:{sx:1,sy:1},body:{y:0}},'inOut')],impact:350},
-  skill:{keys:[P(220,{root:{sy:.9,sx:1.08},body:{y:4,r:-6},frontArm:{r:-60},sword:{r:60},head:{r:-6}},'out'),P(280,{root:{y:-10,sy:1.06,sx:.95},body:{r:-14,y:0},frontArm:{r:-170},sword:{r:130},head:{r:-12},backArm:{r:50}},'out'),P(110,{root:{y:0,sy:.9,sx:1.1},body:{r:18,y:4},frontArm:{r:40},sword:{r:62},head:{r:8},backArm:{r:-40}},'snap'),P(240,{},'lin'),P(360,{root:{sy:1,sx:1},body:{y:0}},'inOut')],impact:610},
+  skill:{keys:[P(220,{root:{sy:.9,sx:1.08},body:{y:4,r:-6},frontArm:{r:-60},sword:{r:60},head:{r:-6}},'out'),P(280,{root:{y:-10,sy:1.06,sx:.95},body:{r:-14,y:0},frontArm:{r:-170},sword:{r:130},head:{r:-12},backArm:{r:50}},'out'),P(350,{},'lin'),P(110,{root:{y:0,sy:.9,sx:1.1},body:{r:18,y:4},frontArm:{r:40},sword:{r:62},head:{r:8},backArm:{r:-40}},'snap'),P(240,{},'lin'),P(360,{root:{sy:1,sx:1},body:{y:0}},'inOut')],impact:960},
   curse:{keys:[P(100,{frontArm:{r:-70},sword:{r:80},body:{r:6},head:{r:4}},'snap'),P(360,{},'lin')],impact:100},
   cheer:{keys:[P(140,{root:{sy:.86,sx:1.1}},'out'),P(220,{root:{y:-26,sy:1.08,sx:.94},frontArm:{r:-140},sword:{r:150},backArm:{r:120}},'out'),P(200,{root:{y:0,sy:1,sx:1}},'in'),P(300,{},'lin')],impact:0}
  },
@@ -6441,7 +6492,7 @@ const CLIPS={
     a spinning dance with both fans sweeping up; `flourish` plays when her passive Empowers. */
  dancer:{
   basic:{keys:[P(220,{body:{r:-8},frontArm:{r:-100},sword:{r:70},backArm:{r:30},fanBack:{r:-20},head:{r:-6},root:{sx:.96,sy:1.04}},'out'),P(90,{body:{r:10},frontArm:{r:-56},sword:{r:30},backArm:{r:-10},head:{r:6},root:{sx:1.06,sy:.94}},'snap'),P(280,{root:{sx:1,sy:1}},'lin')],impact:310},
-  skill:{keys:[P(180,{root:{sy:.9,sx:1.08},body:{y:3,r:6}},'out'),P(160,{root:{sx:-1,sy:1.04,y:-6},body:{y:0,r:-6},frontArm:{r:-130},sword:{r:110},backArm:{r:120},fanBack:{r:-60},head:{r:-8}},'inOut'),P(160,{root:{sx:1,sy:1.06,y:-10},frontArm:{r:-150},sword:{r:130},backArm:{r:150},fanBack:{r:-90}},'inOut'),P(120,{root:{y:0,sy:.92,sx:1.08},body:{r:8},frontArm:{r:-60},sword:{r:40},backArm:{r:40},fanBack:{r:-30},head:{r:6}},'snap'),P(380,{root:{sy:1,sx:1}},'lin')],impact:620},
+  skill:{keys:[P(180,{root:{sy:.9,sx:1.08},body:{y:3,r:6}},'out'),P(240,{root:{sx:-1,sy:1.04,y:-6},body:{y:0,r:-6},frontArm:{r:-130},sword:{r:110},backArm:{r:120},fanBack:{r:-60},head:{r:-8}},'inOut'),P(240,{root:{sx:1,sy:1.06,y:-10},frontArm:{r:-150},sword:{r:130},backArm:{r:150},fanBack:{r:-90}},'inOut'),P(180,{},'lin'),P(120,{root:{y:0,sy:.92,sx:1.08},body:{r:8},frontArm:{r:-60},sword:{r:40},backArm:{r:40},fanBack:{r:-30},head:{r:6}},'snap'),P(380,{root:{sy:1,sx:1}},'lin')],impact:960},
   flourish:{keys:[P(140,{frontArm:{r:-90},sword:{r:60},backArm:{r:50},fanBack:{r:-40},body:{r:-4},head:{r:-6},root:{sy:1.04,sx:.97}},'out'),P(140,{frontArm:{r:-60},sword:{r:40},root:{sy:.97,sx:1.03}},'snap'),P(320,{root:{sx:1,sy:1}},'lin')],impact:280},
   cheer:{keys:[P(140,{root:{sy:.86,sx:1.1}},'out'),P(220,{root:{y:-26,sy:1.08,sx:.94},frontArm:{r:-140},sword:{r:120},backArm:{r:140},fanBack:{r:-100}},'out'),P(200,{root:{y:0,sy:1,sx:1}},'in'),P(300,{},'lin')],impact:0}
  },
@@ -6477,7 +6528,7 @@ const CLIPS={
     quick snatch when her passive strips a buff from a linked enemy. */
  shaman:{
   basic:{keys:[P(240,{body:{r:-8},frontArm:{r:-70},sword:{r:70},backArm:{r:40},head:{r:-6},root:{sx:.97,sy:1.04}},'out'),P(90,{body:{r:10},frontArm:{r:-28},sword:{r:28},backArm:{r:-6},head:{r:6},root:{sx:1.06,sy:.94}},'snap'),P(280,{root:{sx:1,sy:1}},'lin')],impact:330},
-  skill:{keys:[P(220,{root:{sy:.9,sx:1.08},body:{y:3}},'out'),P(320,{root:{y:-10,sy:1.06,sx:.95},body:{r:-8,y:0},frontArm:{r:-110},sword:{r:110},backArm:{r:120},head:{r:-12}},'out'),P(380,{root:{y:-12},body:{r:-10}},'lin'),P(110,{root:{y:0,sy:.9,sx:1.1},body:{r:10},frontArm:{r:-34},sword:{r:34},backArm:{r:30},head:{r:6}},'snap'),P(400,{root:{sy:1,sx:1}},'lin')],impact:1030},
+  skill:{keys:[P(220,{root:{sy:.9,sx:1.08},body:{y:3}},'out'),P(320,{root:{y:-2,sy:1.06,sx:.95},body:{r:-8,y:0},frontArm:{r:-120},sword:{r:120},backArm:{r:120},head:{r:-12}},'out'),{...P(380,{root:{y:-3},body:{r:-10}},'lin'),cue:'release'},P(110,{root:{y:0,sy:.9,sx:1.1},body:{r:10},frontArm:{r:-34},sword:{r:34},backArm:{r:30},head:{r:6}},'snap'),P(400,{root:{sy:1,sx:1}},'lin')],impact:1030},
   rend:{keys:[P(100,{frontArm:{r:-50},sword:{r:50},backArm:{r:60},body:{r:6},head:{r:4}},'snap'),P(120,{backArm:{r:-10},body:{r:-4}},'snap'),P(320,{},'lin')],impact:220},
   cheer:{keys:[P(140,{root:{sy:.86,sx:1.1}},'out'),P(220,{root:{y:-26,sy:1.08,sx:.94},frontArm:{r:-120},sword:{r:120},backArm:{r:140}},'out'),P(200,{root:{y:0,sy:1,sx:1}},'in'),P(300,{},'lin')],impact:0}
  },
@@ -6539,7 +6590,7 @@ const CLIPS={
     casts her passive's nullification shield. */
  maiden:{
   basic:{keys:[P(240,{body:{r:-8},frontArm:{r:-122},sword:{r:122},bell:{r:16},head:{r:-6},backArm:{r:10},root:{sx:.97,sy:1.04}},'out'),P(90,{body:{r:6},frontArm:{r:-102},sword:{r:102},bell:{r:-32},head:{r:2},backArm:{r:-4},root:{sx:1.06,sy:.94}},'snap'),P(150,{bell:{r:12}},'inOut'),P(220,{bell:{r:-4},root:{sx:1,sy:1}},'inOut')],impact:330},
-  skill:{keys:[P(220,{root:{sy:.9,sx:1.08},body:{y:4,r:8},frontArm:{r:-98},sword:{r:98},bell:{r:6},head:{r:10},eyes:{sy:.2},backArm:{r:-6}},'out'),P(260,{root:{sy:.92,sx:1.06},body:{r:10}},'lin'),P(260,{root:{y:-8,sy:1.06,sx:.95},body:{y:0,r:-6},frontArm:{r:-132},sword:{r:132},bell:{r:-24},head:{r:-8},eyes:{sy:1},backArm:{r:16}},'out'),P(130,{bell:{r:14}},'inOut'),P(130,{bell:{r:-24}},'inOut'),P(110,{root:{y:0,sy:.93,sx:1.07},body:{r:4},frontArm:{r:-108},sword:{r:108},bell:{r:-32},head:{r:0}},'snap'),P(160,{bell:{r:12}},'inOut'),P(300,{bell:{r:0},root:{sy:1,sx:1}},'inOut')],impact:1130},
+  skill:{keys:[P(165,{root:{sy:.9,sx:1.08},body:{y:4,r:8},frontArm:{r:-98},sword:{r:98},bell:{r:6},head:{r:10},eyes:{sy:.2},backArm:{r:-6}},'out'),P(195,{root:{sy:.92,sx:1.06},body:{r:10}},'lin'),P(195,{root:{y:-8,sy:1.06,sx:.95},body:{y:0,r:-6},frontArm:{r:-132},sword:{r:132},bell:{r:-24},head:{r:-8},eyes:{sy:1},backArm:{r:16}},'out'),P(97.5,{bell:{r:14}},'inOut'),P(97.5,{bell:{r:-24}},'inOut'),P(82.5,{root:{y:0,sy:.93,sx:1.07},body:{r:4},frontArm:{r:-108},sword:{r:108},bell:{r:-32},head:{r:0}},'snap'),P(160,{bell:{r:12}},'inOut'),P(300,{bell:{r:0},root:{sy:1,sx:1}},'inOut')],impact:852.5},
   ward:{keys:[P(120,{frontArm:{r:-114},sword:{r:114},bell:{r:10},body:{r:-4},head:{r:-4}},'out'),P(110,{bell:{r:-30},root:{sx:1.04,sy:.96}},'inOut'),P(130,{bell:{r:10}},'inOut'),P(260,{bell:{r:0},root:{sx:1,sy:1}},'inOut')],impact:230},
   cheer:{keys:[P(140,{root:{sy:.86,sx:1.1}},'out'),P(220,{root:{y:-26,sy:1.08,sx:.94},frontArm:{r:-136},sword:{r:136},bell:{r:-26},backArm:{r:30}},'out'),P(200,{root:{y:0,sy:1,sx:1},bell:{r:14}},'in'),P(160,{bell:{r:-10}},'inOut'),P(240,{bell:{r:0}},'lin')],impact:0}
  },
@@ -6624,7 +6675,7 @@ const CLIPS={
  ballista:{
   basic:{keys:[P(240,{backArm:{r:-52},arrow:{r:-38},body:{r:-4},head:{r:-3},root:{sx:.98,sy:1.02}},'out'),P(120,{backArm:{r:-48},arrow:{r:-42}},'lin'),P(50,{backArm:{r:-78},arrow:{r:-12,sx:0,sy:0},body:{r:3},root:{x:-2,sx:1.03,sy:.97}},'snap'),P(160,{},'lin'),P(1,{arrow:{sx:.2,sy:.2}},'lin'),P(240,{backArm:{r:-68},arrow:{r:-22,sx:1,sy:1},body:{r:0},root:{x:0,sx:1,sy:1}},'inOut')],impact:410},
   aim:{pose:'aiming',keys:[P(350,{root:{sy:.9,sx:1.08},body:{y:4,r:4},backArm:{r:-52},arrow:{r:-38},frontArm:{r:-72},head:{r:3},eyes:{sy:.5}},'out'),P(450,{root:{sy:.93,sx:1.06},body:{y:3,r:3},backArm:{r:-46},frontArm:{r:-72},arrow:{r:-44,sx:1.15,sy:1.15},eyes:{sy:.45}},'inOut')],impact:350},
-  skill:{pose:null,keys:[P(360,{backArm:{r:-40},arrow:{r:-50,sx:1.35,sy:1.35},body:{r:-5},root:{sy:.92,sx:1.07}},'out'),{...P(480,{},'lin'),cue:'release'},P(100,{backArm:{r:-82},arrow:{r:-8,sx:0,sy:0},frontArm:{r:-76},body:{r:6,y:0},head:{r:4},eyes:{sy:1},root:{x:-7,sx:1.06,sy:.94}},'snap'),P(320,{},'lin'),P(1,{arrow:{sx:.2,sy:.2}},'lin'),P(480,{backArm:{r:-68},frontArm:{r:-68},arrow:{r:-22,sx:1,sy:1},body:{r:0},head:{r:0},root:{x:0,sx:1,sy:1}},'inOut')],impact:840},
+  skill:{pose:null,keys:[P(360,{backArm:{r:-40},arrow:{r:-50,sx:1.35,sy:1.35},body:{r:-5},root:{sy:.92,sx:1.07}},'out'),{...P(550,{},'lin'),cue:'release'},P(100,{backArm:{r:-82},arrow:{r:-8,sx:0,sy:0},frontArm:{r:-76},body:{r:6,y:0},head:{r:4},eyes:{sy:1},root:{x:-7,sx:1.06,sy:.94}},'snap'),P(320,{},'lin'),P(1,{arrow:{sx:.2,sy:.2}},'lin'),P(480,{backArm:{r:-68},frontArm:{r:-68},arrow:{r:-22,sx:1,sy:1},body:{r:0},head:{r:0},root:{x:0,sx:1,sy:1}},'inOut')],impact:910},
   flinch:{keys:[P(70,{body:{r:-10},head:{r:-10},backArm:{r:-60},arrow:{r:-30},frontArm:{r:-60},eyes:{sy:.3},root:{x:-3}},'snap'),P(340,{eyes:{sy:1},root:{x:0}},'back')],impact:70},
   cheer:{keys:[P(140,{root:{sy:.86,sx:1.1}},'out'),P(220,{root:{y:-26,sy:1.08,sx:.94},frontArm:{r:-120},backArm:{r:120},arrow:{r:8,sx:0,sy:0}},'out'),P(200,{root:{y:0,sy:1,sx:1}},'in'),P(1,{arrow:{sx:.2,sy:.2}},'lin'),P(300,{arrow:{sx:1,sy:1}},'lin')],impact:0},
   poses:{aiming:{root:{sy:.93,sx:1.06},body:{y:3,r:3},backArm:{r:-46},frontArm:{r:-72},arrow:{r:-44,sx:1.15,sy:1.15},eyes:{sy:.45}}}
@@ -6674,7 +6725,7 @@ function act(svg,name,{face=0}={}){
  const armParent=raisedArm?.parentNode,armNext=raisedArm?.nextSibling;
  if(raisedArm)armParent.appendChild(raisedArm);
  let releaseCue;const release=clip.keys.some(k=>k.cue==='release')?new Promise(resolve=>{releaseCue=resolve;}):undefined;
- const done=p.play([...clip.keys,P(320,back,'inOut')],cue=>{if(cue==='release')releaseCue?.();}).then(()=>{p.idleW=1;busy.delete(p);svg.classList.remove('acting');if(raisedArm)armParent.insertBefore(raisedArm,armNext);});
+ const done=p.play([...clip.keys,P(clip.recovery??320,back,'inOut')],cue=>{if(cue==='release')releaseCue?.();}).then(()=>{p.idleW=1;busy.delete(p);svg.classList.remove('acting');if(raisedArm)armParent.insertBefore(raisedArm,armNext);});
  return {impact:REDUCED?0:clip.impact,approach:clip.approach,release,done};
 }
 /* Held poses (e.g. the Sage's meditation) replace the rest pose until cleared, so clips and
@@ -6834,22 +6885,39 @@ const ART={
  ice:SVG(44,28,'<path d="M-20 0 L-11 -10 L7 -8 L21 0 L7 8 L-11 10Z" fill="#79c7ef" stroke="#356e9e" stroke-width="1.5" stroke-linejoin="round"/><path d="M-20 0 L-6 -3 L7 -8 L21 0 L3 2Z" fill="#e4fbff"/><path d="M-11 -10 L-6 -3 L-20 0Z" fill="#a1e4ff"/><path d="M-6 -3 L3 2 L-11 10 L-20 0Z" fill="#a5eaff"/><path d="M3 2 L21 0 L7 8 L-11 10Z" fill="#459ace"/><path d="M-11 -10 L-6 -3 L3 2 L21 0 M3 2 L-11 10" fill="none" stroke="#f1ffff" stroke-width="1"/>','fx-ice-crystal'),
  frostCrest:SVG(64,80,'<g stroke="#448cb7" stroke-width="1.5" stroke-linejoin="round"><path d="M-2 28 L-24 4 L-26 -21 L-10 -12 L0 7Z" fill="#7ac9ed"/><path d="M2 28 L24 4 L26 -21 L10 -12 L0 7Z" fill="#73bde7"/><path d="M0 -37 L13 -20 L11 17 L0 34 L-11 17 L-13 -20Z" fill="#a8eaff"/></g><path d="M-26 -21 L-17 -3 L-2 28 L-24 4Z" fill="#c5f7ff"/><path d="M26 -21 L17 -3 L2 28 L24 4Z" fill="#b8efff"/><path d="M0 -37 L0 -15 L-11 17 L-13 -20Z" fill="#f0ffff"/><path d="M0 -15 L13 -20 L11 17 L0 34Z" fill="#64b5e4"/><path d="M0 -15 L0 34 L-11 17Z" fill="#c5f7ff"/><path d="M-13 -20 L0 -15 L13 -20 M0 -37 V-15 L-11 17 M0 -15 L11 17" fill="none" stroke="#f4ffff" stroke-width="1.3"/>','fx-frost-crystal'),
  flake:SVG(30,30,'<g stroke="#2b1d16" stroke-width="4.5" stroke-linecap="round"><path d="M0 -11 V11 M-9.5 -5.5 L9.5 5.5 M-9.5 5.5 L9.5 -5.5"/></g><g stroke="#e6f7ff" stroke-width="2.2" stroke-linecap="round"><path d="M0 -11 V11 M-9.5 -5.5 L9.5 5.5 M-9.5 5.5 L9.5 -5.5"/></g>'),
+ hexCurse:SVG(48,48,'<circle r="21" fill="#6928b4" opacity=".15"/><path d="M-20 -3 Q-24 -19 -8 -20 Q-17 -13 -13 -7 M7 -21 Q24 -20 22 -3 Q17 -14 10 -11 M21 7 Q17 25 1 21 Q14 17 12 10 M-7 21 Q-25 15 -21 0 Q-16 13 -10 10" fill="#9756db" opacity=".75"/><circle r="14" fill="#29103f" stroke="#ae6de8" stroke-width="1.3"/><path d="M-11 2 Q-9 -13 3 -11 Q12 -10 11 1 Q4 -5 -1 3 Q-7 10 -11 2Z" fill="#59318b"/><path d="M-11 -2 C-12 -9 -5 -13 2 -11 Q-5 -10 -7 -5 Q-8 -2 -11 -2Z" fill="#c49aff" opacity=".85"/><ellipse cx="-6" cy="-7" rx="3.4" ry="1.6" transform="rotate(-35 -6 -7)" fill="#f4deff" opacity=".95"/><path d="M6 -11 Q15 -5 11 6 Q8 12 2 12" fill="none" stroke="#ce95ff" stroke-width="1.1" stroke-linecap="round" opacity=".8"/><path d="M-4 -9 L4 8 M5 -7 L-5 6 M-7 -3 L-2 -3 M3 3 L8 3" fill="none" stroke="#ecc6ff" stroke-width="1.7" stroke-linecap="round"/><g fill="none" stroke="#c596f0" stroke-width="1.1"><path d="M0 -22 L3 -19 L0 -16 L-3 -19Z M19 -3 L22 0 L19 3 L16 0Z M0 16 L3 19 L0 22 L-3 19Z M-22 0 L-19 -3 L-16 0 L-19 3Z"/><path d="M-15 -14 L-12 -17 M12 -17 L16 -13 M16 13 L12 17 M-12 17 L-16 13"/></g>','fx-hex-curse'),
  hex:SVG(40,40,'<circle r="17" fill="#9a5cff" opacity=".35"/><circle r="9" fill="#6e34d0" stroke="#2b1d16" stroke-width="3"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#e6d2ff" stroke-width="2.5" stroke-linecap="round"/>'),
- judgmentSpark:SVG(40,40,'<circle r="18" fill="#ffd46b" opacity=".1"/><circle r="12" fill="#ffe394" opacity=".18"/><path d="M-12 -12 Q-3 -4 0 -5 Q4 -4 12 -12 Q4 -3 5 0 Q4 4 12 12 Q3 4 0 5 Q-4 4 -12 12 Q-4 3 -5 0 Q-4 -4 -12 -12Z" fill="#ffdf8c" opacity=".65"/><path d="M0 -19 C2 -5 4 -3 19 0 C4 2 2 5 0 19 C-2 5 -4 2 -19 0 C-4 -3 -2 -5 0 -19Z" fill="#fff1bf"/><path d="M0 -12 Q1.5 -1.5 12 0 Q1.5 1.5 0 12 Q-1.5 1.5 -12 0 Q-1.5 -1.5 0 -12Z" fill="#fffef2"/><circle r="3" fill="#fff"/>','fx-judgment-spark'),
+ judgmentSpark:SVG(40,40,'<circle r="19" fill="#ffd56a" opacity=".12"/><circle r="15.5" fill="none" stroke="#ffe3a0" stroke-width="1.2"/><path d="M-17 -5 A18 18 0 0 1 9 -15 M17 5 A18 18 0 0 1 -9 15" fill="none" stroke="#fff7d7" stroke-width="1.5" stroke-linecap="round"/><ellipse rx="19" ry="6" transform="rotate(-30)" fill="none" stroke="#ffd26c" stroke-width=".8" opacity=".85"/><path d="M-11 -11 L0 -5 L11 -11 L5 0 L11 11 L0 5 L-11 11 L-5 0Z" fill="#ffe19a" opacity=".8"/><path d="M0 -19 C2 -5 4 -3 19 0 C4 2 2 5 0 19 C-2 5 -4 2 -19 0 C-4 -3 -2 -5 0 -19Z" fill="#fff3be"/><path d="M0 -12 Q1.5 -1.5 12 0 Q1.5 1.5 0 12 Q-1.5 1.5 -12 0 Q-1.5 -1.5 0 -12Z" fill="#fffef4"/><circle r="3.5" fill="#fff"/>','fx-judgment-spark'),
  holy:SVG(40,40,'<circle r="17" fill="#ffe08a" opacity=".4"/><circle r="9" fill="#ffe08a" stroke="#2b1d16" stroke-width="3"/><path d="M0 -5 v10 M-5 0 h10" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>'),
  // Points right so flight rotation keeps the flame tail behind the molten core.
+ astralImpact:SVG(64,64,'<path d="M0 -30 L7 -10 L23 -22 L13 -5 L31 0 L12 7 L22 23 L5 13 L0 31 L-7 12 L-25 22 L-13 4 L-31 0 L-12 -7 L-22 -25 L-5 -13Z" fill="#3e185c" stroke="#9b60d0" stroke-width="1.3"/><path d="M0 -22 L4 -6 L17 -15 L8 -2 L22 1 L7 5 L13 18 L2 10 L-2 23 L-5 8 L-19 14 L-9 1 L-22 -3 L-7 -5 L-13 -18 L-3 -9Z" fill="#7032a4"/><path d="M0 -15 Q3 -3 15 0 Q3 3 0 15 Q-3 3 -15 0 Q-3 -3 0 -15Z" fill="#bd8aee"/><path d="M0 -8 L2 -2 L8 0 L2 2 L0 8 L-2 2 L-8 0 L-2 -2Z" fill="#f0d9ff"/>','fx-astral-impact'),
+ cannonMuzzleFlash:SVG(80,48,'<path d="M-35 -7 L-8 -12 L7 -23 L5 -10 L34 -15 L20 -2 L39 5 L13 9 L20 22 L-3 13 L-17 16 L-13 7 L-35 6Z" fill="#f37428"/><path d="M-35 -4 L-6 -7 L8 -13 L5 -4 L24 0 L7 5 L9 13 L-9 6 L-35 3Z" fill="#ffdc71"/><path d="M-35 -2 L-8 -3 L13 0 L-8 3 L-35 2Z" fill="#fffbe2"/>','fx-cannon-muzzle'),
+ cannonSmoke:SVG(60,52,'<path d="M-23 13 C-34 4 -25 -10 -15 -9 C-17 -23 1 -27 9 -17 C21 -25 34 -10 25 0 C37 11 22 25 10 18 C-1 29 -15 23 -15 16Z" fill="#66616a"/><path d="M-24 1 Q-24 -12 -11 -8 Q-11 -23 3 -18 Q13 -15 10 -6 Q26 -16 26 0 Q14 -6 10 5 Q0 -5 -8 3 Q-17 -3 -24 1Z" fill="#a59b98"/><path d="M-16 -7 Q-9 -15 -2 -13 M13 -9 Q21 -11 23 -4" fill="none" stroke="#d3bab0" stroke-width="2" stroke-linecap="round"/>','fx-cannon-smoke'),
+ cannonBlast:SVG(90,90,'<path d="M-35 12 Q-49 -2 -32 -13 Q-38 -30 -19 -32 Q-8 -48 6 -34 Q24 -44 29 -24 Q48 -22 36 -3 Q48 15 28 23 Q23 43 5 34 Q-13 44 -23 27 Q-42 31 -35 12Z" fill="#c44223"/><path d="M-29 10 Q-39 -2 -24 -10 Q-29 -25 -13 -25 Q-4 -37 7 -25 Q22 -31 22 -15 Q37 -16 27 0 Q38 14 21 17 Q18 33 4 25 Q-9 34 -17 20 Q-32 25 -29 10Z" fill="#ff8b2b"/><path d="M-21 6 L-29 -7 L-12 -6 L-15 -23 L0 -13 L13 -27 L13 -10 L30 -9 L18 3 L29 17 L10 13 L5 30 L-4 15 L-23 23 L-15 9Z" fill="#ffd96b"/><path d="M-12 -3 L-13 -14 L0 -8 L10 -17 L8 -4 L21 2 L9 7 L6 20 L-2 9 L-16 14 L-10 3 L-21 -4Z" fill="#fff7cf"/>','fx-cannon-blast'),
+ meteorWake:SVG(32,52,'<path d="M0 24 C-18 13 -10 0 -13 -12 Q-5 -7 -6 -24 Q8 -16 6 -5 Q17 -10 12 6 Q20 17 0 24Z" fill="#eb491e" opacity=".7"/><path d="M0 22 Q-10 12 -5 3 Q0 -4 -1 -15 Q10 -4 5 7 Q14 15 0 22Z" fill="#ffb632"/><path d="M0 21 Q-6 14 1 3 Q8 15 0 21Z" fill="#fff2a5"/>'),
+ meteorGround:SVG(100,36,'<ellipse rx="47" ry="15" fill="#492829" opacity=".65"/><ellipse rx="42" ry="12" fill="#bd421e" opacity=".65"/><path d="M-43 0 Q-25 -16 0 -12 Q26 -16 43 0 Q27 15 0 12 Q-26 15 -43 0Z" fill="none" stroke="#ffad39" stroke-width="2"/><path d="M-34 1 L-19 -3 L-9 2 L3 -5 L17 0 L33 -2 M-9 2 L-16 9 M17 0 L23 8 M3 -5 L-2 -10" fill="none" stroke="#ffd879" stroke-width="1.6" stroke-linecap="round"/>'),
+ meteorFlare:SVG(64,64,'<path d="M0 -30 L5 -10 L20 -20 L11 -4 L30 0 L10 5 L20 22 L4 12 L0 30 L-5 11 L-23 20 L-11 4 L-30 0 L-10 -5 L-20 -22 L-4 -11Z" fill="#ffb340"/><circle r="12" fill="#fff2bd"/><circle r="6" fill="#fffde8"/>'),
  meteor:SVG(60,60,`
-  <path d="M19 -15 C30 -7 29 10 17 19 C5 27 -12 19 -24 15 C-33 13 -38 17 -44 19 C-40 12 -34 9 -40 5 C-45 2 -49 4 -53 5 C-49 -2 -42 -5 -44 -9 C-46 -13 -51 -15 -54 -18 C-43 -19 -34 -12 -29 -14 C-24 -16 -29 -23 -32 -27 C-20 -25 -17 -18 -9 -20 C1 -23 12 -22 19 -15Z" fill="#b92e18" stroke="#49312a" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M19 -13 C28 -5 25 9 16 16 C5 23 -5 16 -19 11 C-27 8 -33 11 -37 12 C-32 7 -29 2 -37 -2 L-46 -5 C-35 -7 -29 -2 -24 -7 C-21 -11 -23 -17 -26 -21 C-15 -16 -10 -13 -4 -17 C4 -21 14 -19 19 -13Z" fill="#f15b1b"/>
-  <path d="M19 -10 C25 -3 22 9 14 14 C5 19 -5 13 -11 7 C-18 1 -27 4 -30 5 C-25 -1 -21 -2 -23 -9 C-15 -6 -10 -9 -12 -14 C-5 -11 -1 -16 6 -15 C12 -15 16 -14 19 -10Z" fill="#ff9c24"/>
-  <path d="M17 -9 C23 -3 20 6 14 11 C7 16 -1 12 -6 7 C-10 4 -15 5 -18 7 C-16 1 -11 -2 -14 -7 C-8 -5 -7 -9 -8 -12 C-2 -9 2 -12 6 -12 C11 -13 15 -12 17 -9Z" fill="#ffdb4b"/>
-  <path d="M15 -7 C20 -2 16 5 11 8 C7 11 2 9 -1 5 C-3 2 -7 2 -10 3 C-7 -1 -5 -4 -6 -7 C-1 -5 2 -8 5 -9 C9 -10 13 -10 15 -7Z" fill="#fff19a"/>
-  <path d="M13 -6 Q18 -2 12 3 Q8 7 5 3 Q3 0 0 0 Q5 -2 5 -5 Q9 -8 13 -6Z" fill="#fffbe2"/>
-  <path d="M-4 13 Q7 22 17 12 Q25 4 23 -4" fill="none" stroke="#8f271c" stroke-width="2" stroke-linecap="round"/>
-  <path d="M18 -13 Q10 -20 2 -17 M-13 -16 Q-19 -16 -22 -20" fill="none" stroke="#ffc34b" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M-24 -4 L-21 -3 M-33 -10 L-30 -9 M-18 8 L-16 9 M-4 5 L-2 6 M6 -6 L8 -5" stroke="#e66b1c" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M-45 -24 Q-51 -28 -58 -26 Q-55 -20 -45 -24Z M-53 13 Q-59 11 -63 15 Q-57 19 -53 13Z" fill="#ff9b28"/>
-  <path d="M-48 -24 L-53 -25 M-56 14 L-59 15" stroke="#ffe388" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M20 -16 C31 -7 28 12 17 20 C5 26 -9 20 -22 16 Q-35 10 -44 19 Q-39 9 -34 7 Q-46 0 -54 5 Q-48 -4 -39 -5 Q-45 -14 -54 -18 Q-39 -20 -27 -11 Q-26 -20 -32 -27 Q-17 -24 -10 -18 Q5 -26 20 -16Z" fill="#a62e20" stroke="#532b28" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M20 -13 Q33 3 16 18 Q5 25 -13 13 Q-27 4 -37 12 Q-32 4 -28 2 Q-38 -7 -46 -5 Q-35 -11 -24 -2 Q-20 -12 -26 -21 Q-12 -16 -9 -10 Q7 -23 20 -13Z" fill="#f15b20"/>
+  <path d="M20 -11 Q29 1 18 14 Q9 23 -4 15 Q-14 7 -24 7 Q-17 2 -17 -3 Q-28 -10 -34 -13 Q-18 -13 -10 -5 Q-7 -15 4 -18 Q2 -11 7 -12 Q15 -17 20 -11Z" fill="#ffb333"/>
+  <path d="M22 -6 Q29 4 18 15 Q10 21 0 14 Q-7 9 -14 10 Q-8 5 -8 0 Q-15 -5 -19 -10 Q-7 -8 -2 -3 Q1 -10 8 -14 Q6 -7 12 -9 Q19 -13 22 -6Z" fill="#ffe77a"/>
+  <!-- Faceted molten stone: a bright leading rim around a dark, fractured core. -->
+  <path d="M4 -11 L14 -13 L22 -7 L25 3 L20 12 L10 17 L0 13 L-6 5 L-4 -4Z" fill="#72312c" stroke="#fff0a1" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M4 -11 L14 -13 L12 -4 L3 0 L-4 -4Z" fill="#d56b39"/>
+  <path d="M14 -13 L22 -7 L25 3 L17 1 L12 -4Z" fill="#a4492e"/>
+  <path d="M-4 -4 L3 0 L6 7 L0 13 L-6 5Z" fill="#9b4632"/>
+  <path d="M3 0 L12 -4 L17 1 L14 9 L6 7Z" fill="#512c2c"/>
+  <path d="M17 1 L25 3 L20 12 L14 9Z" fill="#b75b32"/>
+  <path d="M0 13 L6 7 L14 9 L20 12 L10 17Z" fill="#462831"/>
+  <path d="M5 -10 L3 0 L6 7 L1 12 M3 0 L12 -4 L14 -11 M12 -4 L17 1 L23 3 M17 1 L14 9 L10 15 M14 9 L6 7" fill="none" stroke="#f77a27" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M5 -10 L3 0 L6 7 M3 0 L12 -4 M17 1 L14 9 L10 15 M14 9 L6 7" fill="none" stroke="#ffd774" stroke-width=".8" stroke-linecap="round"/>
+  <path d="M17 -12 Q28 -5 25 5 Q23 15 13 18" fill="none" stroke="#fff9cc" stroke-width="2" stroke-linecap="round"/>
+  <!-- Curving flame ribbons and detached embers share the original silhouette bounds. -->
+  <path d="M-35 -16 Q-22 -13 -15 -4 Q-9 3 -6 1 M-31 10 Q-18 6 -10 13 Q-3 19 4 20" fill="none" stroke="#ffc04a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M-18 -18 Q-12 -15 -10 -11 M-28 -1 Q-22 0 -19 3" fill="none" stroke="#ffe997" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M-45 -24 Q-51 -28 -58 -26 Q-54 -19 -45 -24Z M-53 13 Q-59 11 -63 15 Q-57 19 -53 13Z" fill="#ff9b28"/>
+  <path d="M-49 -24 L-54 -25 M-56 14 L-59 15" stroke="#fff0a3" stroke-width="1.3" stroke-linecap="round"/>
   <path d="M-23 23 L-21 20 L-19 23 L-21 26Z M-39 -30 L-37 -32 L-35 -30 L-37 -28Z" fill="#ffd45a"/>
  `),
  flask:SVG(30,36,'<path d="M0 -10 C10 -10 12 2 8 8 C4 14 -4 14 -8 8 C-12 2 -10 -10 0 -10Z" fill="#7fd36a" stroke="#2b1d16" stroke-width="2.5"/><rect x="-3" y="-17" width="6" height="7" fill="#c99a62" stroke="#2b1d16" stroke-width="2"/>'),
@@ -7025,11 +7093,11 @@ class Stage{
   this.skillDim.getAnimations().forEach(a=>a.cancel());
   anim(this.skillDim,[{opacity:SKILL_SHADE},{opacity:1,offset:.25},{opacity:1,offset:.8},{opacity:SKILL_SHADE}],{duration,easing:'linear'});
  }
- async skillEnd(){
-  const nodes=[this.skillDim,this.skillBadge].filter(Boolean);this.skillDim=this.skillBadge=null;
+ async skillEnd(duration=260){
+  const nodes=[this.skillDim,this.skillBadge,this.swapCue].filter(Boolean);this.skillDim=this.skillBadge=this.swapCue=null;
   await Promise.all(nodes.map(async el=>{
    const opacity=getComputedStyle(el).opacity;el.getAnimations().forEach(a=>a.cancel());
-   await anim(el,[{opacity},{opacity:0}],{duration:260,easing:'ease-out'});el.remove();
+   await anim(el,[{opacity},{opacity:0}],{duration,easing:'ease-out'});el.remove();
   }));
   this.layer.classList.remove('skill-focus');
   this.clearParticipants();
@@ -7052,22 +7120,58 @@ class Stage{
   this.pop('<div class="fx-ring chi"></div>',pt,[{transform:'translate(-50%,-50%) scale(1.9)',opacity:0},{transform:'translate(-50%,-50%) scale(1.15)',opacity:1,offset:.35},{transform:'translate(-50%,-50%) scale(.8)',opacity:0}],900,'',pt.size/60*k);
   for(let i=0;i<6;i++)this.pop(ART.mote,{x:pt.x+(i-2.5)*pt.size*.34,y:pt.y+pt.size*.7},[{transform:'translate(-50%,-50%) scale(.3)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.25},{transform:`translate(-50%,-50%) translateY(${-pt.size*(1.4+(i%3)*.3)}px) scale(.4)`,opacity:0}],1000+i*70,'',pt.size/60);
  }
- dome(uid,color='#9fd0ff',size=1,{outline=3,lower=0}={}){const pt=this.at(uid,.05);pt.y+=pt.size*lower;return this.pop(`<div class="fx-dome" style="--c:${color};--dome-outline:${outline}px"></div>`,pt,[{transform:'translate(-50%,-100%) scale(.3)',opacity:0},{transform:'translate(-50%,-100%) scale(1.1)',opacity:1,offset:.25},{transform:'translate(-50%,-100%) scale(1)',opacity:1,offset:.7},{transform:'translate(-50%,-100%) scale(1)',opacity:0}],1100,'',pt.size/60*size);}
+ dome(uid,color='#9fd0ff',size=1,{outline=3,lower=0,polished=false}={}){const pt=this.at(uid,.05);pt.y+=pt.size*lower;
+  const id=`ward-${uid}-${this.domeSerial=(this.domeSerial||0)+1}`;
+  const art=polished?SVG(60,56,`<defs><radialGradient id="${id}" cx="32%" cy="24%" r="85%"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".4" stop-color="${color}" stop-opacity=".09"/><stop offset=".85" stop-color="${color}" stop-opacity=".18"/><stop offset="1" stop-color="${color}" stop-opacity=".32"/></radialGradient></defs><path d="M-28 22 C-29 -7 -17 -26 0 -26 C17 -26 29 -7 28 22 Q0 29 -28 22Z" fill="url(#${id})" stroke="${color}" stroke-width=".65" stroke-opacity=".8"/><path d="M-25 7 C-23 -10 -14 -22 -2 -23" fill="none" stroke="#f5fcff" stroke-width=".85" stroke-opacity=".85" stroke-linecap="round"/><path d="M9 -22 C20 -16 26 -2 26 12" fill="none" stroke="${color}" stroke-width=".45" stroke-opacity=".5"/><path d="M-28 22 Q0 16 28 22 Q0 29 -28 22Z" fill="${color}" fill-opacity=".08" stroke="${color}" stroke-width=".5" stroke-opacity=".5"/>`,'fx-valkyrie-dome'):`<div class="fx-dome" style="--c:${color};--dome-outline:${outline}px"></div>`;
+  return this.pop(art,pt,[{transform:'translate(-50%,-100%) scale(.3)',opacity:0},{transform:'translate(-50%,-100%) scale(1.1)',opacity:1,offset:.25},{transform:'translate(-50%,-100%) scale(1)',opacity:1,offset:.7},{transform:'translate(-50%,-100%) scale(1)',opacity:0}],1100,'',pt.size/60*size);}
 }
 
 /* --- per-hero skill effects; each resolves when its main blow lands --- */
 const SKILLS={
- async valkyrie(st,a,ev){const dome={outline:.7,lower:.12};st.dome(a,'#ffe08a',2.375,dome);await wait(150);await Promise.all(ev.targets.map((uid,i)=>wait(i*70).then(()=>st.dome(uid,'#9fd0ff',2.375,dome))));},
+ async valkyrie(st,a,ev){st.valkyrieBarrier=a;const dome={outline:.7,lower:.12,polished:true};st.dome(a,'#ffe08a',2.375,dome);await wait(150);await Promise.all(ev.targets.map((uid,i)=>wait(i*70).then(()=>st.dome(uid,'#9fd0ff',2.375,dome))));},
  // Oracle is in BOLT for her basic bolt, so the caller starts this 320 ms early: wait it out.
  // The song begins: notes rise around the Bard and a soft green dome blooms on every ally.
  // Blood-Link: crimson skulls mark the two endpoints; the link event draws the chain.
- async shaman(st,a,ev){
-  await wait(320);
-  const team=st.root.querySelector(`.slot[data-uid="${a}"]`)?.dataset.team;
+ async shaman(st,a,ev,clip){
+  const seal=SVG(88,88,'<circle r="35" fill="none" stroke="#e7647d" stroke-width="1" opacity=".7"/><path d="M-39 0 A39 39 0 0 1 20 -34 M39 0 A39 39 0 0 1 -20 34" fill="none" stroke="#ffb4ae" stroke-width="1.8" stroke-linecap="round"/><path d="M0 -42 L3 -36 L0 -30 L-3 -36Z M30 0 L36 -3 L42 0 L36 3Z M0 30 L3 36 L0 42 L-3 36Z M-42 0 L-36 -3 L-30 0 L-36 3Z" fill="#f0758f"/>','fx-blood-seal');
+  await wait(220);
+  const chargeArt=seal.replace('</svg>','<g fill="#ffe0dc"><path d="M-29 -32 L-27 -27 L-22 -25 L-27 -23 L-29 -18 L-31 -23 L-36 -25 L-31 -27Z M28 17 L30 22 L35 24 L30 26 L28 31 L26 26 L21 24 L26 22Z"/><circle cx="29" cy="-24" r="2.3"/><circle cx="-28" cy="23" r="2"/><circle cx="-13" cy="-43" r="1.6"/><circle cx="13" cy="43" r="1.6"/></g></svg>');
+  const charge=st.put(chargeArt,st.heldSkull(a),'fx-shaman-charge',st.at(a).size/80);
+  let frame;const follow=()=>{const pt=st.heldSkull(a);charge.style.left=pt.x+'px';charge.style.top=pt.y+'px';frame=requestAnimationFrame(follow);};follow();
+  try{await anim(charge,[{transform:'translate(-50%,-50%) scale(.45) rotate(-70deg)',opacity:0},{transform:'translate(-50%,-50%) scale(.8) rotate(-25deg)',opacity:1,offset:.25},{transform:'translate(-50%,-50%) scale(.95) rotate(0deg)',opacity:1,offset:.65},{transform:'translate(-50%,-50%) scale(1) rotate(35deg)',opacity:1}],{duration:700,easing:'linear'});if(clip.release)await clip.release;}finally{cancelAnimationFrame(frame);charge.remove();}
+  const flash=ART.impactStar.replace('#fff8e8','#ffbcc8').replace('#e6cfa4','#d74970');
+  st.pop(flash,st.heldSkull(a),[{transform:'translate(-50%,-50%) scale(.3)',opacity:0},{transform:'translate(-50%,-50%) scale(1.5)',opacity:1,offset:.2},{transform:'translate(-50%,-50%) scale(.5) rotate(45deg)',opacity:0}],300,'',st.at(a).size/65,'linear');
+  await wait(110);
+  const team=st.slot(a)?.dataset.team;
   const foes=[...st.root.querySelectorAll(`.slot[data-team="${1-team}"]:not(.dead)`)].sort((p,q)=>p.dataset.slot-q.dataset.slot).map(el=>el.dataset.uid);
   const ends=[...new Set([foes[0],foes[foes.length-1]])].filter(Boolean);
+  // The tether forms with the skull marks, making the two linked targets explicit.
+  if(ends.length===2){
+   const p=st.at(ends[0],.32),q=st.at(ends[1],.32),len=Math.hypot(q.x-p.x,q.y-p.y),chain=st.put('<div class="fx-chain fx-blood-tether"></div>',p);
+   Object.assign(chain.style,{width:len+'px',height:'4px',transform:`translate(0,-50%) rotate(${Math.atan2(q.y-p.y,q.x-p.x)}rad)`});
+   anim(chain,[{opacity:0,clipPath:'inset(0 50% 0 50%)'},{opacity:.9,clipPath:'inset(0 0 0 0)',offset:.25},{opacity:.65,offset:.7},{opacity:0}],{duration:1250,easing:'linear'}).then(()=>chain.remove());
+   const pulse=ART.impactStar.replace('#fff8e8','#ffb5c6').replace('#e6cfa4','#e33760');
+   for(let k=0;k<4;k++){
+    const from=k%2?q:p,to=k%2?p:q,dx=to.x-from.x,dy=to.y-from.y,start=k*.1,finish=start+.55;
+    st.pop(pulse,from,[
+     {transform:'translate(-50%,-50%) scale(.25)',opacity:0},
+     {transform:'translate(-50%,-50%) scale(.25)',opacity:0,offset:start},
+     {transform:`translate(-50%,-50%) translate(${dx*.12}px,${dy*.12}px) scale(.65) rotate(20deg)`,opacity:1,offset:start+.08},
+     {transform:`translate(-50%,-50%) translate(${dx*.5}px,${dy*.5}px) scale(.9) rotate(90deg)`,opacity:1,offset:start+.27},
+     {transform:`translate(-50%,-50%) translate(${dx}px,${dy}px) scale(.4) rotate(180deg)`,opacity:0,offset:finish},
+     {transform:`translate(-50%,-50%) translate(${dx}px,${dy}px) scale(.1)`,opacity:0}
+    ],1250,'fx-blood-link-pulse',p.size/65,'linear');
+   }
+   for(const link of st.events.filter(e=>e.t==='link'&&e.cast&&ends.includes(e.uid)&&ends.includes(e.to)))(st.playedEvents??=new Set()).add(link);
+  }
   await Promise.all(ends.map(uid=>{
    const center=st.at(uid,.32);
+   st.pop('<div class="fx-ring fx-blood-link-ring"></div>',center,[{transform:'translate(-50%,-50%) scale(.5)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:.8,offset:.2},{transform:'translate(-50%,-50%) scale(1.3)',opacity:.35,offset:.48},{transform:'translate(-50%,-50%) scale(1)',opacity:.75,offset:.65},{transform:'translate(-50%,-50%) scale(1.5)',opacity:0}],1200,'',center.size/70,'linear');
+   for(let k=0;k<4;k++){
+    const angle=k*Math.PI/2,x=Math.cos(angle)*center.size*.48,y=Math.sin(angle)*center.size*.48;
+    st.pop(ART.impactStar.replace('#fff8e8','#ffc5d1').replace('#e6cfa4','#d7466c'),{x:center.x+x,y:center.y+y},[{transform:'translate(-50%,-50%) scale(.1)',opacity:0},{transform:'translate(-50%,-50%) scale(.65)',opacity:.9,offset:.3},{transform:`translate(-50%,-50%) translate(${x*.3}px,${y*.3-center.size*.15}px) scale(.1) rotate(60deg)`,opacity:0}],1000+k*50,'',center.size/85,'linear');
+   }
+
    return st.pop(ART.bloodSkull,center,[
     {transform:'translate(-50%,-35%) scale(.3)',opacity:0},
     {transform:'translate(-50%,-50%) scale(1.1)',opacity:.85,offset:.18},
@@ -7112,9 +7216,40 @@ const SKILLS={
  // and a rewinding clock ring spins over that enemy and the ally it trades turns with.
  async timekeeper(st,a,ev){
   const sw=st.events.find(e=>e.t==='timeswap'),target=sw?.a||st.events.find(e=>e.t==='status'&&e.id==='timelocked')?.uid;if(!target)return;
-  const to=st.at(target,.5);await st.fly(ART.sandMote,st.hourglassSand(a),to,260,{scale:to.size/40});st.flash(target);
-  const spin=(uid,dir)=>{const pt=st.at(uid,.5);st.pop(ART.timeRing,pt,[{transform:'translate(-50%,-50%) scale(.5) rotate(0deg)',opacity:0},{transform:`translate(-50%,-50%) scale(1) rotate(${dir*-75}deg)`,opacity:1,offset:.25},{transform:`translate(-50%,-50%) scale(1.04) rotate(${dir*-135}deg)`,opacity:1,offset:.45},{transform:`translate(-50%,-50%) scale(1.15) rotate(${dir*-300}deg)`,opacity:0}],1200,'',pt.size/80*1.1,'linear');};
-  spin(target,1);if(sw?.b)spin(sw.b,-1);await wait(420);
+  // Light gathers in the turning hourglass; the spell manifests directly on its two targets.
+  const origin=st.hourglassSand(a),glint=st.put(ART.impactStar,origin,'fx-hourglass-glint',origin.size/45);
+  let frame;const follow=()=>{const pt=st.hourglassSand(a);glint.style.left=pt.x+'px';glint.style.top=pt.y+'px';frame=requestAnimationFrame(follow);};follow();
+  try{await anim(glint,[{transform:'translate(-50%,-50%) scale(.2) rotate(-30deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1.2) rotate(20deg)',opacity:1,offset:.6},{transform:'translate(-50%,-50%) scale(.5) rotate(50deg)',opacity:0}],{duration:320,easing:'linear'});}finally{cancelAnimationFrame(frame);glint.remove();}
+  const targets=[{uid:target,dir:-1,color:'#9dcfee',light:'#e2f5ff',label:'Turn delayed'}];
+  if(sw?.b)targets.push({uid:sw.b,dir:1,color:'#e6b35f',light:'#fff0b5',label:'Turn advanced'});
+  const marks=targets.map(async({uid,dir,color,light})=>{
+   const feet=st.at(uid,.02);
+   const dial=SVG(92,34,`<ellipse rx="41" ry="12" fill="${color}" fill-opacity=".2" stroke="${color}" stroke-width="1.2"/><ellipse rx="33" ry="9" fill="none" stroke="${light}" stroke-width=".7" opacity=".7"/><g stroke="${light}" stroke-width="1.5" stroke-linecap="round"><path d="M0 -15 V-10 M0 10 V15 M-44 0 H-36 M36 0 H44 M-31 -10 L-26 -7 M31 -10 L26 -7 M-31 10 L-26 7 M31 10 L26 7"/></g>`,'fx-time-ground');
+   st.pop(dial,feet,[{transform:'translate(-50%,-50%) scale(.3)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.2},{transform:'translate(-50%,-50%) scale(1.08)',opacity:.9,offset:.65},{transform:'translate(-50%,-50%) scale(1.2)',opacity:0}],1400,'',feet.size/75,'linear');
+   for(let k=0;k<4;k++){
+    const x=(k-1.5)*feet.size*.32;
+    st.pop(ART.impactStar.replace('#fff8e8',light).replace('#e6cfa4',color),{x:feet.x+x,y:feet.y},[{transform:'translate(-50%,-50%) scale(.1)',opacity:0},{transform:'translate(-50%,-50%) scale(.4)',opacity:.85,offset:.3},{transform:`translate(-50%,-50%) translateY(${-feet.size*.35}px) scale(.1) rotate(45deg)`,opacity:0}],1000+k*70,'',feet.size/85,'linear');
+   }
+   const pt=st.at(uid,.4),ticks=Array.from({length:12},(_,i)=>`<path d="M0 -28 V-24" transform="rotate(${i*30})"/>`).join('');
+   const clock=SVG(80,80,`<circle r="34" fill="#42364d" fill-opacity="1" stroke="#4e4050" stroke-width="3"/><circle r="32" fill="none" stroke="${color}" stroke-width="2.5"/><path d="M-29 -10 A31 31 0 0 1 13 -28" fill="none" stroke="${light}" stroke-width="1.5" stroke-linecap="round"/><g stroke="${light}" stroke-width="1.5">${ticks}</g><g class="time-hands"><path d="M0 8 V-21 M0 0 L14 -7" fill="none" stroke="${light}" stroke-width="2.5" stroke-linecap="round"/><circle r="3" fill="${color}" stroke="#fff8df" stroke-width="1"/></g><g fill="${color}" stroke="#4e4050" stroke-width="1"><path d="M-38 -4 Q-37 -24 -20 -34 L-24 -38 L-12 -36 L-16 -24 L-18 -29 Q-31 -21 -32 -5Z"/><path d="M38 4 Q37 24 20 34 L24 38 L12 36 L16 24 L18 29 Q31 21 32 5Z"/></g>`,'fx-turn-clock');
+   const face=st.put(clock,pt,'',pt.size/75),hands=face.querySelector('.time-hands');
+   const ticking=hands.animate([{transform:'rotate(0deg)'},{transform:`rotate(${dir*180}deg)`,offset:.45},{transform:`rotate(${dir*360}deg)`}],{duration:1250,fill:'forwards',easing:'ease-in-out'});
+   for(let i=0;i<7;i++){
+    const angle=i*Math.PI*2/7,r=pt.size*.57,frames=[];
+    for(let j=0;j<=8;j++){
+     const t=j/8,q=angle+dir*t*Math.PI*1.6;
+     frames.push({transform:`translate(-50%,-50%) translate(${Math.cos(q)*r}px,${Math.sin(q)*r-t*pt.size*.2}px) rotate(${t*120}deg) scale(${.2+Math.sin(t*Math.PI)*.45})`,opacity:j===0||j===8?0:.9});
+    }
+    st.pop(ART.impactStar.replace('#fff8e8',light).replace('#e6cfa4',color),pt,frames,1300,'',pt.size/80,'linear');
+   }
+   try{await anim(face,[{transform:'translate(-50%,-50%) scale(.35)',opacity:0},{transform:'translate(-50%,-50%) scale(1.08)',opacity:1,offset:.18},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.4},{transform:'translate(-50%,-53%) scale(1.07)',opacity:1,offset:.65},{transform:'translate(-50%,-65%) scale(1.15)',opacity:0}],{duration:1400,easing:'linear'});}finally{ticking.cancel();face.remove();}
+  });
+  await wait(650);
+  if(sw){
+   st.float(sw.a,'Turn delayed','del',{dur:1000});st.float(sw.b,'Turn advanced','adv',{dur:1000});
+   (st.playedEvents??=new Set()).add(sw);
+  }
+  await Promise.all(marks);
  },
  // Astral Shot: starting Aiming only braces (the clip); firing looses a streaking astral bolt that
  // bursts in violet light on the target.
@@ -7123,10 +7258,25 @@ const SKILLS={
   const arrow=st.sprite(a)?.querySelector('[data-bone="arrow"] image'),oldFilter=arrow?.style.filter;
   if(arrow)arrow.style.filter='drop-shadow(0 0 2px #fff3ff) drop-shadow(0 0 5px #b272ff)';
   try{
-   await (clip.release||wait(clip.impact)); // Capture the drawn arrow before its release frame hides it.
+   await wait(200);
+   const tip=st.bonePoint(a,'arrow',.5,.9,.4),spark=st.put(ART.impactStar.replace('#fff8e8','#d5acff').replace('#e6cfa4','#8644bd'),tip,'fx-astral-charge',tip.size/100*1.4*1.5*1.4);
+   let frame;const follow=()=>{const pt=st.bonePoint(a,'arrow',.5,.9,.4);spark.style.left=pt.x+'px';spark.style.top=pt.y+'px';frame=requestAnimationFrame(follow);};follow();
+   try{await anim(spark,[
+    {transform:'translate(-50%,-50%) rotate(-20deg) scale(.35)',opacity:0},
+    {transform:'translate(-50%,-50%) rotate(-10deg) scale(1)',opacity:1,offset:.25},
+    {transform:'translate(-50%,-50%) rotate(15deg) scale(1)',opacity:1,offset:.85},
+    {transform:'translate(-50%,-50%) rotate(20deg) scale(.65)',opacity:0}
+   ],{duration:710,easing:'linear'});}finally{cancelAnimationFrame(frame);spark.remove();}
+   await (clip.release||wait(Math.max(0,clip.impact-910))); // Read the arrow before the release hides it.
    const from=st.bonePoint(a,'arrow',.5,.9,.4),to=st.at(ev.target,.5);
    if(arrow)arrow.style.filter=oldFilter;
    await st.fly(ART.ballistaBolt,from,to,213,{scale:to.size/56});st.shake(6);
+   st.pop(ART.astralImpact,to,[
+    {transform:'translate(-50%,-50%) scale(.8) rotate(-12deg)',opacity:0},
+    {transform:'translate(-50%,-50%) scale(1.05) rotate(0deg)',opacity:1,offset:.25},
+    {transform:'translate(-50%,-50%) scale(1.08) rotate(8deg)',opacity:.9,offset:.55},
+    {transform:'translate(-50%,-50%) scale(1.2) rotate(18deg)',opacity:0}
+   ],550,'',to.size/65*1.5,'linear');
    st.pop('<div class="fx-ring hex"></div>',to,[{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:'translate(-50%,-50%) scale(2.2)',opacity:0}],520,'',to.size/60);
    const start=st.events.indexOf(ev)+1;
    let end=st.events.findIndex((e,i)=>i>=start&&['action','cycleEnd','turn'].includes(e.t));if(end<0)end=st.events.length;
@@ -7150,6 +7300,19 @@ const SKILLS={
  async trickster(st,a,ev,clip,game){
   await wait(Math.max(0,clip.impact-140));
   const pair=game.unit(ev.target)?.flags.displaced?.pair;
+  if(pair){
+   const A=st.at(ev.target,.9),B=st.at(pair,.9),center={x:(A.x+B.x)/2,y:Math.min(A.y,B.y)-A.size*.12};
+   const arrows=SVG(72,52,`<g stroke="#403047" stroke-width="1.5" stroke-linejoin="round">
+    <g transform="translate(-11 1) rotate(-14)"><rect x="-10" y="-15" width="20" height="29" rx="3" fill="#b76b94"/><rect x="-8" y="-13" width="16" height="24" rx="1.5" fill="#fff0d2"/><path d="M0 -7 L4 0 L0 7 L-4 0Z" fill="#bd416c" stroke-width=".8"/><path d="M-6 -10 H-3 M3 8 H6" stroke="#c37883" stroke-width="1"/></g>
+    <g transform="translate(11 -1) rotate(14)"><rect x="-10" y="-15" width="20" height="29" rx="3" fill="#627fa7"/><rect x="-8" y="-13" width="16" height="24" rx="1.5" fill="#fff0d2"/><path d="M0 -7 C-2 -3 -7 -1 -4 2 Q-1 5 0 1 Q1 5 4 2 C7 -1 2 -3 0 -7Z M0 1 L-2 7 H2Z" fill="#435a83" stroke-width=".8"/><path d="M-6 -10 H-3 M3 8 H6" stroke="#7a8eab" stroke-width="1"/></g>
+    <path d="M-29 -6 Q-25 -25 17 -21 L16 -26 L31 -17 L16 -9 L17 -14 Q-17 -19 -24 -3Z" fill="#e8b75f"/>
+    <path d="M29 6 Q25 25 -17 21 L-16 26 L-31 17 L-16 9 L-17 14 Q17 19 24 3Z" fill="#a986d0"/>
+   </g><path d="M-25 -9 Q-16 -22 18 -18 L25 -17" fill="none" stroke="#fff0b0" stroke-width="1.4" stroke-linecap="round"/><path d="M25 9 Q16 22 -18 18 L-25 17" fill="none" stroke="#e5ceff" stroke-width="1.4" stroke-linecap="round"/>`,'fx-swap-arrows');
+   st.swapCue=st.put(arrows,center,'fx-swap-cue',A.size/90);
+   st.swapCue.animate([{transform:'translate(-50%,-50%) scale(.7)',opacity:0},{transform:'translate(-50%,-50%) scale(1.08)',opacity:1,offset:.65},{transform:'translate(-50%,-50%) scale(1)',opacity:1}],{duration:240,fill:'forwards',easing:'ease-out'});
+   st.swapCue.querySelector('svg').animate([{filter:'brightness(1) drop-shadow(0 0 3px #bd9bff)'},{filter:'brightness(1.3) drop-shadow(0 0 6px #bd9bff)'},{filter:'brightness(1) drop-shadow(0 0 3px #bd9bff)'}],{duration:850,iterations:Infinity,easing:'ease-in-out'});
+  }
+
   await Promise.all([...new Set([ev.target,pair].filter(Boolean))].map(uid=>{
    const pt=st.at(uid,.5);
    return st.pop(ART.trickBurst,pt,[
@@ -7196,29 +7359,66 @@ const SKILLS={
  async maiden(st,a,ev,clip,game){
   await wait(Math.max(0,clip.impact-120));const from=st.weaponPoint(a,.54,.58,.6),me=st.at(a,.5);
   st.pop(ART.maidenPulse,me,[{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:'translate(-50%,-50%) scale(2.6)',opacity:0}],620,'',me.size/60);
+  const auras=[];
   const allies=game.living(game.unit(a).team).filter(x=>x.uid!==a);
   await Promise.all(allies.map(async(x,i)=>{await wait(i*60);const to=st.at(x.uid,.5);await st.fly(ART.maidenLight,from,to,340,{arc:to.size*.5,scale:to.size/40,trail:ART.maidenLight});
+   const feet=st.at(x.uid,.02);
+   auras.push(st.pop('<div class="fx-beam"></div>',feet,[
+    {transform:'translate(-50%,-100%) scaleX(.2)',opacity:0},
+    {transform:'translate(-50%,-100%) scaleX(1)',opacity:.85,offset:360/1400},
+    {transform:'translate(-50%,-100%) scaleX(.6)',opacity:0}
+   ],1400,'',feet.size/60,'linear'));
    st.pop(ART.maidenPulse,to,[{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:'translate(-50%,-50%) scale(1.6)',opacity:0}],420,'',to.size/60);}));
+  st.maidenAura=Promise.all(auras);
  },
  // Overclock: a rune sigil spins up over each ally (the Oracle's rise, settle, hold and fade).
  async farseer(st,a,ev){
   await wait(560);
   await Promise.all(ev.targets.map(async(uid,i)=>{
    await wait(i*70);const pt=st.at(uid,.36);
+   const glint=ART.impactStar.replace('#fff8e8','#efffff').replace('#e6cfa4','#8bdcff');
+   for(let k=0;k<4;k++){
+    const angle=k*Math.PI/2,frames=[];
+    for(let j=0;j<=8;j++){
+     const t=j/8,q=angle+t*Math.PI/2,r=pt.size*.58*1.06/1.15;
+     frames.push({transform:`translate(-50%,-50%) translate(${Math.cos(q)*r}px,${Math.sin(q)*r-t*pt.size*.15}px) rotate(${t*80}deg) scale(${.25+Math.sin(t*Math.PI)*.65})`,opacity:j===0||j===8?0:j<3?1:.75});
+    }
+    st.pop(glint,pt,frames,1050,'',pt.size/75,'linear');
+   }
    await st.pop(ART.runeSigil,pt,[
     {transform:'translate(-50%,-30%) scale(.3) rotate(-90deg)',opacity:0},
-    {transform:'translate(-50%,-50%) scale(1.08) rotate(0deg)',opacity:1,offset:.22},
+    {transform:'translate(-50%,-50%) scale(1.08) rotate(0deg)',opacity:1,offset:.15},
     {transform:'translate(-50%,-50%) scale(1) rotate(20deg)',opacity:1,offset:.38},
-    {transform:'translate(-50%,-56%) scale(1) rotate(60deg)',opacity:1,offset:.75},
+    {transform:'translate(-50%,-56%) scale(1) rotate(60deg)',opacity:1,offset:.82},
     {transform:'translate(-50%,-74%) scale(1.05) rotate(90deg)',opacity:0}
-   ],1150,'fx-rune-sigil',pt.size/100,'linear');
+   ],1150,'fx-rune-sigil',pt.size/100*1.06,'linear');
   }));
  },
  // Desolation: Druid's botanical crest uses Oracle's rise, settle, hold and fade motion.
  async druid(st,a,ev){
-  await wait(320);
+  const leaf=SVG(24,30,'<path d="M0 13 C-18 2 -7 -10 9 -13 Q17 5 0 13Z" fill="#79b960" stroke="#375e3b" stroke-width="1.2"/><path d="M0 12 Q-1 0 9 -12 M0 5 L-5 0 M2 -2 L8 -4" fill="none" stroke="#d6eb9d" stroke-width="1"/>','fx-druid-leaf');
+  const mote=ART.impactStar.replace('#fff8e8','#e9ffc2').replace('#e6cfa4','#83bf75');
+  const origin=st.weaponPoint(a,.4,.12,.8),charge=st.put(mote,origin,'',origin.size/50);
+  let frame;const follow=()=>{const pt=st.weaponPoint(a,.4,.12,.8);charge.style.left=pt.x+'px';charge.style.top=pt.y+'px';frame=requestAnimationFrame(follow);};follow();
+  for(let i=0;i<5;i++){
+   const angle=i*Math.PI*2/5,dx=Math.cos(angle)*origin.size*.65,dy=Math.sin(angle)*origin.size*.55;
+   st.pop(i%2?leaf:mote,origin,[{transform:`translate(-50%,-50%) translate(${dx}px,${dy}px) scale(.25)`,opacity:0},{transform:`translate(-50%,-50%) translate(${dx*.65}px,${dy*.65}px) rotate(35deg) scale(.6)`,opacity:1,offset:.3},{transform:'translate(-50%,-50%) rotate(85deg) scale(.1)',opacity:0}],320,'',origin.size/65,'linear');
+  }
+  try{await anim(charge,[{transform:'translate(-50%,-50%) scale(.2) rotate(-25deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1.2) rotate(15deg)',opacity:1,offset:.65},{transform:'translate(-50%,-50%) scale(.6) rotate(40deg)',opacity:0}],{duration:320,easing:'linear'});}finally{cancelAnimationFrame(frame);charge.remove();}
+
   await Promise.all(ev.targets.map(async uid=>{
    const pt=st.at(uid,.32);
+   const feet=st.at(uid,.02);
+   // Leaves lift off the ground around the feet while the original crest stays visible.
+   for(let i=0;i<8;i++){
+    const side=i%2?1:-1,x=side*pt.size*(.18+(i%4)*.12),frames=[];
+    for(let j=0;j<=8;j++){
+     const t=j/8,drift=Math.sin(t*Math.PI*1.6+i*.6)*pt.size*.14;
+     frames.push({transform:`translate(-50%,-50%) translate(${drift}px,${-pt.size*(.6+(i%3)*.2)*t}px) rotate(${i*35+t*110}deg) scale(${.25+Math.sin(t*Math.PI)*.55})`,opacity:j===0||j===8?0:j<6?.9:.45});
+    }
+    st.pop(leaf,{x:feet.x+x,y:feet.y+pt.size*.03},frames,1000+(i%3)*70,'',pt.size/60,'linear');
+   }
+
    await st.pop(ART.thornRing,pt,[
     {transform:'translate(-50%,-30%) scale(.4)',opacity:0},
     {transform:'translate(-50%,-50%) scale(1.08)',opacity:1,offset:.2},
@@ -7248,13 +7448,24 @@ const SKILLS={
  async lightkeeper(st,a,ev){
   // The ranged-skill caller starts early; reveal the blessing at the casting pose.
   await wait(320);const pt=st.at(ev.target,.32);
+  const feet=st.at(ev.target,.02),blueStar=ART.impactStar.replace('#fff8e8','#e0faff').replace('#e6cfa4','#69bfff');
+  // A blue-white ignition opens into a rotating lantern halo around the blessing.
+  st.pop(blueStar,pt,[{transform:'translate(-50%,-50%) scale(.2)',opacity:0},{transform:'translate(-50%,-50%) scale(2.3) rotate(20deg)',opacity:1,offset:.3},{transform:'translate(-50%,-50%) scale(1.3) rotate(40deg)',opacity:0}],360,'',pt.size/55,'linear');
+  const halo=SVG(100,100,'<circle r="38" fill="none" stroke="#5fb9f4" stroke-width="1" opacity=".45"/><path d="M-42 0 A42 42 0 0 1 21 -36 M42 0 A42 42 0 0 1 -21 36" fill="none" stroke="#b4efff" stroke-width="2" stroke-linecap="round"/><path d="M0 -47 L3 -42 L0 -37 L-3 -42Z M0 37 L3 42 L0 47 L-3 42Z" fill="#edfcff"/>','fx-beacon-halo');
+  st.pop(halo,pt,[{transform:'translate(-50%,-50%) scale(.4) rotate(-35deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1) rotate(-10deg)',opacity:.9,offset:.2},{transform:'translate(-50%,-54%) scale(1.05) rotate(30deg)',opacity:.7,offset:.7},{transform:'translate(-50%,-65%) scale(1.1) rotate(55deg)',opacity:0}],1250,'',pt.size/80,'linear');
+  st.pop('<div class="fx-ring fx-beacon-floor"></div>',feet,[{transform:'translate(-50%,-50%) scale(.3,.1)',opacity:0},{transform:'translate(-50%,-50%) scale(1.7,.45)',opacity:.85,offset:.25},{transform:'translate(-50%,-50%) scale(2,.55)',opacity:0}],1100,'',pt.size/60,'linear');
+  for(let i=0;i<6;i++){
+   const x=(i%2?1:-1)*pt.size*(.35+(i%3)*.12),y=pt.size*(.4-i*.1);
+   st.pop(blueStar,{x:pt.x+x,y:pt.y+y},[{transform:'translate(-50%,-50%) scale(.15)',opacity:0},{transform:'translate(-50%,-50%) scale(.65) rotate(15deg)',opacity:.9,offset:.25},{transform:`translate(-50%,-50%) translate(${-x*.2}px,${-pt.size*.65}px) scale(.2) rotate(65deg)`,opacity:0}],850+i*60,'',pt.size/70,'linear');
+  }
+
   await st.pop(ART.beaconCrest,pt,[
    {transform:'translate(-50%,-30%) scale(.35)',opacity:0},
    {transform:'translate(-50%,-50%) scale(1.08)',opacity:1,offset:.2},
    {transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.35},
    {transform:'translate(-50%,-56%) scale(1)',opacity:1,offset:.75},
    {transform:'translate(-50%,-74%) scale(1.05)',opacity:0}
-  ],1150,'fx-beacon-crest',pt.size/80*1.1,'linear');
+  ],1250,'fx-beacon-crest',pt.size/80*1.1,'linear');
  },
  // Event Horizon: a black hole opens over the enemy line, scaled by the MP spent (3 small … 8 massive).
  // At high MP the field darkens, debris and stars spiral in, rings pulse and the screen shakes harder.
@@ -7276,24 +7487,63 @@ const SKILLS={
   st.shake(6+k*10);},
  // Mirror Bastion: reflective crests form over every living ally, then fade.
  async sentry(st,a,ev){
-  const team=st.slot(a)?.dataset.team;
+  const team=st.slot(a)?.dataset.team,dir=team==='0'?1:-1;
+  st.sentryMirrors=new Set();
   await Promise.all([...st.root.querySelectorAll(`.slot[data-team="${team}"]:not(.dead)`)].map(async el=>{
-   const pt=st.at(el.dataset.uid,.32);
-   await st.pop(ART.mirrorCrest,pt,[
-    {transform:'translate(-50%,-35%) scale(.4)',opacity:0},
-    {transform:'translate(-50%,-50%) scale(1.08)',opacity:.9,offset:.18},
-    {transform:'translate(-50%,-50%) scale(1)',opacity:.9,offset:.32},
-    {transform:'translate(-50%,-54%) scale(1)',opacity:.9,offset:.75},
-    {transform:'translate(-50%,-70%) scale(1.04)',opacity:0}
-   ],1200,'fx-mirror-crest',pt.size/80*1.1,'linear');
+   const uid=el.dataset.uid,pt=st.at(uid,.32),id=`mirror-pane-${uid}`;st.sentryMirrors.add(uid);
+   // Sweep a bright reflection across the clipped glass while the mirror turns toward us.
+   const art=ART.mirrorCrest.replace('</svg>',`<defs><clipPath id="${id}"><path d="M0 -27 L14 -20 L16 12 L0 26 L-16 12 L-14 -20Z"/></clipPath></defs><g clip-path="url(#${id})"><g class="mirror-sheen"><path d="M-19 -45 L-7 -45 L33 45 L21 45Z" fill="#fff" opacity=".8"/><path d="M-28 -45 L-24 -45 L16 45 L12 45Z" fill="#d8f9ff" opacity=".65"/></g></g></svg>`);
+   const mirror=st.put(art,pt,'fx-mirror-crest',pt.size/80*1.1),shine=mirror.querySelector('.mirror-sheen');
+   const sheen=shine.animate([{transform:'translateX(-55px)',opacity:0},{transform:'translateX(-30px)',opacity:1,offset:.25},{transform:'translateX(40px)',opacity:1,offset:.7},{transform:'translateX(55px)',opacity:0}],{duration:1250,fill:'forwards',easing:'linear'});
+   // A short incoming glint visibly rebounds away from the mirror face.
+   const ray=SVG(32,8,'<path d="M-15 0 L9 -2 L15 0 L9 2Z" fill="#dffaff"/><path d="M-11 0 H11" stroke="#fff" stroke-width="1.2"/>','fx-mirror-ray');
+   st.pop(ray,pt,[
+    {transform:`translate(-50%,-50%) translate(${dir*pt.size*.95}px,${-pt.size*.2}px) rotate(${-dir*12}deg)`,opacity:0},
+    {transform:`translate(-50%,-50%) translate(${dir*pt.size*.8}px,${-pt.size*.16}px) rotate(${-dir*12}deg)`,opacity:0,offset:.25},
+    {transform:`translate(-50%,-50%) translate(${dir*pt.size*.5}px,${-pt.size*.1}px) rotate(${-dir*12}deg)`,opacity:1,offset:.4},
+    {transform:'translate(-50%,-50%) scale(.5)',opacity:1,offset:.53},
+    {transform:`translate(-50%,-50%) translate(${dir*pt.size*.45}px,${-pt.size*.4}px) rotate(${-dir*40}deg)`,opacity:1,offset:.68},
+    {transform:`translate(-50%,-50%) translate(${dir*pt.size}px,${-pt.size*.8}px) rotate(${-dir*40}deg) scale(.3)`,opacity:0}
+   ],1000,'',pt.size/65,'linear');
+   st.pop(ART.impactStar.replace('#fff8e8','#effcff').replace('#e6cfa4','#8cd7ff'),pt,[{transform:'translate(-50%,-50%) scale(.1)',opacity:0},{transform:'translate(-50%,-50%) scale(.1)',opacity:0,offset:.45},{transform:'translate(-50%,-50%) scale(1.1)',opacity:1,offset:.55},{transform:'translate(-50%,-50%) scale(.4) rotate(35deg)',opacity:0}],1000,'',pt.size/55,'linear');
+   try{await anim(mirror,[
+    {transform:'translate(-50%,-35%) perspective(300px) rotateY(-65deg) scale(.6)',opacity:0},
+    {transform:'translate(-50%,-50%) perspective(300px) rotateY(12deg) scale(1.08)',opacity:.9,offset:.22},
+    {transform:'translate(-50%,-50%) perspective(300px) rotateY(0deg) scale(1)',opacity:.9,offset:.4},
+    {transform:'translate(-50%,-54%) perspective(300px) rotateY(-12deg) scale(1)',opacity:.9,offset:.73},
+    {transform:'translate(-50%,-70%) perspective(300px) rotateY(-35deg) scale(1.04)',opacity:0}
+   ],{duration:1350,easing:'linear'});}finally{sheen.cancel();mirror.remove();}
   }));
  },
  // Tempo Waltz: petals swirl over her and the two frontmost allies (Haste) and enemies (Slow).
- async dancer(st,a,ev){await wait(320);const team=st.root.querySelector(`.slot[data-uid="${a}"]`)?.dataset.team;
+ async dancer(st,a,ev,clip){
+  const team=st.slot(a)?.dataset.team;
   const front=t=>[...st.root.querySelectorAll(`.slot[data-team="${t}"]:not(.dead)`)].sort((p,q)=>p.dataset.slot-q.dataset.slot).slice(0,2).map(el=>el.dataset.uid);
-  const swirl=(uid,cls)=>{const pt=st.at(uid,.5);st.pop(`<div class="fx-ring ${cls}"></div>`,pt,[{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:'translate(-50%,-50%) scale(1.8)',opacity:0}],620,'',pt.size/60);
-   for(let i=0;i<5;i++)st.pop(ART.petal,{x:pt.x+(i-2)*pt.size*.15,y:pt.y},[{transform:'translate(-50%,-50%) rotate(0deg) scale(.4)',opacity:0},{transform:'translate(-50%,-50%) rotate(120deg) scale(1)',opacity:1,offset:.3},{transform:`translate(-50%,-50%) translateY(${-pt.size*.6}px) rotate(260deg) scale(.6)`,opacity:0}],900+i*60,'',pt.size/45);};
-  for(const uid of front(team))swirl(uid,'haste');for(const uid of front(1-team))swirl(uid,'slow');await wait(200);},
+  const star=ART.impactStar.replace('#fff8e8','#fff0d2').replace('#e6cfa4','#ed96bc');
+  const ribbon=SVG(100,70,'<path d="M-43 5 C-55 -16 -13 -27 25 -16 C61 -6 39 15 0 17 C-31 18 -49 9 -41 0" fill="none" stroke="#f190bf" stroke-width="3" stroke-linecap="round"/><path d="M-37 10 C-16 26 42 14 44 -4 M-29 -15 Q-7 -23 15 -18" fill="none" stroke="#ffe0ef" stroke-width="1.4" stroke-linecap="round"/>','fx-dance-ribbon');
+  const flourish=(uid,duration,self=false)=>{
+   const pt=st.at(uid,.32),feet=st.at(uid,.02);
+   const ring=st.pop(ribbon,{x:pt.x,y:pt.y+pt.size*.1},[{transform:'translate(-50%,-50%) scale(.3) rotate(-15deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1) rotate(0deg)',opacity:.9,offset:.2},{transform:'translate(-50%,-65%) scale(1.1) rotate(12deg)',opacity:.8,offset:.65},{transform:'translate(-50%,-90%) scale(1.2) rotate(25deg)',opacity:0}],duration,'',pt.size/75*(self?1.15:1),'linear');
+   for(let i=0;i<(self?10:7);i++){
+    const angle=i*.88,r=pt.size*(self?.65:.5),frames=[];
+    for(let j=0;j<=8;j++){
+     const t=j/8,q=angle+t*Math.PI*1.4,x=Math.cos(q)*r,y=Math.sin(q)*r*.32-t*pt.size*.95;
+     frames.push({transform:`translate(-50%,-50%) translate(${x}px,${y}px) rotate(${i*35+t*180}deg) scale(${.45+Math.sin(t*Math.PI)*.35})`,opacity:j===0||j===8?0:.9});
+    }
+    st.pop(i%2?star:ART.petal,{x:feet.x,y:feet.y-pt.size*.12},frames,duration-100+(i%3)*40,'',pt.size/(i%2?65:75),'linear');
+   }
+   return ring;
+  };
+  await wait(180);const solo=flourish(a,1550,true);
+  await wait(Math.max(0,clip.impact-180));
+  const allies=front(team).filter(uid=>uid!==a).map(uid=>flourish(uid,1250));
+  for(const uid of front(1-team)){
+   const pt=st.at(uid,.5);
+   st.pop('<div class="fx-ring slow"></div>',pt,[{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:'translate(-50%,-50%) scale(1.8)',opacity:0}],850,'',pt.size/60);
+   for(let i=0;i<4;i++)st.pop(ART.petal,{x:pt.x+(i-1.5)*pt.size*.2,y:pt.y},[{transform:'translate(-50%,-50%) scale(.4)',opacity:0},{transform:'translate(-50%,-50%) rotate(90deg) scale(.8)',opacity:.8,offset:.3},{transform:`translate(-50%,-50%) translateY(${-pt.size*.5}px) rotate(220deg) scale(.3)`,opacity:0}],1000+i*50,'',pt.size/60,'linear');
+  }
+  await Promise.all([solo,...allies,clip.done]);
+ },
  // Soul Harvest: a crimson slash rakes the target and its neighbours; violet wisps rise from each.
  async reaper(st,a,ev){
   // The handler starts with the downward swing; each crescent lands 110 ms later.
@@ -7340,6 +7590,16 @@ const SKILLS={
   ],1250,'',unit/60,'linear');
  },
  async bard(st,a,ev){
+  // The opening phrase sends a teal note rising from every ally.
+  for(const uid of ev.targets){
+   const pt=st.at(uid,.45);
+   st.pop(ART.melodyImpact,pt,[
+    {transform:'translate(-50%,-50%) scale(.55) rotate(-8deg)',opacity:0},
+    {transform:'translate(-50%,-50%) scale(1) rotate(0deg)',opacity:1,offset:.15},
+    {transform:`translate(-50%,-50%) translate(${pt.size*.1}px,${-pt.size*.35}px) scale(1) rotate(6deg)`,opacity:.9,offset:.5},
+    {transform:`translate(-50%,-50%) translate(${pt.size*.25}px,${-pt.size*1.1}px) scale(.85) rotate(14deg)`,opacity:0}
+   ],1100,'fx-melody-impact',pt.size/80,'linear');
+  }
   await wait(320);
   await Promise.all(ev.targets.map(uid=>{
    const feet=st.at(uid,.02);
@@ -7376,29 +7636,85 @@ const SKILLS={
    st.shake(Math.max(2,7-i*2));from=pt;
   }
  },
- // Cannonball arcs onto the target; the blast rings out over the target and its neighbours.
- async cannoneer(st,a,ev){const from=st.cannonMuzzle(a),to=st.at(ev.target,.45);st.shake(3);st.pop(ART.star,from,[{transform:'translate(-50%,-50%) scale(.5)',opacity:1},{transform:'translate(-50%,-50%) scale(1.6)',opacity:0}],300,'',from.size/50);await st.fly(ART.ball,from,to,360,{arc:to.size*.9,scale:to.size/26*.95*.96,trail:ART.fire});st.shake(10);
-  for(const uid of ev.targets){const pt=st.at(uid,.4);st.pop('<div class="fx-ring fire"></div>',pt,[{transform:'translate(-50%,-50%) scale(.2)',opacity:1},{transform:'translate(-50%,-50%) scale(2.8)',opacity:0}],560,'',pt.size/60);
-   st.pop(ART.star,pt,[{transform:'translate(-50%,-50%) scale(.6)',opacity:1},{transform:'translate(-50%,-50%) scale(2) rotate(45deg)',opacity:0}],420,'',pt.size/40);
-   for(let i=0;i<4;i++)st.pop(ART.dust,{x:pt.x+(i-1.5)*pt.size*.22,y:pt.y+pt.size*.3},[{transform:'translate(-50%,-50%) scale(.4)',opacity:.9},{transform:`translate(-50%,-50%) translateY(${-pt.size*.35}px) scale(1.3)`,opacity:0}],700+i*60,'',pt.size/40);}},
- async cryomancer(st,a,ev){
-  await wait(320);
+ // A braced shot, followed by a central detonation and smaller splash blasts.
+ async cannoneer(st,a,ev,clip,game){
+  const from=st.cannonMuzzle(a),to=st.at(ev.target,.45),dir=to.x>=from.x?1:-1;
+  st.shake(4);
+  st.pop(ART.cannonMuzzleFlash,{x:from.x+dir*from.size*.36,y:from.y},[
+   {transform:`translate(-50%,-50%) scaleX(${dir}) scale(.3)`,opacity:1},
+   {transform:`translate(-50%,-50%) scaleX(${dir}) scale(1.15)`,opacity:1,offset:.18},
+   {transform:`translate(-50%,-50%) scaleX(${dir}) scale(.65)`,opacity:0}
+  ],210,'',from.size/85,'linear');
+  for(let k=0;k<3;k++)st.pop(ART.cannonSmoke,from,[
+   {transform:'translate(-50%,-50%) scale(.15)',opacity:0},
+   {transform:`translate(-50%,-50%) translate(${dir*from.size*.2}px,-5px) scale(.45)`,opacity:.65,offset:.2},
+   {transform:`translate(-50%,-50%) translate(${dir*from.size*(.5+k*.2)}px,${-from.size*(.4+k*.15)}px) scale(.8)`,opacity:0}
+  ],600+k*100,'',from.size/80,'linear');
+  await st.fly(ART.ball,from,to,440,{arc:to.size*.9,scale:to.size/26*.95*.96});
+  const start=st.events.indexOf(ev)+1;
+  let end=st.events.findIndex((e,i)=>i>=start&&['action','cycleEnd','turn'].includes(e.t));if(end<0)end=st.events.length;
+  const damage=st.events.slice(start,end).filter(e=>e.t==='damage'&&e.from===a);
+  st.shake(12);
   await Promise.all(ev.targets.map(async uid=>{
-   const center=st.at(uid,.32);
-   const crest=st.pop(ART.frostCrest,center,[
-    {transform:'translate(-50%,-35%) scale(.3)',opacity:0},
-    {transform:'translate(-50%,-50%) scale(1.1)',opacity:1,offset:.18},
-    {transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.35},
-    {transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.72},
-    {transform:'translate(-50%,-65%) scale(1.03)',opacity:0}
-   ],1050,'fx-frost-crest',center.size/80*1.1,'linear');
-   await wait(190);st.flash(uid);
-   await crest;
+   const primary=uid===ev.target,pt=st.at(uid,.4),size=pt.size/65*(primary?1.25:.85);
+   if(!primary)await wait(65);
+   for(const hit of damage.filter(e=>e.uid===uid)){presentDamage(st,hit,game);(st.playedEvents??=new Set()).add(hit);}
+   st.pop(ART.cannonBlast,pt,[{transform:'translate(-50%,-50%) scale(.2)',opacity:1},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.17},{transform:'translate(-50%,-50%) scale(1.12)',opacity:.9,offset:.4},{transform:'translate(-50%,-55%) scale(1.25)',opacity:0}],420,'',size,'linear');
+   st.pop('<div class="fx-ring fire"></div>',pt,[{transform:'translate(-50%,-50%) scale(.4)',opacity:1},{transform:'translate(-50%,-50%) scale(3)',opacity:0}],480,'',pt.size/60);
+   for(let k=0;k<8;k++){
+    const angle=k*Math.PI/4,x=Math.cos(angle)*pt.size*1.1,y=Math.sin(angle)*pt.size*.8;
+    st.pop(SVG(12,6,'<path d="M-6 0 L3 -2 L6 0 L3 2Z" fill="#ffe6a1"/>'),pt,[{transform:`translate(-50%,-50%) rotate(${k*45}deg)`,opacity:1},{transform:`translate(-50%,-50%) translate(${x}px,${y}px) rotate(${k*45}deg) scale(.2)`,opacity:0}],440+k*20,'',pt.size/70,'linear');
+   }
+   await wait(140);
+   await Promise.all([-1,0,1].map((side,k)=>st.pop(ART.cannonSmoke,{x:pt.x+side*pt.size*.22,y:pt.y},[
+    {transform:'translate(-50%,-50%) scale(.25)',opacity:0},
+    {transform:'translate(-50%,-60%) scale(.65)',opacity:.55,offset:.2},
+    {transform:`translate(-50%,-50%) translate(${side*pt.size*.35}px,${-pt.size*(.7+k*.12)}px) scale(1.15)`,opacity:0}
+   ],850+k*80,'',size*.75,'linear')));
+  }));
+ },
+ async cryomancer(st,a,ev,clip){
+  await wait(200);
+  await Promise.all(ev.targets.map(async uid=>{
+   const feet=st.at(uid,.02),scale=feet.size/70*1.2;
+   const petal='<path d="M0 30 L-10 1 L0 -33 L10 1Z" fill="#77c9ec" stroke="#437fba" stroke-width="1.1" stroke-linejoin="round"/><path d="M0 30 L-10 1 L0 -33 L0 1Z" fill="#d2f7ff"/><path d="M0 -33 L10 1 L0 30 L0 1Z" fill="#8bd9f5"/><path d="M0 -33 V30 M-10 1 L0 7 L10 1" fill="none" stroke="#efffff" stroke-width="1"/>';
+   const angles=[-62,62,-40,40,-20,20,0];
+   const flower=st.put(SVG(100,80,angles.map((angle,i)=>`<g class="ice-petal" data-angle="${angle}" data-length="${i===6?1:i<2?.65:.83}">${petal}</g>`).join(''),'fx-ice-bloom'),{x:feet.x,y:feet.y-30*scale},'',scale);
+   const petals=[...flower.querySelectorAll('.ice-petal')];
+   const openings=petals.map((el,i)=>{
+    const angle=Number(el.dataset.angle),length=Number(el.dataset.length);
+    el.style.transformOrigin='0px 30px';
+    return el.animate([{transform:'rotate(0deg) scale(.12,.08)',opacity:0},{transform:`rotate(${angle*.2}deg) scale(.55,${length*.55})`,opacity:.85,offset:.35},{transform:`rotate(${angle}deg) scale(1,${length})`,opacity:1}],{duration:400+i*20,fill:'forwards',easing:'ease-in-out'});
+   });
+   const frost=SVG(100,32,'<ellipse rx="44" ry="12" fill="#a0e3ff" fill-opacity=".2"/><path d="M-40 0 H40 M-28 -8 L28 8 M-28 8 L28 -8 M0 -12 V12 M-23 0 L-29 -4 M23 0 L29 4" stroke="#d2faff" stroke-width="1.2" stroke-linecap="round" fill="none"/>','fx-ice-ground');
+   st.pop(frost,feet,[{transform:'translate(-50%,-50%) scale(.2)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:.85,offset:.35},{transform:'translate(-50%,-50%) scale(1.1)',opacity:.6,offset:.75},{transform:'translate(-50%,-50%) scale(1.15)',opacity:0}],1050,'',scale,'linear');
+   await Promise.all(openings.map(x=>x.finished.catch(()=>{})));
+   if(clip.release)await clip.release;
+   // Her pointing gesture lasts 400 ms; react only when it reaches the target.
+   const hitReaction=wait(400).then(()=>st.flash(uid));
+   // The opened crystal petals fracture outward into tiny glistening shards.
+   for(let k=0;k<9;k++){
+    const x=(k-4)*feet.size*.13,y=-feet.size*(.25+(k%3)*.18);
+    st.pop(SVG(12,20,'<path d="M0 -9 L4 1 L0 9 L-4 -1Z" fill="#b9edff" stroke="#619bc6" stroke-width=".8"/><path d="M0 -9 V9 L-4 -1Z" fill="#efffff"/>','fx-ice-shard'),{x:feet.x+x*.6,y:feet.y+y},[{transform:`translate(-50%,-50%) rotate(${k*35}deg) scale(.3)`,opacity:0},{transform:`translate(-50%,-50%) translate(${x*.4}px,-8px) rotate(${k*35+30}deg) scale(.75)`,opacity:1,offset:.25},{transform:`translate(-50%,-50%) translate(${x}px,${feet.size*.25}px) rotate(${k*35+100}deg) scale(.25)`,opacity:0}],600,'',scale,'linear');
+   }
+   await Promise.all(petals.map(async(el,i)=>{
+    const angle=Number(el.dataset.angle),length=Number(el.dataset.length);
+    await anim(el,[{transform:`rotate(${angle}deg) scale(1,${length})`,opacity:1},{transform:`translate(${angle*.12}px,7px) rotate(${angle*1.2}deg) scale(.85,${length*.9})`,opacity:0}],{duration:550,easing:'ease-in'});
+   }));
+   await hitReaction;
+   openings.forEach(x=>x.cancel());flower.remove();
   }));
  },
  async oracle(st,a,ev){
   await wait(320);
   await Promise.all(ev.targets.map(async uid=>{
+   const feet=st.at(uid,.02);
+   st.pop('<div class="fx-beam fx-focus-aura fx-oracle-aura"></div>',feet,[
+    {transform:'translate(-50%,-100%) scaleX(.25)',opacity:0},
+    {transform:'translate(-50%,-100%) scaleX(1)',opacity:.85,offset:.22},
+    {transform:'translate(-50%,-100%) scaleX(1)',opacity:.75,offset:.7},
+    {transform:'translate(-50%,-100%) scaleX(.8)',opacity:0}
+   ],650,'',feet.size/60,'linear');
    const pt=st.at(uid,.32);
    await st.pop(ART.omen,pt,[
     {transform:'translate(-50%,-30%) scale(.4)',opacity:0},
@@ -7409,10 +7725,41 @@ const SKILLS={
    ],1150,'fx-omen',pt.size/80*1.1,'linear');
   }));
  },
- async bishop(st,a,ev){const from=st.bookLight(a),to=st.at(ev.target,.5);await st.fly(ART.judgmentSpark,from,to,320,{scale:to.size/34,trail:ART.judgmentSpark});st.shake(4);
+ async bishop(st,a,ev,clip,game){
+  (st.bishopIdleHeals??=new Set()).add(a);
+  const origin=st.bookLight(a),charge=st.put(ART.judgmentSpark,origin,'',origin.size/34*1.5);
+  let frame;const follow=()=>{const pt=st.bookLight(a);charge.style.left=pt.x+'px';charge.style.top=pt.y+'px';frame=requestAnimationFrame(follow);};follow();
+  try{
+   await anim(charge,[{transform:'translate(-50%,-50%) scale(.65) rotate(-20deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1.1) rotate(0deg)',opacity:1,offset:.65},{transform:'translate(-50%,-50%) scale(1) rotate(15deg)',opacity:1}],{duration:220,easing:'ease-out'});
+   if(clip.release)await clip.release;
+  }finally{cancelAnimationFrame(frame);charge.remove();}
+  const from=st.bookLight(a),to=st.at(ev.target,.5);
+  await st.fly(ART.judgmentSpark,from,to,320,{scale:to.size/34*1.5,endScale:to.size/34,scaleEndAt:.45,trail:ART.impactStar});st.shake(4);
+  st.pop(ART.judgmentSpark,to,[{transform:'translate(-50%,-50%) scale(.4)',opacity:0},{transform:'translate(-50%,-50%) scale(1.6) rotate(20deg)',opacity:1,offset:.18},{transform:'translate(-50%,-50%) scale(1.9) rotate(45deg)',opacity:0}],420,'',to.size/34,'linear');
   st.pop('<div class="fx-ring holy"></div>',to,[{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:'translate(-50%,-50%) scale(2.2)',opacity:0}],520,'',to.size/60);
-  st.pop(ART.star,to,[{transform:'translate(-50%,-50%) scale(.5)',opacity:1},{transform:'translate(-50%,-50%) scale(1.6) rotate(45deg)',opacity:0}],380,'',to.size/50);},
- async warlock(st,a,ev){const from=st.staffCrystal(a),to=st.at(ev.target,.5);await st.fly(ART.hex,from,to,320,{scale:to.size/30*1.75,trail:ART.hex});
+  for(let i=0;i<6;i++){
+   const angle=i*Math.PI/3,dx=Math.cos(angle)*to.size*.8,dy=Math.sin(angle)*to.size*.65;
+   st.pop(ART.impactStar,to,[{transform:'translate(-50%,-50%) scale(.2)',opacity:1},{transform:`translate(-50%,-50%) translate(${dx*.6}px,${dy*.6}px) scale(.8) rotate(30deg)`,opacity:1,offset:.4},{transform:`translate(-50%,-50%) translate(${dx}px,${dy}px) scale(.1) rotate(70deg)`,opacity:0}],450+i*25,'',to.size/70,'linear');
+  }
+  const start=st.events.indexOf(ev)+1;
+  let end=st.events.findIndex((e,i)=>i>=start&&['action','cycleEnd','turn'].includes(e.t));if(end<0)end=st.events.length;
+  for(const hit of st.events.slice(start,end).filter(e=>e.t==='damage'&&e.from===a)){presentDamage(st,hit,game);(st.playedEvents??=new Set()).add(hit);}
+  await clip.done; // Healing follows only after his hands and book have returned to idle.
+ },
+ async warlock(st,a,ev,clip){
+  const origin=st.staffCrystal(a),scale=origin.size/60*1.75*.85,charge=st.put(ART.hexCurse,origin,'',scale);
+  let frame;const follow=()=>{const pt=st.staffCrystal(a);charge.style.left=pt.x+'px';charge.style.top=pt.y+'px';frame=requestAnimationFrame(follow);};follow();
+  try{
+   await anim(charge,[{transform:'translate(-50%,-50%) scale(.2) rotate(-70deg)',opacity:0},{transform:'translate(-50%,-50%) scale(.45) rotate(-40deg)',opacity:.8,offset:.2},{transform:'translate(-50%,-50%) scale(.8) rotate(0deg)',opacity:1,offset:.65},{transform:'translate(-50%,-50%) scale(1) rotate(35deg)',opacity:1}],{duration:940,easing:'linear'});
+   if(clip.release)await clip.release;
+  }finally{cancelAnimationFrame(frame);charge.remove();}
+  const from=st.staffCrystal(a),to=st.at(ev.target,.5);
+  await st.fly(ART.hexCurse,from,to,320,{scale,endScale:scale*.9,trail:ART.voidSpark});
+  st.pop(ART.hexCurse,to,[{transform:'translate(-50%,-50%) scale(.65) rotate(35deg)',opacity:1},{transform:'translate(-50%,-50%) scale(1.5) rotate(80deg)',opacity:.9,offset:.3},{transform:'translate(-50%,-50%) scale(1.8) rotate(130deg)',opacity:0}],460,'',scale,'linear');
+  for(let i=0;i<6;i++){
+   const angle=i*Math.PI/3,dx=Math.cos(angle)*to.size*.7,dy=Math.sin(angle)*to.size*.6;
+   st.pop(ART.voidSpark,to,[{transform:'translate(-50%,-50%) scale(.3)',opacity:0},{transform:`translate(-50%,-50%) translate(${dx*.4}px,${dy*.4}px) scale(.75)`,opacity:1,offset:.25},{transform:`translate(-50%,-50%) translate(${dx}px,${dy}px) scale(.1) rotate(75deg)`,opacity:0}],520,'',to.size/65,'linear');
+  }
   st.shake(4);for(const uid of ev.targets){const pt=st.at(uid,.75);st.pop('<div class="fx-ring hex"></div>',pt,[{transform:'translate(-50%,-50%) scale(1.8)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.35},{transform:'translate(-50%,-50%) scale(.6)',opacity:0}],720,'',pt.size/60);
    st.pop(`<svg class="fx-svg" viewBox="-12 -12 24 24" width="24" height="24"><circle r="9" fill="#2a1e3a" stroke="#c9a8ff" stroke-width="2.4"/><path d="M-6 -6 L6 6" stroke="#c9a8ff" stroke-width="2.4" stroke-linecap="round"/></svg>`,{x:pt.x,y:pt.y-pt.size*.55},[{transform:'translate(-50%,-50%) scale(.3)',opacity:0},{transform:'translate(-50%,-50%) scale(1.2)',opacity:1,offset:.25},{transform:'translate(-50%,-80%) scale(1)',opacity:0}],1100,'',pt.size/26);}},
  async paladin(st,a,ev){
@@ -7423,8 +7770,11 @@ const SKILLS={
     {transform:'translate(-50%,-35%) scale(.3)',opacity:0,filter:'brightness(1.8)'},
     {transform:'translate(-50%,-50%) scale(1.12)',opacity:1,filter:'brightness(1.5)',offset:.18},
     {transform:'translate(-50%,-50%) scale(1)',opacity:1,filter:'brightness(1)',offset:.35},
-    {transform:'translate(-50%,-50%) scale(1)',opacity:1,filter:'brightness(1)',offset:.78},
-    {transform:'translate(-50%,-58%) scale(1.03)',opacity:0,filter:'brightness(1)'}
+    {transform:'translate(-50%,-51%) scale(1.09)',opacity:.9,filter:'brightness(1.45)',offset:.5},
+    {transform:'translate(-50%,-52%) scale(.98)',opacity:.72,filter:'brightness(1.05)',offset:.63},
+    {transform:'translate(-50%,-54%) scale(1.08)',opacity:.55,filter:'brightness(1.4)',offset:.77},
+    {transform:'translate(-50%,-56%) scale(.99)',opacity:.28,filter:'brightness(1.05)',offset:.9},
+    {transform:'translate(-50%,-58%) scale(1.04)',opacity:0,filter:'brightness(1.2)'}
    ],1050,'fx-bulwark',center.size/80*1.1,'linear');
   }));
  },
@@ -7444,8 +7794,8 @@ const SKILLS={
   st.shake(5);
  },
  async blademaster(st,a,ev,clip){
-  // Stop just short at 500 ms, hold for 65 ms, then burst forward with the slash.
-  st.lunge(a,ev.target,clip.impact,.7,{arrive:clip.approach,pause:65,stop:.82});await wait(clip.impact);const pt=st.at(ev.target);
+  // Stop just short at 500 ms, hold for 48.75 ms, then burst forward with the slash.
+  st.lunge(a,ev.target,clip.impact,.7,{arrive:clip.approach,pause:48.75,stop:.82});await wait(clip.impact);const pt=st.at(ev.target);
   const dir=pt.x>=st.at(a).x?1:-1;
   const pose=(r,scale)=>`translate(-50%,-50%) scaleX(${dir}) rotate(${r}deg) scale(${scale})`;
   st.pop(ART.executionImpact,pt,[
@@ -7454,14 +7804,31 @@ const SKILLS={
    {transform:pose(0,1.08),opacity:1,offset:.38},
    {transform:pose(4,1.14),opacity:.9,offset:.65},
    {transform:pose(8,1.22),opacity:0}
-  ],440,'fx-execution-impact',pt.size/80,'linear');
+  ],440,'fx-execution-impact',pt.size/80*1.2,'linear');
   st.shake(7);
  },
  async assassin(st,a,ev){
   const slot=st.slot(a),f=st.fighter(a),A=st.at(a,0),B=st.at(ev.target,0),dx=(B.x-A.x)*.85,dy=B.y-A.y;
-  if(f&&!REDUCED){slot?.classList.add('skill-attacker-front');f.style.zIndex=30;await anim(f,[{opacity:1,transform:'none'},{opacity:0,transform:'scale(.6)'}],{duration:140,fill:'forwards'});
-   f.animate([{opacity:0,transform:`translate(${dx}px,${dy}px)`},{opacity:1,transform:`translate(${dx}px,${dy}px)`,offset:.15},{opacity:1,transform:`translate(${dx}px,${dy}px)`,offset:.7},{opacity:0,transform:`translate(${dx}px,${dy}px)`,offset:.8},{opacity:1,transform:'none'}],{duration:760}).finished.then(()=>{f.style.zIndex='';f.getAnimations().forEach(x=>x.cancel());}).catch(()=>{}).finally(()=>slot?.classList.remove('skill-attacker-front'));
-   const s=st.sprite(a);if(s)RiftSprites.act(s,'skill');}
+  if(f&&!REDUCED){
+   slot?.classList.add('skill-attacker-front');f.style.zIndex=30;
+   // Preserve the target reveal/strike timing, then use explicit fades and hidden pauses.
+   const target=`translate(${dx}px,${dy}px)`,duration=2052;
+   const motion=f.animate([
+    {opacity:1,transform:'none',offset:0},
+    {opacity:0,transform:'none',offset:300/duration},
+    {opacity:0,transform:target,offset:700/duration},
+    {opacity:1,transform:target,offset:814/duration},
+    {opacity:1,transform:target,offset:1232/duration},
+    {opacity:0,transform:target,offset:1632/duration},
+    {opacity:0,transform:'none',offset:1932/duration},
+    {opacity:1,transform:'none',offset:1}
+   ],{duration,fill:'forwards',easing:'linear'});
+   st.assassinReturn=motion.finished.catch(()=>{}).finally(()=>{
+    motion.cancel();f.style.zIndex='';slot?.classList.remove('skill-attacker-front');
+   });
+   await wait(700);
+   const s=st.sprite(a);if(s)RiftSprites.act(s,'skill');
+  }
   await wait(230);const pt=st.at(ev.target);st.pop(ART.cross,pt,[{transform:'translate(-50%,-50%) scale(.5)',opacity:1},{transform:'translate(-50%,-50%) scale(1.4)',opacity:0}],380,'',pt.size/80);
   // Clearly visible warm-white star sparks stay on the effects layer above both combatants.
   const dir=B.x>=A.x?1:-1;
@@ -7488,14 +7855,33 @@ const SKILLS={
    {transform:pose(1.12),opacity:.85,offset:.65},
    {transform:pose(1.2),opacity:0}
   ],400,'fx-pinning-impact',to.size/75,'linear');},
- async pyromancer(st,a,ev){
-  const hits=ev.targets.map((uid,i)=>(async()=>{await wait(i*110);const to=st.at(uid,.35),from={x:to.x+to.size*1.2,y:to.y-to.size*3.2};
-   await st.fly(ART.meteor,from,to,420,{scale:to.size/48*1.8,trail:ART.fire});st.pop('<div class="fx-ring fire"></div>',to,[{transform:'translate(-50%,-50%) scale(.2)',opacity:1},{transform:'translate(-50%,-50%) scale(2.6)',opacity:0}],520,'',to.size/60);
-   for(let k=0;k<3;k++)st.pop(ART.flame,st.at(uid,.25+k*.14),[{transform:'translate(-50%,-50%) scale(.4)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.2},{transform:'translate(-50%,-90%) scale(.3)',opacity:0}],800+k*110,'',to.size/40);})());
-  await wait(420);st.shake(8);await Promise.all(hits);
+ async pyromancer(st,a,ev,clip,game){
+  // Land each meteor separately, with its damage at contact rather than after the volley.
+  const start=st.events.indexOf(ev)+1;
+  let end=st.events.findIndex((e,i)=>i>=start&&['action','cycleEnd','turn'].includes(e.t));if(end<0)end=st.events.length;
+  const damage=st.events.slice(start,end).filter(e=>e.t==='damage'&&e.from===a);
+  await Promise.all(ev.targets.map(async(uid,i)=>{
+   await wait(i*140);
+   const to=st.at(uid,.15),feet=st.at(uid,.02),from={x:to.x+to.size*1.2,y:to.y-to.size*3.8};
+   await st.fly(ART.meteor,from,to,460,{scale:to.size/48*1.8,trail:ART.meteorWake});
+   for(const hit of damage.filter(e=>e.uid===uid)){presentDamage(st,hit,game);(st.playedEvents??=new Set()).add(hit);}
+   st.shake(i===0?9:5);
+   st.pop(ART.meteorFlare,to,[{transform:'translate(-50%,-50%) scale(.25)',opacity:1},{transform:'translate(-50%,-50%) scale(1.15)',opacity:1,offset:.18},{transform:'translate(-50%,-50%) scale(1.5)',opacity:0}],260,'',to.size/55,'linear');
+   st.pop('<div class="fx-ring fire"></div>',feet,[{transform:'translate(-50%,-50%) scale(.3,.15)',opacity:1},{transform:'translate(-50%,-50%) scale(2.4,.7)',opacity:0}],550,'',to.size/55);
+   const ground=st.pop(ART.meteorGround,feet,[{transform:'translate(-50%,-50%) scale(.3)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:.95,offset:.1},{transform:'translate(-50%,-50%) scale(1.04)',opacity:.75,offset:.6},{transform:'translate(-50%,-50%) scale(1.08)',opacity:0}],1300,'',to.size/70,'linear');
+   for(let k=0;k<7;k++){
+    const dx=(k-3)*to.size*.12,pt={x:feet.x+dx,y:feet.y-2};
+    st.pop(ART.meteorWake,pt,[{transform:'translate(-50%,-90%) scale(.15,.2)',opacity:0},{transform:'translate(-50%,-90%) scale(.6,1)',opacity:.95,offset:.15},{transform:'translate(-50%,-95%) scale(.8,.75)',opacity:.8,offset:.4},{transform:'translate(-50%,-105%) scale(.5,1.1)',opacity:.65,offset:.65},{transform:'translate(-50%,-120%) scale(.2,.4)',opacity:0}],850+(k%3)*140,'',to.size/70,'linear');
+    const x=(k-3)*to.size*.24,y=-to.size*(.5+(k%3)*.2);
+    st.pop(SVG(8,8,'<path d="M0 -4 L2 0 L0 4 L-2 0Z" fill="#ffe694"/>'),to,[{transform:'translate(-50%,-50%)',opacity:1},{transform:`translate(-50%,-50%) translate(${x*.7}px,${y}px)`,opacity:1,offset:.55},{transform:`translate(-50%,-50%) translate(${x}px,${y*.4}px) scale(.2)`,opacity:0}],550+k*35,'',to.size/65,'linear');
+   }
+   await ground;
+  }));
  },
- async priestess(st,a,ev){const pt=st.at(ev.target,.02);st.pop('<div class="fx-beam"></div>',pt,[{transform:'translate(-50%,-100%) scaleX(.2)',opacity:0},{transform:'translate(-50%,-100%) scaleX(1)',opacity:.85,offset:.3},{transform:'translate(-50%,-100%) scaleX(.6)',opacity:0}],900,'',pt.size/60);
-  for(let i=0;i<8;i++)st.pop(ART.plus,{x:pt.x+(i-3.5)*pt.size*.12,y:pt.y-pt.size*.3},[{transform:'translate(-50%,-50%) scale(.4)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.2},{transform:`translate(-50%,-50%) translateY(${-pt.size*(1+(i%3)*.2)}px) scale(.5)`,opacity:0}],900+i*50,'',pt.size/40);await wait(250);},
+ async priestess(st,a,ev,clip){const pt=st.at(ev.target,.02);st.priestessAura=st.pop('<div class="fx-beam"></div>',pt,[{transform:'translate(-50%,-100%) scaleX(.2)',opacity:0},{transform:'translate(-50%,-100%) scaleX(1)',opacity:.85,offset:360/1400},{transform:'translate(-50%,-100%) scaleX(.6)',opacity:0}],1400,'',pt.size/60,'linear');
+  // Return to rest and clear the skill presentation as the aura finishes.
+  st.priestessAura=Promise.all([st.priestessAura,clip.done,wait(1192).then(()=>st.skillEnd(208))]);
+  for(let i=0;i<8;i++)st.pop(ART.plus,{x:pt.x+(i-3.5)*pt.size*.12,y:pt.y-pt.size*.3},[{transform:'translate(-50%,-50%) scale(.4)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.2},{transform:`translate(-50%,-50%) translateY(${-pt.size*(1+(i%3)*.2)}px) scale(.5)`,opacity:0}],720+i*40,'',pt.size/40);await wait(200);},
  async alchemist(st,a,ev,clip){
   const from=st.at(a,.7),to=st.at(ev.target,.3),image=st.sprite(a)?.querySelector('[data-bone="sword"] image')?.cloneNode(true);
   let flask=ART.flask,scale=to.size/34;
@@ -7505,25 +7891,64 @@ const SKILLS={
    flask=SVG(34,50,image.outerHTML,'fx-thrown-flask');
    scale=(clip.weaponLength||to.size)/50;
   }
-  await st.fly(flask,from,to,480,{arc:to.size*1.4,spin:540,scale:scale*1.1});
+  await st.fly(flask,from,to,480,{arc:to.size*1.4,spin:540,scale:scale*1.1*1.15});
   for(const uid of ev.targets)st.flash(uid);
+  const start=st.events.indexOf(ev)+1;
+  let end=st.events.findIndex((e,i)=>i>=start&&['action','cycleEnd','turn'].includes(e.t));if(end<0)end=st.events.length;
+  const poisoned=[...new Set(st.events.slice(start,end).filter(e=>e.t==='status'&&e.id==='poison'&&['add','refresh','replace'].includes(e.op)&&ev.targets.includes(e.uid)).map(e=>e.uid))];
+  const acid=SVG(100,40,'<path d="M-43 4 Q-50 -5 -34 -9 Q-31 -17 -15 -13 Q0 -20 15 -12 Q35 -16 37 -7 Q51 -4 43 7 Q36 16 18 12 Q0 19 -15 13 Q-36 18 -40 9Z" fill="#477536" fill-opacity=".65" stroke="#4e6630" stroke-width="1.2"/><path d="M-37 3 Q-43 -3 -28 -6 Q-16 -13 -3 -9 Q13 -14 28 -7 Q43 -5 36 4 Q27 11 10 8 Q-7 13 -22 8 Q-35 11 -37 3Z" fill="#91c64c" fill-opacity=".8"/><path d="M-28 -4 Q-16 -10 -5 -6 M10 7 Q26 10 34 3" fill="none" stroke="#d5f283" stroke-width="1.5" stroke-linecap="round"/>','fx-acid-ground');
+  const bubble=SVG(12,12,'<circle r="4.5" fill="#a7d95c" fill-opacity=".65" stroke="#d9f69a" stroke-width="1"/><path d="M-2 -1 Q-2 -3 0 -3" fill="none" stroke="#f4ffd6" stroke-width="1.2" stroke-linecap="round"/>','fx-acid-bubble');
+  st.acidGround=Promise.all(poisoned.map(uid=>{
+   const feet=st.at(uid,.02);
+   for(let k=0;k<7;k++){
+    const x=(k-3)*feet.size*.13;
+    st.pop(bubble,{x:feet.x+x,y:feet.y},[{transform:'translate(-50%,-50%) scale(.2)',opacity:0},{transform:'translate(-50%,-50%) scale(.8)',opacity:.9,offset:.25},{transform:`translate(-50%,-50%) translate(${x*.2}px,${-feet.size*(.25+(k%3)*.12)}px) scale(1)`,opacity:.7,offset:.7},{transform:`translate(-50%,-50%) translate(${x*.25}px,${-feet.size*(.35+(k%3)*.12)}px) scale(1.25)`,opacity:0}],850+(k%3)*160,'',feet.size/65,'linear');
+   }
+   return st.pop(acid,feet,[{transform:'translate(-50%,-50%) scale(.25)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:.9,offset:.18},{transform:'translate(-50%,-50%) scale(1.04,.95)',opacity:.8,offset:.65},{transform:'translate(-50%,-50%) scale(1.08)',opacity:0}],1300,'',feet.size/75,'linear');
+  }));
+
   for(const uid of ev.targets)for(let i=0;i<3;i++){const q=st.at(uid,.25);st.pop(ART.puff,{x:q.x+(i-1)*q.size*.25,y:q.y},[{transform:'translate(-50%,-50%) scale(.3)',opacity:0},{transform:'translate(-50%,-50%) scale(1.1)',opacity:.85,offset:.25},{transform:`translate(-50%,-50%) translateY(${-q.size*.6}px) scale(1.4)`,opacity:0}],1000+i*90,'',q.size/55);}}
 };
 
 async function actionFx(st,ev,game){
+ if(st.assassinReturn){await st.assassinReturn;st.assassinReturn=null;}
  // Choreography follows the unit's kit (its skill and passive); the sprite itself draws its look.
  const a=ev.uid,u=game.unit(a),hero=root.Rift.Units.kit(u.hero),s=st.sprite(a);
  // A performing Bard's waited turn is another bar of her song.
  if(ev.kind==='skip'){const song=root.Rift?.Status?.has(u,'performing');st.float(a,song?'♪ Playing':'Skip',song?'st performing':'info');if(s)RiftSprites.act(s,song?'play':'hurt');await wait(song?600:350);return;}
  if(ev.kind==='skill'){st.skillStart(ev,game);
   if(hero==='ronin'){await SKILLS.ronin(st,a,ev,null,game);return;}
+  // Let the aura read before starting the existing charge choreography.
+  if(hero==='blademaster'||hero==='dragoon'||hero==='vanguard'){
+   const feet=st.at(a,.02);
+   await st.pop(`<div class="fx-beam fx-focus-aura fx-${hero}-aura"></div>`,feet,[
+    {transform:'translate(-50%,-100%) scaleX(.25)',opacity:0},
+    {transform:'translate(-50%,-100%) scaleX(1)',opacity:.85,offset:.22},
+    {transform:'translate(-50%,-100%) scaleX(1)',opacity:.75,offset:.7},
+    {transform:'translate(-50%,-100%) scaleX(.8)',opacity:0}
+   ],hero==='vanguard'?700:650,'',feet.size/60,'linear');
+  }
   // Measure held weapons before their throwing poses change or hide them.
   const weapon=['crusader','alchemist'].includes(hero)?s?.querySelector('[data-bone="sword"] image'):null,matrix=weapon?.getScreenCTM();
   const weaponLength=matrix?Math.max(+weapon.getAttribute('width')*Math.hypot(matrix.a,matrix.b),+weapon.getAttribute('height')*Math.hypot(matrix.c,matrix.d)):undefined;
   // Ballista's skill either starts Aiming (a braced draw) or fires the charged shot.
   const clip=hero==='assassin'||!s?{impact:0}:RiftSprites.act(s,hero==='ballista'&&ev.aim?'aim':'skill');
   if(weaponLength)clip.weaponLength=weaponLength;
-  const lead={ballista:clip.impact,dragoon:320,blademaster:clip.impact,reaper:110,templar:clip.impact}[hero]??0;await wait(Math.max(0,clip.impact-lead-(BOLT[hero]?320:0)));
+  if(hero==='ranger'){
+   // Hold the aiming pose for 550 ms while the muzzle spark rotates.
+   await wait(300);
+   const pt=st.crossbowMuzzle(a),spark=st.put(ART.impactStar,pt,'fx-ranger-charge',pt.size/100*1.4*1.5);
+   let frame;const follow=()=>{const tip=st.crossbowMuzzle(a);spark.style.left=tip.x+'px';spark.style.top=tip.y+'px';frame=requestAnimationFrame(follow);};follow();
+   try{await anim(spark,[
+    {transform:'translate(-50%,-50%) rotate(-20deg) scale(.35)',opacity:0},
+    {transform:'translate(-50%,-50%) rotate(-10deg) scale(1)',opacity:1,offset:.25},
+    {transform:'translate(-50%,-50%) rotate(15deg) scale(1)',opacity:1,offset:.85},
+    {transform:'translate(-50%,-50%) rotate(20deg) scale(.65)',opacity:0}
+   ],{duration:550,easing:'linear'});}finally{cancelAnimationFrame(frame);spark.remove();}
+   await wait(Math.max(0,clip.impact-320-850));
+   await SKILLS.ranger(st,a,ev,clip,game);return;
+  }
+  const lead={cryomancer:clip.impact,shaman:clip.impact,warlock:clip.impact,dancer:clip.impact,cannoneer:120,ballista:clip.impact,dragoon:320,blademaster:clip.impact,reaper:110,templar:clip.impact}[hero]??0;await wait(Math.max(0,clip.impact-lead-(BOLT[hero]?320:0)));
   await SKILLS[hero](st,a,ev,clip,game);return;}
  const clip=s?RiftSprites.act(s,'basic'):{impact:0},t=ev.target;
  if(MELEE.has(hero)){st.lunge(a,t,clip.impact);await wait(clip.impact);const pt=st.at(t),dir=u.team===0?1:-1;
@@ -7591,8 +8016,8 @@ async function consequences(st,events,game){
    await wait(e.from===st.sageRelease&&e.kind==='true'?168:120);
    if(st.challengeRally){await st.challengeRally;st.challengeRally=null;}
   }else if(e.t==='heal'){if(e.amount){st.float(e.uid,`+${e.amount}`,'heal',{lift:.62});st.hp(e.uid,e.amount);}
-   // The Bishop's heals answer his strikes: he raises his palm and the light rings the ally.
-   if(e.amount&&root.Rift.Units.kit(game.unit(e.from)?.hero)==='bishop'){const s=st.sprite(e.from);if(s)RiftSprites.act(s,'bless');const pt=st.at(e.uid,.5);
+   // Skill healing keeps Bishop at rest; the ally still receives the healing ring.
+   if(e.amount&&root.Rift.Units.kit(game.unit(e.from)?.hero)==='bishop'){const s=st.sprite(e.from);if(s&&!st.bishopIdleHeals?.has(e.from))RiftSprites.act(s,'bless');const pt=st.at(e.uid,.5);
     st.pop('<div class="fx-ring holy"></div>',pt,[{transform:'translate(-50%,-50%) scale(1.8)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.35},{transform:'translate(-50%,-50%) scale(.6)',opacity:0}],720,'',pt.size/60);}
    await wait(100);}
   else if(e.t==='status'){
@@ -7608,7 +8033,7 @@ async function consequences(st,events,game){
    await wait(70);
   }
   else if(e.t==='relic'){st.relic(e);await wait(90);}
-  else if(e.t==='barrier'){st.dome(e.uid,'#9fd0ff');for(const u of e.to)st.dome(u,'#9fd0ff');st.float(e.uid,'Barrier!','skillname');await wait(140);}
+  else if(e.t==='barrier'){if(st.valkyrieBarrier!==e.uid){st.dome(e.uid,'#9fd0ff');for(const u of e.to)st.dome(u,'#9fd0ff');}st.float(e.uid,'Barrier!','skillname');await wait(140);}
   else if(e.t==='reflect'){st.float(e.uid,'Reflect','st reflect');await wait(120);}
   else if(e.t==='gauge'){st.float(e.uid,`${e.pct>0?'» +':'« '}${e.pct}%`,e.pct>0?'adv':'del',{dur:1400});await wait(90);}
   else if(e.t==='passive'){st.float(e.uid,e.name,'passive',{dur:1400});{const h=root.Rift.Units.kit(game.unit(e.uid)?.hero),clip={paladin:'guard',warlock:'curse',oracle:'purify',cryomancer:'chill',cannoneer:'brace',bard:'riposte',champion:'absorb',archmage:'counter',reaper:'curse',dancer:'flourish',sentry:'endure',stargazer:'glean',lightkeeper:'kindle',shaman:'rend',druid:'ward',farseer:'surge',maiden:'ward',trickster:'trick',illusionist:'waft',vanguard:'ward',timekeeper:'rewind',ronin:'surge'}[h];if(h==='druid'){const pt=st.at(e.uid,.25);st.pop(ART.barkWard,pt,[{transform:'translate(-50%,-50%) scale(.6)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:.9,offset:.25},{transform:'translate(-50%,-55%) scale(1.1)',opacity:0}],950,'',pt.size/85);}const s=clip&&st.sprite(e.uid);if(s)RiftSprites.act(s,clip);}await wait(110);}
@@ -7648,7 +8073,7 @@ async function consequences(st,events,game){
   // Intercept: the guarded ally's crest flashes and a shield flies to the Guardian, who takes the hit.
   else if(e.t==='intercept'){const p=st.at(e.uid,.45),q=st.at(e.by,.45);st.pop(ART.guardianCrest,p,[{transform:'translate(-50%,-50%) scale(.8)',opacity:.95},{transform:'translate(-50%,-50%) scale(1.15)',opacity:0}],380,'',p.size/100);
    await st.fly(ART.guardianCrest,p,q,220,{scale:q.size/110});st.float(e.by,'Intercept!','skillname',{dur:1100});const s=st.sprite(e.by);if(s)RiftSprites.act(s,'brace');await wait(80);}
-  else if(e.t==='mirror'){st.dome(e.uid,'#bfe6ff');st.float(e.uid,'Mirror!','st mirror',{dur:1100});await wait(140);}
+  else if(e.t==='mirror'){if(!st.sentryMirrors?.has(e.uid))st.dome(e.uid,'#bfe6ff');st.float(e.uid,'Mirror!','st mirror',{dur:1100});await wait(140);}
   else if(e.t==='link'){const p=st.at(e.uid,.55),q=st.at(e.to,.55),len=Math.hypot(q.x-p.x,q.y-p.y);
    const c=st.put('<div class="fx-chain"></div>',p);Object.assign(c.style,{width:len+'px',transform:`translate(0,-50%) rotate(${Math.atan2(q.y-p.y,q.x-p.x)}rad)`});
    anim(c,[{opacity:0,clipPath:'inset(0 100% 0 0)'},{opacity:1,clipPath:'inset(0 0 0 0)',offset:.4},{opacity:1,offset:.75},{opacity:0}],{duration:e.cast?1000:600}).then(()=>c.remove());await wait(e.cast?260:120);}
@@ -7693,7 +8118,11 @@ async function play(rootEl,events,game){
   let from=0;
   for(let i=0;i<main.length;i++)if(main[i].t==='action'){await consequences(st,main.slice(from,i),game);await wait(220);await actionFx(st,main[i],game);from=i+1;}
   await consequences(st,main.slice(from),game);
-  await st.skillEnd();
+  if(st.assassinReturn)await st.assassinReturn;
+  if(st.maidenAura)await st.maidenAura;
+  if(st.acidGround)await st.acidGround;
+  if(st.priestessAura)await st.priestessAura;
+  else await st.skillEnd();
   if(cyc.length){
    await wait(380);const end=cyc[0].cycle,next=cyc.find(e=>e.t==='cycle');
    st.banner(`Cycle ${end} complete`,'cycle');await wait(650);
@@ -7703,7 +8132,7 @@ async function play(rootEl,events,game){
   const win=events.find(e=>e.t==='win');
   if(win){await wait(400);st.banner(win.team==='draw'?'Draw':`${win.team?'Dusk':'Dawn'} wins!`,win.team==='draw'?'':win.team?'dusk':'dawn');
    if(win.team!=='draw')for(const u of game.living(win.team)){const s=st.sprite(u.uid);if(s)RiftSprites.act(s,'cheer');}await wait(1300);}
-  else await wait(act?.kind==='skip'?100:380);
+  else if(!st.priestessAura)await wait(act?.kind==='skip'?100:380);
  }finally{st.skillDim?.remove();st.clearParticipants();
   // The next board render places these fighters in their new slots (same task, no paint between).
   for(const [el,p] of st.heldPositions)el.style.translate=p.translate;
