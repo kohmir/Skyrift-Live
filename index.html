@@ -1017,7 +1017,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .arena-choice p{margin-bottom:14px}
 
 /* Team setup has a fixed shell; only the two lower content areas scroll. */
-.screen.setup{width:100%;max-width:1600px;margin:auto;height:100vh;height:100dvh;padding:max(12px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:14px;overflow:hidden}
+.screen.setup{width:100%;max-width:1600px;margin:auto;height:100vh;height:100dvh;padding:max(12px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:14px;overflow:hidden}
 .setup .top{margin:0;flex-wrap:nowrap;min-width:0}.setup .scene-title{font-size:28px;order:0;flex:0 1 auto}.setup .brandmark,.x-menu-screen .brandmark{width:40px;height:40px}.setup .wordmark,.x-menu-screen .wordmark{font-size:30px}
 .muster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;min-width:0}
 .m-side{position:relative;min-width:0;padding:10px 12px 6px;background:linear-gradient(150deg,#49382b,#30241a);border:2px solid var(--ink);border-radius:15px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--team) 65%,transparent),0 4px 0 #100c08}
@@ -1067,14 +1067,14 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 
 .setup-skills{padding:0 18px}.setup-skill{padding:16px 0;border-bottom:1px solid #9e80544d}.setup-skill:last-child{border-bottom:0}.setup-skill-heading{display:flex;align-items:center;gap:10px}.setup-skill-heading>.combat-icon{width:38px;height:38px;flex:none}.setup-skill h3{font-size:21px;line-height:1.1}.setup-skill-heading span{font-size:10px;color:#826b49;font-weight:900}.setup-skill p{font-size:13px;line-height:1.6;margin:8px 0 0}
 
-.setup-foot{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-height:50px}.setup-foot p{font-size:12px;color:var(--muted);margin:0}.setup-foot>div{display:flex;gap:10px;align-items:center}.setup-foot .start{display:flex;align-items:center;justify-content:center;gap:12px;min-width:210px;min-height:48px;font-size:17px}.setup-foot .combat-icon{width:26px;height:26px}
+
 @media (max-width:1150px){.roster{grid-template-columns:repeat(3,minmax(0,1fr))}.setup-workspace{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.setup-hero-heading h2{font-size:29px}.setup-preview{min-height:190px;padding:8px 10px}.setup-hero-art{--setup-art-height:180px}.setup-browser-head{padding:10px 12px 6px}.roster-filter{padding-inline:8px}}
 @media (orientation:landscape) and (max-height:650px){
  .screen.setup{gap:8px;padding:6px 12px}.setup .top{height:36px}.setup .brandmark{width:30px;height:30px}.setup .wordmark{font-size:24px}.setup .scene-title{font-size:23px}.setup .home-button{min-height:34px;padding:4px 10px;font-size:11px}
  .m-side{padding:4px 8px 3px;border-radius:11px}.m-side header{height:36px;margin-bottom:6px}.team-name{font-size:19px}.party-reroll{min-height:28px;font-size:10px;padding:0 6px}.party-reroll>span:first-child{font-size:16px}.control-tag{font-size:9px}
  .m-slot-btn{min-height:55px;padding:3px 5px;gap:2px}.m-slot .face{width:28px;height:28px}.m-name{font-size:9px}.m-role{display:none}.m-no{left:5px;top:4px;font-size:9px}.m-clear{width:22px;min-height:22px;font-size:17px}.m-empty{font-size:9px}.m-axis{font-size:8px}.m-side-note{font-size:8px}
  .setup-browser-head{padding:6px 9px 2px}.setup-browser-head h2{font-size:20px}.setup-slot-hint{font-size:9px}.roster-filters{padding-top:4px;gap:5px}.roster-filter{min-height:30px;padding:2px 7px;font-size:10px}.roster-filter .class-icon{width:15px;height:15px}.roster{gap:7px;padding:8px;grid-template-columns:repeat(3,minmax(0,1fr))}.hero-pick{min-height:72px;padding:7px 7px 21px;gap:3px 6px}.hero-pick .face{width:38px;height:38px}.hc-name{font-size:15px}.hc-text{gap:1px}.hero-pick .cls-tag{font-size:8px}.hero-pick .class-icon{width:12px;height:12px}.hc-slots{font-size:8px}
- .setup-preview{min-height:74px;grid-template-columns:85px minmax(0,1fr);padding:3px 8px}.setup-hero-art{--setup-art-height:68px}.setup-hero-heading h2{font-size:23px;margin:0 0 3px}.setup-hero-meta{gap:6px;margin-bottom:4px}.setup-hero-slots{font-size:10px;padding:1px 4px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill p{font-size:12px}.setup-skill h3{font-size:19px}.setup-foot{min-height:38px}.setup-foot p{font-size:10px}.setup-foot .start{min-height:36px;min-width:170px;font-size:14px;padding:4px 10px}.setup-foot .quiet{min-height:36px;padding:4px 8px;font-size:11px}
+ .setup-preview{min-height:74px;grid-template-columns:85px minmax(0,1fr);padding:3px 8px}.setup-hero-art{--setup-art-height:68px}.setup-hero-heading h2{font-size:23px;margin:0 0 3px}.setup-hero-meta{gap:6px;margin-bottom:4px}.setup-hero-slots{font-size:10px;padding:1px 4px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill p{font-size:12px}.setup-skill h3{font-size:19px}
 }
 @media (orientation:portrait) and (max-width:760px){
  .screen.setup{padding:8px 10px max(8px,env(safe-area-inset-bottom));gap:8px}.setup .top{height:36px;gap:8px}.setup .brand{display:none}.setup .scene-title{font-size:25px}.setup .home-button{min-height:36px;padding:4px 9px;font-size:11px}
@@ -1083,10 +1083,10 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
  .setup-workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(100px,1fr) minmax(125px,1fr);gap:8px}.setup-browser,.setup-detail{border-radius:12px}.setup-browser-head{padding:7px 9px 3px}.setup-browser-head h2{font-size:20px}.setup-slot-hint{font-size:9px}.roster-filters{gap:5px;padding:5px 0 4px}.roster-filter{min-height:28px;padding:2px 7px;font-size:10px}.roster-filter .class-icon{display:none}
  .roster{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px;gap:7px}.hero-pick{min-height:65px;display:grid;grid-template-columns:auto minmax(0,1fr);padding:6px 8px 19px;gap:4px 6px;text-align:left;justify-content:start}.hero-pick .face{width:38px;height:38px}.hc-text{align-items:flex-start;gap:2px}.hc-name{font-size:16px}.hero-pick .cls-tag{font-size:8px}.hero-pick .class-icon{width:12px;height:12px}.hc-slots{font-size:8px;bottom:5px}.hc-info{width:24px;min-height:24px;bottom:0;right:0}
  .setup-preview{grid-template-columns:124px minmax(0,1fr);min-height:120px;padding:4px 10px}.setup-hero-art{--setup-art-height:112px}.setup-hero-heading h2{font-size:26px;margin:0 0 5px}.setup-hero-heading .cls-tag{font-size:9px}.setup-hero-meta{gap:6px;margin-bottom:6px}.setup-hero-slots{font-size:10px;padding:1px 4px}.setup-skills{padding:0 12px}.setup-skill{padding:10px 0}.setup-skill-heading>.combat-icon{width:30px;height:30px}.setup-skill h3{font-size:20px}.setup-skill p{font-size:12px}
- .setup-foot{min-height:42px;display:block}.setup-foot p{display:none}.setup-foot>div{gap:8px}.setup-foot .start{flex:1;min-width:0;min-height:42px;font-size:15px}.setup-foot .quiet{min-height:42px;font-size:10px;padding:4px 7px}
+
 }
 @media (orientation:portrait) and (max-height:650px){
- .screen.setup{gap:5px;padding-top:5px;padding-bottom:5px}.setup .top{height:28px}.setup .scene-title{font-size:22px}.setup .home-button{min-height:28px}.muster{gap:5px}.m-side header{height:22px;margin-bottom:7px}.team-name{font-size:17px}.party-reroll{min-height:22px}.m-slot-btn{min-height:49px;gap:1px}.m-slot .face{width:25px;height:25px}.m-axis{font-size:6px}.setup-workspace{gap:5px;grid-template-rows:minmax(80px,1fr) minmax(105px,1fr)}.setup-browser-head{padding:4px 7px 0}.setup-browser-head h2{font-size:17px}.roster-filters{padding-top:2px;padding-bottom:3px}.roster-filter{min-height:24px;font-size:9px;padding-inline:6px}.setup-foot{min-height:36px}.setup-foot .start,.setup-foot .quiet{min-height:36px}
+ .screen.setup{gap:5px;padding-top:5px;padding-bottom:5px}.setup .top{height:28px}.setup .scene-title{font-size:22px}.setup .home-button{min-height:28px}.muster{gap:5px}.m-side header{height:22px;margin-bottom:7px}.team-name{font-size:17px}.party-reroll{min-height:22px}.m-slot-btn{min-height:49px;gap:1px}.m-slot .face{width:25px;height:25px}.m-axis{font-size:6px}.setup-workspace{gap:5px;grid-template-rows:minmax(80px,1fr) minmax(105px,1fr)}.setup-browser-head{padding:4px 7px 0}.setup-browser-head h2{font-size:17px}.roster-filters{padding-top:2px;padding-bottom:3px}.roster-filter{min-height:24px;font-size:9px;padding-inline:6px}
  .setup-preview{min-height:78px;grid-template-columns:80px minmax(0,1fr);padding:3px 8px}.setup-hero-art{--setup-art-height:70px}.setup-hero-meta{margin-bottom:4px}.setup-hero-heading h2{font-size:21px;margin:0 0 3px}.setup-hero-heading .cls-tag{font-size:8px}
 }
 
@@ -1095,7 +1095,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
  .setup-browser-head>div:first-child{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px}.setup-browser-head h2{grid-column:1;grid-row:1}.setup-slot-hint{grid-column:1;grid-row:2;line-height:1.2}
  .roster-expand{grid-column:2;grid-row:1 / 3;display:inline-flex;align-items:center;justify-content:center;min-height:32px;padding:3px 9px;font-size:11px;box-shadow:none;background:#fff4d9;color:#674d2b;border-color:#9b8057}
  .screen.setup.roster-expanded{grid-template-rows:auto minmax(0,1fr)}
- .setup.roster-expanded>.muster,.setup.roster-expanded>.setup-foot{display:none}
+ .setup.roster-expanded>.muster,.setup.roster-expanded .setup-actions .start{display:none}
 }
 
 /* The compact placement control scrolls with the hero preview. */
@@ -1115,7 +1115,7 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 
 /* Phone layouts keep the hero identity prominent and supporting details compact. */
 @media (orientation:landscape) and (max-width:1000px) and (max-height:650px), (orientation:portrait) and (max-width:760px){
- 
+
  .setup-hero-heading .cls-tag{padding:0;background:transparent;border:0;border-radius:0;line-height:1}
  .setup-hero-heading .cls-tag .ct-label{display:none}.setup-hero-heading .cls-tag .class-icon{width:14px;height:14px}
  .setup-skill h3{font-size:15px;line-height:1.15}.setup-skill-heading>.combat-icon{width:26px;height:26px}
@@ -1404,6 +1404,26 @@ button.x-node.picked{animation:none;transform:translate(-50%,-50%) scale(1.14);b
 .fx-svg.fx-ice-bloom{width:100px;height:80px;filter:drop-shadow(0 0 3px #9cddff88)}
 .fx-svg.fx-ice-ground{width:100px;height:32px}
 .fx-svg.fx-ice-shard{width:12px;height:20px}
+
+/* Arena setup actions share the header; the lower panels use the old footer's space. */
+.setup .scene-title{min-width:0;white-space:nowrap}
+.setup-actions{display:flex;align-items:center;gap:10px;margin-left:auto;flex:0 0 auto}
+.setup-actions .start{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 16px;font-size:15px;white-space:nowrap}
+.setup-actions .combat-icon{width:22px;height:22px}
+@media (orientation:landscape) and (max-height:650px){
+ .setup-actions{gap:8px}.setup-actions .start{min-height:34px;padding:4px 10px;font-size:11px;gap:6px}.setup-actions .combat-icon{width:18px;height:18px}
+}
+@media (orientation:portrait) and (max-width:760px){
+ .setup-actions{gap:6px}.setup-actions .start{min-height:36px;padding:4px 8px;font-size:11px;gap:5px}.setup-actions .combat-icon{width:18px;height:18px}
+}
+@media (orientation:portrait) and (max-height:650px){.setup-actions .start{min-height:28px}}
+@media (orientation:portrait) and (max-width:380px){
+ .setup .top{gap:6px}.setup .scene-title{font-size:20px}.setup-actions{gap:5px}.setup-actions .combat-icon{display:none}
+}
+
+/* Match the chevron to the label's visible capitals, rather than a rotated box. */
+.home-button-content{display:inline-flex;align-items:baseline;gap:8px}
+.home-button-content>.home-arrow{display:inline-block;flex:none;width:.55em;height:1cap;background:currentColor;clip-path:polygon(100% 0,100% 25%,45% 50%,100% 75%,100% 100%,0 50%)}
 </style></head><body><div id="app"><div class="boot" role="status"><strong>Skyrift</strong><span>Loading…</span></div></div><div id="overlay"></div><div id="toast" role="status" aria-live="polite"></div><script>/* Battle configuration. Every number here is a provisional balance value (see
    docs/REVAMP_PLAN.md, "Open decisions"); systems read them from here, never inline. */
 (function(root){
@@ -9164,7 +9184,7 @@ function render(){
  if(focus)$(`[data-key="${focus}"]`)?.focus({preventScroll:true});
  scheduleCpu();
 }
-function homeButton(){return '<button class="quiet home-button" data-nav="main"><span class="home-arrow" aria-hidden="true"></span> Main Menu</button>';}
+function homeButton(){return '<button class="quiet home-button" data-nav="main"><span class="home-button-content"><span class="home-arrow" aria-hidden="true"></span><span class="home-label">Main Menu</span></span></button>';}
 function go(screen){
  closeModal();
  if(screen==='guide')ui.guideFromBattle=ui.screen==='battle';
@@ -9220,7 +9240,7 @@ function setupView(){
   <div class="m-axis"><span>${team===0?'Rear':'Front'}</span><p class="m-side-note" role="status" aria-live="polite" aria-atomic="true" title="${esc(lineup.text)}"><strong>${esc(lineup.name)}</strong></p><span>${team===0?'Front':'Rear'}</span></div></section>`;};
  const skill=(art,title,meta,text)=>`<section class="setup-skill"><div class="setup-skill-heading">${art}<div><h3>${esc(title)}</h3><span>${meta}</span></div></div><p>${esc(text)}</p></section>`;
  return `<main class="screen setup ${ui.rosterExpanded?'roster-expanded':''}">
-  <header class="top">${brand()}<h1 class="scene-title">Team setup</h1>${homeButton()}</header>
+  <header class="top">${brand()}<h1 class="scene-title">Team setup</h1><div class="setup-actions">${homeButton()}<button class="primary start" data-action="start" ${ready?'':'disabled'}>Start Battle ${combatIcon(ACTION_ICON.attack)}</button></div></header>
   <section class="muster" aria-label="Formations">${side(0)}${side(1)}</section>
   <section class="setup-workspace" id="setup-workspace" aria-label="Choose and inspect heroes">
    <section class="setup-browser" aria-labelledby="roster-title">
@@ -9244,7 +9264,6 @@ function setupView(){
 
    </aside>
   </section>
-  <footer class="setup-foot"><div>${arenaGame?.winner===null?'<button class="quiet" data-action="resume">Resume Battle</button>':''}<button class="primary start" data-action="start" ${ready?'':'disabled'}>Start Battle ${combatIcon(ACTION_ICON.attack)}</button></div></footer>
  </main>`;
 }
 function inspectHero(id){ui.setupHero=id;render();$('.setup-detail-scroll').scrollTop=0;}
@@ -9511,7 +9530,6 @@ function action(name){
   if(ui.sel.team===team)ui.setupHero=next.party[ui.sel.slot-1];
   persist();render();if(ui.sel.team===team)$('.setup-detail-scroll').scrollTop=0;return;
  }
- if(name==='resume'){hostArena();ui.screen='battle';render();return;}
  if(name==='setup'){ui.screen='setup';render();return;}
  if(name==='guide')return go('guide');
  if(name==='menu')return menu();
