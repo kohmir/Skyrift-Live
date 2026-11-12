@@ -90,8 +90,8 @@ select{background:#fff8e6;border:2px solid var(--ink);color:#2b1d16;border-radiu
 .sprite .dusk{--sc:#a8402a;--scD:#6e2418}
 /* Round portrait frame used on cards, bench, slots and dossiers. */
 .hero-icon{flex-shrink:0;display:block;width:48px;height:48px;border-radius:50%;overflow:hidden;border:3px solid var(--ink);
- background:radial-gradient(circle at 50% 35%,#cfe07e,#7f9434 75%);box-shadow:0 0 0 2px var(--dawn) inset}
-.hero-icon.dusk{box-shadow:0 0 0 2px var(--dusk) inset}
+ background:var(--team,var(--dawn));box-shadow:0 0 0 2px var(--team,var(--dawn)) inset}
+.hero-icon.dawn{--team:var(--dawn)}.hero-icon.dusk{--team:var(--dusk);box-shadow:0 0 0 2px var(--dusk) inset}
 .sprite.portrait-sprite{overflow:hidden;border:0;border-radius:0;background:none;box-shadow:none}
 .sprite.portrait-sprite[data-portrait-head] [data-bone="root"]{visibility:hidden}
 .sprite.portrait-sprite[data-portrait-head] [data-bone="head"],.sprite.portrait-sprite[data-portrait-head] [data-bone="tails"],.sprite.portrait-sprite[data-portrait-head] [data-bone="backHair"]{visibility:visible}
@@ -102,7 +102,7 @@ select{background:#fff8e6;border:2px solid var(--ink);color:#2b1d16;border-radiu
 .t0{--team:var(--dawn);--team-l:var(--dawn-l)}.t1{--team:var(--dusk);--team-l:var(--dusk-l)}
 strong.t0{color:var(--dawn-l)}strong.t1{color:var(--dusk-l)}
 .face{display:block;flex-shrink:0;width:40px;height:40px;border-radius:50%;overflow:hidden;border:2.5px solid var(--ink);
- background:radial-gradient(circle at 50% 35%,#cfe07e,#7f9434 75%);box-shadow:0 0 0 2px var(--team,var(--dawn)) inset}
+ background:var(--team,var(--dawn));box-shadow:0 0 0 2px var(--team,var(--dawn)) inset}
 .face.dawn{--team:var(--dawn)}.face.dusk{--team:var(--dusk)}
 .face .sprite{width:100%;height:100%}
 .face.gone{filter:grayscale(1) brightness(.6)}
@@ -6589,8 +6589,8 @@ function framePortrait(svg){
     5% of the shape may poke past the rim, so long strands cannot shrink the face; the face is never
     zoomed out below MIN_FACE or in beyond MAX_FACE, so long hair cannot shrink it to a dot. */
  const TRIM=.05,FACE=.265,HEAD=.78,MIN_FACE=.25,MAX_FACE=.29,SPARSE=.4,REACH={up:2.7,chin:1.0,back:2.5,front:1.5};
- // Art direction: heroes whose spiky or tied-up hair reads too tight at the shared zoom (face fraction multiplier).
- const ZOOM={bishop:.93,sage:.93,sentry:.93};
+ // Art direction: per-hero corrections to the shared portrait face scale.
+ const ZOOM={bishop:.93,sage:.93,sentry:.93,ronin:1.055};
  const shapes=root.RiftHeroShape?.[svg.dataset.sprite],pts=[];
  if(shapes){
   for(const im of svg.querySelectorAll('[data-bone="head"] image,[data-bone="tails"] image,[data-bone="backHair"] image')){
